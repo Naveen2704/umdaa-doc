@@ -1,0 +1,102 @@
+<!-- <ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="" >
+          </ion-back-button>
+        </ion-buttons>
+     <ion-title>{{id}} {{title}}</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+<ion-row>
+<ion-col size-md="6" size-xs="12" *ngFor="let final of finalList">
+<h3 style="text-align: center;">{{final.title}} <ion-icon name="arrow-dropdown" (click)="toggle(final)"></ion-icon></h3>
+<ion-item class="outlined">
+            
+<ion-textarea rows="4" cols="10"></ion-textarea>
+  </ion-item>     
+  <div>
+    
+    <div *ngIf="show && verify == final.section_id">
+        <ion-item class="outlined">
+          <ion-grid>
+            <ion-row>
+            <ion-col  size-md="12">
+                <div *ngFor="let aga of again">
+                    <div *ngIf="(final.section_id) == aga.parent_section_id">
+                        <h3 style="text-align: center;">{{aga.title}}</h3> 
+                        <div *ngFor="let filter of filterfilledname">
+                            <div *ngIf="(filter.section_id) == aga.section_id">
+                            <p>{{filter.field_id}} {{filter.field_name}}</p>
+                            <div *ngIf="(filter.field_type) == 'checkbox'">
+ 
+                                <div *ngFor="let foptions of filtered_final">
+                                <p *ngIf="(foptions.field_id) == filter.field_id">  
+                                  <input type="checkbox">{{foptions.option_name}}
+                                </p>
+                                </div>
+                            </div>   
+                            
+                            <div *ngIf="(filter.field_type) == 'text'">
+                                <ion-item class="outlined">
+                                    <ion-input></ion-input>
+                              
+                                  </ion-item>
+                            </div> 
+                              <div *ngIf="(filter.field_type) == 'radio'">
+                                  <div>
+                                  <!-- <ion-list> -->
+                                      <!-- <ion-radio-group>
+                                        <ion-item>
+                                          <ion-label>Biff</ion-label>
+                                          <ion-radio slot="start" value="biff" checked></ion-radio>
+                                        </ion-item>
+                                  
+                                        <ion-item>
+                                          <ion-label>Griff</ion-label>
+                                          <ion-radio slot="start" value="griff"></ion-radio>
+                                        </ion-item> 
+                                      </ion-radio-group> -->
+                                    <!-- </ion-list> -->
+                                <!-- <div *ngFor="let foptions of filtered_final">
+                                  <div *ngIf="(foptions.field_id) == filter.field_id">
+                                      <ion-list>
+                                      <ion-radio-group>
+                                        <ion-item>
+                                          <ion-label>{{foptions.option_name}}</ion-label>
+                                          <ion-radio slot="start"></ion-radio> 
+                                        </ion-item>
+                                   </ion-radio-group>
+                                  </ion-list>
+                                </div></div> 
+                                <div *ngIf="(filter.field_type) == 'radio'">
+
+                                    <div *ngFor="let foptions of filtered_final">
+                                      <p *ngIf="(foptions.field_id) == filter.field_id"><input type="radio"> {{foptions.option_name}}</p>
+                                      
+                                    </div>
+                                  
+                                  </div>
+                              
+                                </div> 
+                              
+                              </div>
+                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+           </ion-row>
+          </ion-grid>
+        </ion-item>
+    </div>
+          
+       
+            </div>  
+        </ion-col> 
+    </ion-row>
+    </form>
+</ion-content> -->

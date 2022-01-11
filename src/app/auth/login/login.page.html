@@ -1,0 +1,245 @@
+
+<ion-content >
+  <!--- desktop, tab view --->
+  <div class="d-none d-md-none d-lg-block d-xl-block">
+    <!-- <a href="https://api.whatsapp.com/send?phone=15551234567&text=I'm%20interested%20in%20your%20car%20for%20sale" data-action="share/whatsapp/share">Share via Whatsapp</a> -->
+  <div class="auth-container">
+    <div class="auth-image">
+      <div>
+        <img src="assets/login.jpg" width="480px">
+      </div>
+    </div>
+    <div class="auth-login">
+      <div class="auth-login-card">
+          <div class="auth-login-main">
+            <img src="./assets/logo/logo.png" class="umdaa-logo" alt="umdaa-logo">
+            <div class="auth-view">
+              <div class="auth-subtitle">
+                Hi! Welcome to Umdaa Health Care
+              </div>
+              <form  class="auth-form" [formGroup]="login_form" #myLogin="ngForm" (ngSubmit)="login(login_form.value,myLogin)" >
+                 
+                    <!-- <ion-item  >
+                        <ion-label position="floating" color="primary">Email/RegNo/Phone</ion-label> 
+                        <ion-icon name="contact" slot="start"></ion-icon>
+                        <ion-input type="email" formControlName="email" placeholder="Email / Phone No" required></ion-input>
+                      </ion-item>    -->
+                      <mat-form-field class="example-full-width " styleClass="login" appearance="outline">
+                        <mat-label>Mobile</mat-label> 
+                        <span matPrefix><mat-icon>phone</mat-icon></span>
+                        <input type="tel" matInput  autocomplete="off" formControlName="email" >
+                  
+                      </mat-form-field>
+                      <!-- <div class="validation-errors" margin>
+                        <ng-container *ngFor="let validation of validation_messages.email">
+                          <div class="error-message" *ngIf="login_form.get('email').hasError(validation.type) && (login_form.get('email').dirty||(login_form.untouched && formSubmitAttempt) )">
+                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div> -->
+                      <!-- <ion-item  > 
+                          <ion-label position="floating" color="primary">Password</ion-label> 
+                          <ion-icon name="unlock" slot="start"></ion-icon>
+                          <ion-input type="password"  formControlName="password" placeholder="Password" [type]="passwordType" clearOnEdit="false" required></ion-input>
+                          <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+                      </ion-item> -->
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <span matPrefix><mat-icon>enhanced_encryption</mat-icon></span>
+                        <input type="password" matInput  autocomplete="off" formControlName="password" [type]="hide ? 'text' : 'password'">
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : ' visibility_off'}}</mat-icon>
+
+                      </mat-form-field>
+                        <!-- <div class="validation-errors" margin>
+                          <ng-container *ngFor="let validation of validation_messages.password">
+                            <div class="error-message" *ngIf="login_form.get('password').hasError(validation.type) && (login_form.get('password').dirty)||(formSubmitAttempt) ">
+                              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                            </div>
+                          </ng-container>
+                      </div> --->
+
+                      <div class="auth-forgot">
+                        <ion-text class="ion-float-right">
+                          <a style="color:#10367a;"  routerLink="/forgot" routerDirection="root" >Forgot Password?</a>
+                        </ion-text>
+                      </div>
+                      <!-- <div class="login_section text-right" >
+                          <div class="login_section_forgot">
+                            
+                          </div>
+                         
+                      </div> -->
+                      <div class="login-btn mt-2">
+                        <button mat-raised-button type="submit" class="login-btn my_bg_v" >Login</button>
+                          <!-- <ion-button type="submit" class="login-btn my_bg_v"><span>Login</span></ion-button> -->
+                    </div>
+                    <!-- <div class="auth-OR">
+                      OR
+                    </div>
+                    <div class="text-sign" padding >
+                        <div class="text-sign-req">
+                            <span>Don't have an account ?</span><a  style="color:#10367a;" routerLink="/register" routerDirection="root"> Sign Up</a>
+                        </div>
+                      </div> -->
+               
+              </form>
+           </div>
+          </div>
+         
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- end -->
+ <!-- mobile view -->
+  <div class="mobile_view  d-block d-md-block d-lg-none d-xl-none ion-padding ion-text-center" color="primary">  
+
+    <div class="ion-margin-top justify-content-center ">
+      <div class="auth-login-main">
+        <img src="./assets/logo/logo.png" class="umdaa-logo" alt="umdaa-logo"  height="100px">
+        <div class="auth-view">
+          <div class="auth-subtitle">
+            Hi! Welcome to Umdaa Health Care
+          </div>
+          <form  class="auth-form" [formGroup]="login_form" #myLogin="ngForm" (ngSubmit)="login(login_form.value,myLogin)">
+             
+                <!-- <ion-item>
+                    <ion-label position="floating" color="primary">Email/RegNo/Phone</ion-label> 
+                    <ion-icon name="contact" slot="start"></ion-icon>
+                    <ion-input type="email" formControlName="email" placeholder="Email / Phone No" required></ion-input>
+                  </ion-item>    -->
+                  <mat-form-field class="example-full-width " styleClass="login" appearance="outline">
+                    <mat-label>Mobile</mat-label> 
+                    <span matPrefix><mat-icon>phone</mat-icon></span>
+                    <input type="text" matInput  autocomplete="off" formControlName="email" >
+              
+                  </mat-form-field>
+                  <!-- <div class="validation-errors" margin>
+                    <ng-container *ngFor="let validation of validation_messages.email">
+                      <div class="error-message" *ngIf="login_form.get('email').hasError(validation.type) && (login_form.get('email').dirty||(login_form.untouched && formSubmitAttempt) )">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                      </div>
+                    </ng-container>
+                  </div> -->
+                  <!-- <ion-item  > 
+                      <ion-label position="floating" color="primary">Password</ion-label> 
+                      <ion-icon name="unlock" slot="start"></ion-icon>
+                      <ion-input type="password"  formControlName="password" placeholder="Password" [type]="passwordType" clearOnEdit="false" required></ion-input>
+                      <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+                  </ion-item> -->
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <span matPrefix><mat-icon>enhanced_encryption</mat-icon></span>
+                    <input type="password" matInput  autocomplete="off" formControlName="password" [type]="hide ? 'text' : 'password'">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : ' visibility_off'}}</mat-icon>
+
+                  </mat-form-field>
+                    <!-- <div class="validation-errors" margin>
+                      <ng-container *ngFor="let validation of validation_messages.password">
+                        <div class="error-message" *ngIf="login_form.get('password').hasError(validation.type) && (login_form.get('password').dirty)||(formSubmitAttempt) ">
+                          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                        </div>
+                      </ng-container>
+                  </div> --->
+
+                  <div class="auth-forgot example-full-width">
+                    <ion-text class="ion-float-right">
+                      <a style="color:#10367a;"  routerLink="/forgot" routerDirection="root" >Forgot Password ?</a>
+                    </ion-text>
+                  </div>
+                  <!-- <div class="login_section text-right" >
+                      <div class="login_section_forgot">
+                        
+                      </div>
+                     
+                  </div> -->
+                  <div class="login-btn mt-2">
+                    <button mat-raised-button type="submit" class="login-btn my_bg_v" >Login</button>
+
+                      <!-- <ion-button type="submit" class="login-btn my_bg_v"><span>Login</span></ion-button> -->
+                </div>
+                <!-- <div class="auth-OR">
+                  OR
+                </div>
+                <div class="text-sign" padding >
+                    <div class="text-sign-req">
+                        <span>Don't have an account ?</span><a  style="color:#10367a;" routerLink="/register" routerDirection="root"> Sign Up</a> 
+                        <ion-button  expand="block"  class="login-btn" (click)="signUp()" fill="outline" color="white">SIGN UP</ion-button>
+                    </div>
+                  </div> -->
+           
+          </form>
+       </div>
+      </div>
+        <!-- <ion-button expand="block" class="ion-margin-top" (click)="signUp()" fill="outline" color="white">SIGN UP</ion-button>
+        <ion-button expand="block" class="ion-margin-top my_bg_v" (click)="signIn()" >LOGIN</ion-button> -->
+    </div>
+  </div>
+  <!-- end -->
+</ion-content>
+
+
+
+
+<!-- safee desktop old -->
+<!-- <ion-grid class=" p-0 container mt-5 d-none d-md-block d-lg-block d-xl-block">
+  <ion-card class="card card-1">
+     <ion-row> 
+         <ion-col size-md="3" class="my_bg_v">
+             <div class="logo">
+                 <img class="image"  src="assets/logo/umdaa_logo_1.png">
+                </div>
+         </ion-col>
+         <ion-col size-md="9" size-xs="12">
+             <ion-toolbar>
+                 <ion-title class="text-muted font-weight-bold large light">LOGIN </ion-title>
+             </ion-toolbar>
+             <form  [formGroup]="login_form" #myLogin="ngForm" (ngSubmit)="login(login_form.value,myLogin)">
+               <ion-col>
+                   <ion-item margin >
+                    <ion-label position="floating" color="primary">Email/RegNo/Phone</ion-label> -
+                       <ion-icon name="contact" slot="start"></ion-icon>
+                       <ion-input type="email" formControlName="email" placeholder="Email / Phone No" required></ion-input>
+                     </ion-item>   
+                 <div class="validation-errors" margin>
+                       <ng-container *ngFor="let validation of validation_messages.email">
+                         <div class="error-message" *ngIf="login_form.get('email').hasError(validation.type) && (login_form.get('email').dirty||(login_form.untouched && formSubmitAttempt) )">
+                           <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                         </div>
+                       </ng-container>
+                     </div> -->
+                     <!-- <ion-item margin >  -->
+                         <!-- <ion-label position="floating" color="primary">Password</ion-label> -
+                         <ion-icon name="unlock" slot="start"></ion-icon>
+                         <ion-input type="password"  formControlName="password" placeholder="Password" [type]="passwordType" clearOnEdit="false" required></ion-input>
+                         <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+                     </ion-item>
+                  <div class="validation-errors" margin>
+                         <ng-container *ngFor="let validation of validation_messages.password">
+                           <div class="error-message" *ngIf="login_form.get('password').hasError(validation.type) && (login_form.get('password').dirty)||(formSubmitAttempt) ">
+                             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                           </div>
+                         </ng-container>
+                     </div> -
+                     <div class="login_section" padding>
+                         <div class="login_section_forgot">
+                           <ion-text class="ion-float-right">
+                             <a style="color:#10367a;"  routerLink="/forgot" routerDirection="root" >Forgot Password?</a>
+                           </ion-text>
+                         </div>
+                        
+                     </div>
+                     <div class="login_section_forgot_btn" padding >
+                         <ion-button type="submit" color="primary"><span>Login</span></ion-button>
+                   </div>
+                   <div class="text-sign" padding >
+                       <div class="text-sign-req">
+                           <span>Don't have an account ?</span><a  style="color:#10367a;" routerLink="/registration" routerDirection="root"> Sign Up</a>
+                       </div>
+                     </div>
+               </ion-col>
+           </form>
+        </ion-col>
+       </ion-row>
+  </ion-card>
+</ion-grid> -->

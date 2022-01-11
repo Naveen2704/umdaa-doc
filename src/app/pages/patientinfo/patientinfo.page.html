@@ -1,0 +1,100 @@
+<ion-header >
+  <ion-toolbar >
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="font-weight-bold small">
+          HOME
+      </ion-title>
+  
+      <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+ <div class="container">
+ 
+    <div class="row">
+      <div class="col-6 col-md-4 col-lg-3  col-xl-3" *ngFor="let p of appPages" >
+          <div *ngIf="p.access == 1;then router else norouter"></div>
+          <ng-template #router>
+            <div class="bg-light rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4" routerLink="{{p.url}}">
+              <span class="d-block my-2 info-box-icon" >
+                <ion-icon  [name]="p.icon"> </ion-icon>
+              </span>
+             {{p.title}}
+          </div>
+          </ng-template>
+          <ng-template #norouter>
+            <div class="bg-light rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4"  (click)="openPopup(p.title)">
+              <span class="d-block my-2 info-box-icon" >
+                <ion-icon  [name]="p.icon"> </ion-icon>
+              </span>
+              {{p.title}}
+          </div>
+            
+          </ng-template>
+          
+      
+      
+      </div>
+      <!-- <div class="col-6 col-md-3 col-lg-3  col-xl-3">
+        <div class="bg-light rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4" routerLink="/dashboard">
+          <span class="d-block my-2 info-box-icon" style="font-size:18px;font-weight:bold;">
+            D
+          </span>
+          <a href="/dashboard" class="bg-light ">Dashboard</a>
+      </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-3  col-xl-3">
+        <div class="bg-light-primary  rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4" routerLink="/appointment">
+          <span class="d-block my-2 info-box-icon"  style="font-size:18px;font-weight:bold;">
+            A
+          </span>
+          <a href="/appointment" class=" bg-light-primary   font-size-h6">Appointments</a>
+      </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-3  col-xl-3">
+        <div class="bg-light-danger rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4" routerLink="/expert">
+          <span class=" d-block my-2 info-box-icon" style="font-size:18px;font-weight:bold;">
+        E
+          </span>
+          <a href="/expert" class="bg-light-danger  font-size-h6">Expert Opinion</a>
+      </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-3  col-xl-3">
+        <div class="bg-light-success  rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4" routerLink="/he">
+          <span class="d-block my-2 info-box-icon" style="font-size:18px;font-weight:bold;">
+          H
+          </span>
+          <a href="/he" class="bg-light-success  font-size-h6">Health Education</a>
+      </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-3  col-xl-3">
+        <div class="bg-light rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4" routerLink="/gbusiness">
+          <span class="d-block my-2 info-box-icon" style="font-size:18px;font-weight:bold;">
+            G
+          </span>
+          <a href="/gbusiness" class="bg-light   font-size-h6">Google Business</a>
+      </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-3  col-xl-3">
+        <div class="bg-light-primary   rounded-xl py-8 pb-8 mb-2  mt-2 pt-4 pl-4" routerLink="/settings">
+          <span class="d-block my-2 info-box-icon" style="font-size:18px;font-weight:bold;">
+            S
+          </span>
+          <a href="/settings" class="bg-light-primary     font-size-h6">Settings</a>
+      </div>
+      </div> -->
+    
+    </div>
+
+ 
+ </div>
+ 
+</ion-content>
+
+
+ 
+ 
+ 
+ 

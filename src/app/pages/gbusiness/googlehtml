@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-toolbar >
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/dashboard"></ion-back-button>
+      </ion-buttons>
+      <ion-title class=" font-weight-bold small">GOOGLE MY BUSINESS</ion-title>
+      <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon>
+  
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content> 
+    <!-- <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="First">Content 1</mat-tab>
+      <mat-tab label="Second">Content 2</mat-tab>
+      <mat-tab label="Third">Content 3</mat-tab>
+    </mat-tab-group> -->
+    <div class="container">
+      <div class="row ">
+        <div class="col-12 d-flex">
+          <div class="col-6 align-left">
+            <div class="text">
+                <div class="inner-text">
+                  <h1 class="header-text"> Engage with customers on Google for free</h1>
+                  <p class="header-para">
+                    With a Google My Business Account, you get more than a business listing. Your free Business Profile lets you easily connect with customers across Google Search and Maps.
+                  </p>
+                  <button mat-raised-button class="my_bg_v" style="width: 200px" (click)="handleAuthClick()" >Sign In</button>
+                </div>
+            </div>
+          </div>
+          <div class="col-6"> 
+              <img  src="assets/mybusinness.png"  height="80%">
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  <!--   *** BEGIN USER SPECIFIED SETTINGS *** -->
+  
+    <!-- <script src="gmbdemo.js"></script> -->
+    <script src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()">
+    </script>
+  
+    
+    <script>
+      // Enter an API key from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials
+      var apiKey = 'AIzaSyD4rpILmhUjAAOxFwN7D62xCbyK1RCGNg4';
+  
+      // Enter a client ID for a web application from the Google API Console:
+      //   https://console.developers.google.com/apis/credentials?project=_
+      // In your API Console project, add a JavaScript origin that corresponds
+      // to the domain where you will be running the script.
+      var clientId = '156131389471-492fagorrn1biovqs6qnmiq9fnfvfd7t.apps.googleusercontent.com';
+      // Use the latest Google My Business API version
+      var gmb_api_version = 'https://mybusiness.googleapis.com/v4';
+  
+      // One or more authorization scopes. Additional scopes may be desired if
+      // multiple APIs are used. Refer to the documentation for the API
+      // or https://developers.google.com/people/v1/how-tos/authorizing
+      // At a minimum, include the Google My Business authorization scope.
+      var scopes = 'https://www.googleapis.com/auth/business.manage';
+    </script>
+    <script
+  
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4rpILmhUjAAOxFwN7D62xCbyK1RCGNg4&libraries=places&callback=initMap">
+    </script>
+  </ion-content>
+  

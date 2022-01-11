@@ -1,0 +1,205 @@
+
+
+
+.c-doctors-carousel-card__bookmark {
+  height: 20px;
+  width: 100px;
+  top: -14px;
+  left: -4px;
+  border-top: 12px solid #e6a83a;
+  border-bottom: 12px solid #e6a83a;
+  border-right: 12px solid transparent;
+}
+.flex-ai-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.u-d-flex {
+ display: -webkit-box; 
+  display: -ms-flexbox;
+  display: flex;
+}
+.c-ihh-stats h1, .c-ihh-stats h2, .c-testimonials h1, .u-bold {
+  font-weight: 700!important;
+}
+.u-xxx-small-font-size {
+  font-size: 14px;
+}
+.u-color--white {
+  color: #fff;
+
+}
+
+.u-cushion--left-less {
+  padding-left: 8px;
+}
+.page-loader, .u-pos-abs {
+  position: absolute;
+  z-index: 9999;
+}
+
+swiper-slide {
+    display: block;
+  }
+  ion-slide > h2 {
+    margin-top: 2.8rem;
+  }
+  ion-slide > img {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 36px 0;
+    position: relative;
+  }
+  .center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+.link:focus {
+  outline: none !important; 
+  cursor: pointer;
+}
+  .card-1 ion-card-content .resp-img:after {
+    position: absolute;
+    content: "";
+    bottom: 3px;
+    right: 3px;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #FFFFFF;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    background: -webkit-linear-gradient(top, #2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
+    background: linear-gradient(#2196F3 0%, #2196F3 50%, #FFC107 50%, #FFC107 100%);
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-animation: scaleIn 0.3s 3.5s ease forwards;
+    animation: scaleIn 0.3s 3.5s ease forwards;
+  }
+  .videoicon{
+    position: absolute;
+    z-index: 1;
+    top: 37px;
+  }
+
+  .text-muted
+  {
+    color: #000000!important;
+  }
+
+  ion-content {
+    --background:rgba(240, 251, 255, 0.986);
+    // --background: url('assets/bg.png') no-repeat 100% 100%;
+}
+// ion-content.background{
+//   --background: url(/assets/bg.png) 0 0/100% 100% no-repeat;
+//   opacity: 0.1;
+// }
+.book{
+  bottom: 16px;
+  right: 16px;
+  position: fixed;
+}
+
+
+
+.text{
+  white-space: nowrap;
+    // width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    // font-size: 14px;
+
+  }
+.position{
+  position:absolute;
+  right: 10;
+}
+
+.h-30{
+  height:30px
+}
+.h-130{
+  height:130px
+}
+.fs{
+  font-size:11px;
+  font-weight: 400;
+  line-height:normal;
+  
+}
+@media (min-width: 1080px) and (max-width: 1920px) {
+  
+  .image span::after{
+    content: attr(data-content);
+    position: absolute;
+    top: 80px;
+    left: 58%;
+    // color: #0b253d;
+    // font-size: 12px;
+    border: 1px solid rgba(21, 22, 22, 0.712);
+    border-radius: 50%;
+    width: 23px;
+    height: 23px;
+    // background-color: yellow;
+    line-height: 20px;
+  }
+  
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  .image span::after{
+    content: attr(data-content);
+    position: absolute;
+    top: 80px;
+    left: 58%;
+    // color: #0b253d;
+    // font-size: 12px;
+    border: 1px solid rgba(21, 22, 22, 0.712);
+    border-radius: 50%;
+    width: 23px;
+    height: 23px;
+    // background-color: yellow;
+    line-height: 20px;
+  }
+  
+}
+@media  screen and (max-width: 1366px) {
+  .image span::after{
+    content: attr(data-content);
+    position: absolute;
+    top: 80px;
+    left: 61%;
+    // color: #0b253d;
+    // font-size: 12px;
+    border: 1px solid rgba(21, 22, 22, 0.712);
+    border-radius: 50%;
+    width: 23px;
+    height: 23px;
+    // background-color: yellow;
+    line-height: 20px;
+  }
+}
+// ::ng-deep .searchbar-input.sc-ion-searchbar-md{
+//   border-radius: 14px !important;
+// }
+::ng-deep .mat-form-field-infix{
+  border-top: 0px !important; 
+}
+
+::ng-deep .sc-ion-card-md-h{
+  border-radius: 14px !important;
+}
+.help{
+  bottom:65px;
+  position: fixed;
+  right: 20px;
+  z-index: 1;
+}

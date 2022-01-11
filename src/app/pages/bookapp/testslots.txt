@@ -1,0 +1,792 @@
+import { Component, OnInit, ViewChild, ElementRef, Inject, NgZone } from '@angular/core';
+import { SelectService } from 'src/app/service/select.service';
+import { CscServiceService } from 'src/app/service/csc-service.service';
+import { BookappService } from 'src/app/service/bookapp.service';
+import { FormGroup, FormBuilder, Validators, NgModel, FormControl, FormArray, AbstractControl, FormGroupDirective } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { LoaderService } from 'src/app/service/loader.service';
+import { ModalController, AlertController, NavController, NavParams } from '@ionic/angular';
+import { Router } from '@angular/router';
+import * as moment from 'moment-timezone';
+import { SlotbookingService } from 'src/app/service/slotbooking.service';
+import { PaymentmodalPage } from '../../paymentmodal/paymentmodal.page';
+import { DOCUMENT } from '@angular/common';
+import { DatePicker } from '@ionic-native/date-picker/ngx';
+import { Storage } from '@ionic/storage'
+import { from, empty } from 'rxjs';
+import { first } from 'rxjs/operators';
+
+
+
+
+@Component({
+  selector: 'app-bookapp',
+  templateUrl: './bookapp.page.html',
+  styleUrls: ['./bookapp.page.scss'],
+})
+
+
+
+export class BookappPage {
+  // @ViewChild('registerForm', { static: true }) formValues
+
+  patientInfo: any = [];
+  patientbillInfo: any = [];
+
+  isCompleted = false;
+  RegisterForm: FormGroup;
+  submitted = false;
+  submittedd = false;
+  titles: string[];
+  genders: string[];
+  years: string[];
+  age: number;
+  birthdate: any;
+  languges: any[];
+  referredbys: any[];
+  states: any[];
+  districts: any;
+  SelectedValue: any[];
+  state_ids: any = [];
+  result: any[];
+  filterDistricts: any = [];
+  responceData: any = [];
+  title: any;
+  gender: any;
+  showMyContainer: boolean = false;
+  showMyPayment: boolean = false;
+
+  //slot booking section
+
+  momentjs: any = moment;
+  slots: any = [];
+  addslots: boolean;
+  today = new Date();
+  jstoday = '';
+  day: number;
+  slottimings: any = [];
+  length: any = [];
+  doctorTimings: any = [];
+  timeValue: any = [];
+  slotsTime: number;
+  timeStops: any = [];
+  length1: any = [];
+  MtimeStops: any = [];
+  AtimeStops: any = [];
+  hide: boolean = false;
+  session1: any = [];
+  afternoonAr: any = [];
+  morningAr: any = [];
+  eveningAr: any = [];
+  disableButton;
+  time: string;
+  timeResp: any = [];
+  priority: HTMLElement;
+  bookingMode: any = [];
+  bookingDate: any = [];
+  data: any = [];
+  sms: any = [];
+  public form = [
+    { val: '1', isChecked: true },
+
+  ];
+  bookedSlots: any;
+  clickedDate: any = [];
+  convertedDate: Date;
+  bs: any;
+  bslength: number;
+  isenabled: boolean = false;
+  session: string;
+
+
+  disabled: boolean = false;
+  isLinear = false;
+  stepHigh = false;
+
+
+
+  public json_data = [
+    { "id": 1, "name": "Registration Fee", "price": 100, isChecked: true },
+    { "id": 2, "name": "Consultation Fee", "price": 500, isChecked: true }
+
+  ]
+  total_price: any = [];
+  total: any;
+  price1: number;
+  price2: number;
+  payment: any = [];
+  totalPrice: number;
+  conPrice: any;
+  regPrice: any;
+  reg: HTMLElement;
+  con: HTMLElement;
+  discount: any;
+  discount_unit: any;
+  discounted: number;
+  withDiscount: any;
+  max: any;
+  billPayment: FormGroup;
+  res: any[];
+  checkedReg: any;
+  checkedCon: any;
+  billing: any;
+  regCheck: any;
+  conCheck: any;
+  loadDate: string;
+  patient_id: any;
+  test: any;
+  modeofpayment: any;
+  reg_fee: number;
+  con_fee: number;
+  minDate: string = new Date().toISOString();
+  selectedDate: string = new Date().toISOString();
+  bookSlotForm: FormGroup;
+  patientInfoget: any = [];
+  appointmentsInfo: Promise<any>;
+  billingInfo: any;
+  error: string;
+  patientAppointmentInfo: any = [];
+  responses: any = [];
+  slotid: any;
+  className: HTMLCollectionOf<Element>;
+  elements: any;
+  MorePatientInfo: any;
+  maxLenght: number;
+  ntimes: any;
+  bdate: string;
+
+  addAttributeForm: FormGroup;
+  loadTime: string;
+  constructor
+
+    (private ngZone: NgZone, public elm: ElementRef, private storageData: Storage, @Inject(DOCUMENT) private document: Document, private datePicker: DatePicker, public alrtctl: AlertController, private slotbooking: SlotbookingService, private router: Router, private loader: LoaderService, private select: SelectService, public alertctrl: AlertController, public navctrl: NavController, public root: Router,
+      private formBuilder: FormBuilder, private CscService: CscServiceService, private bookapp: BookappService, private http: HttpClient, private modal: ModalController
+
+    ) {
+
+  }
+
+
+
+  onKeyPress(event) {
+    if ((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 97 && event.keyCode <= 122) || event.keyCode == 32 || event.keyCode == 46) {
+      this.maxLenght = 25
+      return true
+    }
+    else {
+      return false
+    }
+  }
+  @ViewChild('stepper', { static: true }) stepper: ElementRef;
+  ngOnInit() {
+
+    this.bookSlotForm = new FormGroup({
+      priority: new FormControl(''),
+      bookingMode: new FormControl(''),
+      bookingDate: new FormControl(''),
+      sms: new FormControl(''),
+      morningslot: new FormControl(''),
+      after: new FormControl(''),
+      evenslot: new FormControl('')
+    })
+
+    this.patientInfo.priority = "None"
+    this.patientInfo.bookingMode = "Walk-in"
+    this.RegisterForm = this.formBuilder.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      email: ['', [Validators.email]],
+      mobile: ['', Validators.compose([Validators.required, Validators.maxLength(10),
+      Validators.minLength(10)])],
+      occupation: [''],
+      age: ['', Validators.compose([Validators.required])],
+      gender: [''],
+      title: [''],
+      location: ['', Validators.required],
+
+
+      //password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+    console.log(this.minDate)
+
+    var month = new Date().getMonth() + 1;
+    this.loadDate = new Date().getFullYear() + "-" + (month < 10 ? '0' : '') + month + "-" + (new Date().getDate() < 10 ? '0' : '') + new Date().getDate();
+    this.loadTime = new Date().getHours() + ":" + new Date().getMinutes()
+    console.log(this.loadTime)
+    this.createSlots(this.loadDate);
+    this.patientInfo.bookingDate = new Date().getFullYear() + "-" + month + "-" + new Date().getDate();
+    this.billPayment = new FormGroup({
+      reg: new FormControl(''),
+      consult: new FormControl(''),
+      disc: new FormControl(''),
+    })
+    //console.log(this.minDate)
+    //this.createSlots();
+    this.titles = [
+      "Mr",
+      "Mrs",
+      "MISS",
+      // "MASTER",
+      // "BABY"
+    ];
+    this.genders = [
+      "Male",
+      "Female",
+      "Others",
+
+    ];
+    this.years = [
+      "DAYS",
+      "MONTHES",
+      "YEARS"
+    ];
+    this.languges = [
+      "ENGLISH",
+      "HINDI",
+      "TELUGU",
+      "KANNADA",
+      "MALAYALAM",
+      "THAMIL",
+      "URDHU",
+      "SINDHI",
+      "PANJABHI",
+      "MARATHI",
+      "GUJARATHI",
+      "BENGALI"
+    ];
+    this.referredbys = [
+      "word of mouth",
+      "online",
+      "doctor"
+    ];
+
+
+
+  }
+
+
+
+
+  date(event) {
+    this.slots = event.detail.value;
+    if (this.slots == null) {
+      return this.addslots = false;
+    } else {
+      this.addslots = true;
+    }
+
+  }
+
+  get f() { return this.RegisterForm.controls }
+
+  get slot() { return this.bookSlotForm.controls }
+
+  numberOnly_m(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+  numberOnly_D(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+  numberOnly_A(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+  onSubmit(data) {
+    //console.log(data)       
+    this.submitted = true;
+
+    if (!this.RegisterForm.valid) {
+      return false;
+    } else {
+      this.loader.loadingPresent();
+      (this.slotbooking.postData(data)).subscribe((res) => {
+        //console.log(res['result'].patient_id);
+        if (res['code'] == '200') {
+          this.responceData = res;
+          this.slotbooking.PatientDetails = res.result;
+          console.log(this.slotbooking.PatientDetails)
+          this.MorePatientInfo = this.slotbooking.PatientDetails
+          console.log(this.MorePatientInfo.full_name)
+          this.loader.loadingDismiss();
+        }
+        return;
+        // return this.presentAlert(this.responceData["message"]);
+      })
+    }
+    // if(data.firstname && data.location && data.email && data.mobile && data.age){
+    //   this.loader.loadingPresent();
+
+    // }
+
+
+  }
+  reset() {
+    this.onSubmit(this.data);
+  }
+
+  //getSlotValue
+  getSlotID(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    var value = idAttr.nodeValue;
+    // console.log(this.document.getElementById('slotBtn_{{i}}').value)
+    console.log(this.patientInfo.after)
+    this.elements = this.elm.nativeElement.querySelectorAll('.btn-primary');
+    for (var n = 0; n < this.elements.length; n++) {
+      this.elements[n].classList.remove('btn-primary');
+      this.elements[n].classList.add('button-outline');
+    }
+    event.target.classList.toggle('btn-primary'); // To ADD
+    event.target.classList.toggle('button-outline'); // To Remove
+  }
+  validAge(event) {
+    console.log(event.detail.value);
+    if (event.detail.value == 0 && event.detail.value != '') {
+      alert('Please enter Valid age');
+      this.age = 1;
+    }
+  }
+  //slot booking  section...........///
+
+  trueclick_M(timingss1) {
+    this.submittedd = true;
+    if (!this.bookSlotForm.valid) {
+      return false;
+    } else {
+      this.priority = this.patientInfo.priority
+      this.sms = this.patientInfo.sms;
+      this.bookingMode = this.patientInfo.bookingMode;
+      this.bookingDate = this.patientInfo.bookingDate;
+
+      this.time = timingss1 + ":00"
+      console.log(this.ntimes)
+      this.bookingDate = this.bookingDate.substr(0, 10),
+        console.log(this.bookingDate)
+      this.selectedDate;
+      if (this.patientInfo.sms == true) {
+        this.patientInfo.sms = "1";
+      }
+      else {
+        this.patientInfo.sms = "0";
+      }
+
+      this.data = new Array();
+      this.data['sms'] = this.patientInfo.sms
+      this.data['priority'] = this.priority;
+      this.data['bookingMode'] = this.bookingMode;
+      this.data['bookingDate'] = this.bookingDate;
+      this.data['time'] = this.time;
+      console.log(this.data)
+      this.loader.loadingPresent();
+
+      this.slotbooking.slotTime(this.data).subscribe((res) => {
+        this.timeResp = res;
+
+        if (res['code'] == "200") {
+
+          this.slotbooking.PatientSlotTime = this.timeResp.result.appointment;
+          console.log(this.slotbooking.PatientSlotTime)
+          this.patientInfoget = this.slotbooking.PatientSlotTime
+          console.log(this.patientInfoget)
+          this.loader.loadingDismiss();
+
+          //   console.log(this.timeResp)
+        } if (res['code'] == "201") {
+          this.loader.loadingDismiss();
+        }
+        return;
+        /// return this.presentAlert(this.timeResp["message"]);
+      })
+    }
+  }
+  trueclick_A(timingss2) {
+    this.submittedd = true;
+    if (!this.bookSlotForm.valid) {
+      return false;
+    } else {
+      this.priority = this.patientInfo.priority
+      this.sms = this.patientInfo.sms;
+      this.bookingMode = this.patientInfo.bookingMode;
+      this.bookingDate = this.patientInfo.bookingDate;
+      this.time = timingss2 + ":00"
+      this.bookingDate = this.bookingDate.substr(0, 10),
+        this.selectedDate;
+      if (this.patientInfo.sms == true) {
+        this.patientInfo.sms = "1";
+      }
+      else {
+        this.patientInfo.sms = "0";
+      }
+
+      this.data = new Array();
+      this.data['sms'] = this.patientInfo.sms
+      this.data['priority'] = this.priority;
+      this.data['bookingMode'] = this.bookingMode;
+      this.data['bookingDate'] = this.bookingDate;
+      this.data['time'] = this.time;
+      // console.log(this.data)
+      this.loader.loadingPresent();
+      this.slotbooking.slotTime(this.data).subscribe((res) => {
+        this.timeResp = res;
+
+        if (res['code'] == "200") {
+
+          this.slotbooking.PatientSlotTime = this.timeResp.result.appointment;
+          console.log(this.slotbooking.PatientSlotTime)
+          this.patientInfoget = this.slotbooking.PatientSlotTime
+          console.log(this.patientInfoget)
+          this.loader.loadingDismiss();
+
+          //   console.log(this.timeResp)
+        } if (res['code'] == "201") {
+          this.loader.loadingDismiss();
+        }
+        return;
+        /// return this.presentAlert(this.timeResp["message"]);
+      })
+    }
+  }
+  trueclick_E(timingss3) {
+    this.submittedd = true;
+    if (!this.bookSlotForm.valid) {
+      return false;
+    } else {
+      this.priority = this.patientInfo.priority
+      this.sms = this.patientInfo.sms;
+      this.bookingMode = this.patientInfo.bookingMode;
+      this.bookingDate = this.patientInfo.bookingDate;
+      this.time = timingss3 + ":00";
+
+      this.bookingDate = this.bookingDate.substr(0, 10),
+        this.selectedDate;
+      if (this.patientInfo.sms == true) {
+        this.patientInfo.sms = "1";
+      }
+      else {
+        this.patientInfo.sms = "0";
+      }
+      this.data = new Array();
+      this.data['sms'] = this.patientInfo.sms
+      this.data['priority'] = this.priority;
+      this.data['bookingMode'] = this.bookingMode;
+      this.data['bookingDate'] = this.bookingDate;
+      this.data['time'] = this.time;
+      // console.log(this.data)
+      this.loader.loadingPresent();
+      this.slotbooking.slotTime(this.data).subscribe((res) => {
+        this.timeResp = res;
+
+        if (res['code'] == "200") {
+
+          this.slotbooking.PatientSlotTime = this.timeResp.result.appointment;
+          console.log(this.slotbooking.PatientSlotTime)
+          this.patientInfoget = this.slotbooking.PatientSlotTime
+          console.log(this.patientInfoget)
+          this.loader.loadingDismiss();
+
+          //   console.log(this.timeResp)
+        } if (res['code'] == "201") {
+          this.loader.loadingDismiss();
+        }
+        return;
+        /// return this.presentAlert(this.timeResp["message"]);
+      })
+    }
+  }
+  createSlots(loadDate) {
+    console.log(loadDate)
+    if (loadDate != null) {
+      this.clickedDate = loadDate;
+      this.clickedDate = this.clickedDate.substr(0, 10);
+      console.log(this.clickedDate)
+      this.convertedDate = new Date(this.clickedDate);
+      console.log(this.convertedDate)
+    }
+    else {
+      var month = new Date().getMonth() + 1;
+      this.clickedDate = this.patientInfo.bookingDate.substr(0, 10);
+      this.convertedDate = this.clickedDate.substr(0, 10);
+      this.loadDate = this.clickedDate;
+      console.log(this.loadDate);
+    }
+
+
+
+    this.slotbooking.getslots()
+      .subscribe((data) => {
+        this.slots = data;
+
+        console.log(this.slots)
+        this.bookedSlots = this.slots['result']['booked_slots'];
+        console.log(this.bookedSlots)
+
+        this.slottimings = this.slots['result']['doctor']['clinics']['working_days'];
+        console.log(this.slottimings)
+        this.payment = this.slots['result']['doctor']['clinics'];
+        this.reg_fee = parseInt(this.payment.registration_fee)
+        this.con_fee = parseInt(this.payment.consulting_fee)
+        this.totalPrice = 0
+
+    
+          console.log(this.slottimings);
+          
+          console.log(this.slottimings[0].dayNum);
+        for(var z=0;z<this.slottimings.length;z++)
+        {
+          var d = new Date();
+          var n = d.getDay()
+            if(this.slottimings[z].dayNum == n)
+            {
+              console.log(this.slottimings[z].timings);
+            }
+        }
+
+        this.day = this.convertedDate.getDay();
+
+
+        for (var i = 0; i <= this.slottimings.length - 1; i++) {
+
+          this.length1 = this.slottimings[i].timings;
+
+          for (var n = 0; n < this.length1.length; n++) {
+            var ar1 = this.length1[n];
+            var times = this.length1[n].schedule.split("-");
+            console.log(times);
+            var start = times[0];
+            console.log(start);
+            var end = times[1];
+            console.log(end);
+            var intervel = this.slots['result']['doctor']['clinics']['consultation_time']
+            this.timeStops[n] = this.getTimeStops(start, end, intervel);
+            console.log(this.timeStops[n]);
+          }
+
+        }
+
+        this.morningAr = this.timeStops[0];
+        console.log(this.timeStops[0]);
+        console.log(this.morningAr);
+        this.afternoonAr = this.timeStops[1];
+        console.log(this.afternoonAr);
+        this.eveningAr = this.timeStops[2];
+        console.log(this.eveningAr);
+
+        this.loader.loadingDismiss();
+
+        this.bslength = this.bookedSlots.length - 1;
+        console.log(this.bslength)
+        console.log(this.clickedDate)
+        if (this.bslength != null) {
+
+          for (var cd = 0; cd < this.bslength; cd++) {
+            console.log(this.clickedDate, this.bookedSlots[cd]['date'], this.bookingDate)
+            if (this.clickedDate == this.bookedSlots[cd]['date']) {
+              this.bs = this.bookedSlots[cd]['time_slot'];
+              console.log(this.bs)
+
+              if (this.bs != null) {
+                for (var c = 0; c < this.bs.length; c++) {
+                  var split = this.bs[c].split(" ");
+                  var mrindex = this.morningAr.indexOf(split[0]);
+                  console.log(mrindex)
+                  if (mrindex > -1) {
+                    console.log(this.morningAr.splice(mrindex, 1))
+
+                  }
+                  var afindex = this.afternoonAr.indexOf(split[0]);
+                  if (afindex > -1) {
+                    this.afternoonAr.splice(afindex, 1);
+
+                  }
+                  var evindex = this.eveningAr.indexOf(split[0]);
+                  if (evindex > -1) {
+                    this.eveningAr.splice(evindex, 1);
+
+                  }
+                }
+              }
+
+            }
+
+          }
+        }
+
+      });
+  }
+  //////////end...............///////////
+  //Function To Get Payment 
+  getTimeStops(start, end, intervel) {
+    console.log(start, end, intervel);
+    var startTime = moment(start, 'HH:mm');
+    // console.log(startTime);
+    var endTime = moment(end, 'HH:mm');
+    // console.log(moment(startTime).format('HH:mm'));   
+    // console.log(endTime.isBefore(startTime))
+    // console.log(endTime);              
+    if (endTime.isBefore(startTime)) {
+      endTime.add(1, 'day');
+    }
+    var timeStops = [];
+    while (startTime <= endTime) {
+
+      timeStops.push(moment(startTime).format('HH:mm'));
+      startTime.add(intervel, 'minutes');
+      // console.log(timeStops);
+    }
+    return timeStops;
+  }
+  paymentTotals() {
+    // this.reg = this.patientbillInfo.regPrice;
+    // this.con = this.patientbillInfo.conPrice;
+    if (this.patientbillInfo.regPrice == true) {
+      this.checkedReg = this.reg_fee // register price == 50
+      console.log(this.checkedReg)
+    } else {
+      this.checkedReg = 0
+    }
+
+    if (this.patientbillInfo.conPrice == true) {
+      this.checkedCon = this.con_fee;  // conprice == 500
+      console.log(this.checkedCon)
+    } else {
+      this.checkedCon = 0
+    }
+    this.discount = this.patientbillInfo.discount; // enterd amount 
+    if (this.discount > 100) {
+      alert("Plsese add below 100")
+      this.patientbillInfo.discount = 100;
+    }
+    this.discount_unit = this.patientbillInfo.discount_unit; //selcted unit 
+    console.log(this.discount_unit)
+
+    if (this.discount_unit == "INR") {
+      this.totalPrice = (this.checkedReg + this.checkedCon) - this.discount
+      console.log(this.totalPrice)
+    }
+    else if (this.discount_unit == "%") {
+      this.totalPrice = (this.checkedReg + this.checkedCon) - ((this.checkedReg + this.checkedCon) * this.discount) / 100
+      console.log(this.totalPrice)
+    }
+    else {
+      this.totalPrice = (this.checkedReg + this.checkedCon)
+      console.log(this.totalPrice)
+    }
+    if (this.totalPrice < 0)
+      this.totalPrice = 0;
+
+  }
+
+
+  SaveBill() {
+    //console.log(this.patientbillInfo.regPrice)
+    this.reg = this.patientbillInfo.regPrice;
+    this.con = this.patientbillInfo.conPrice;
+    if (this.patientbillInfo.regPrice == true) {
+      this.checkedReg = this.reg_fee
+    } else {
+      this.checkedReg = "0"
+    }
+
+    if (this.patientbillInfo.conPrice == true) {
+      this.checkedCon = this.con_fee;
+    } else {
+      this.checkedCon = "0"
+    }
+    this.discount = this.patientbillInfo.discount;
+    this.discount_unit = this.patientbillInfo.discount_unit;
+    //this.modeofpayment = this.patientbillInfo.modeofpayment
+    this.res = new Array();
+    this.res['rePrice'] = this.checkedReg
+    this.res['conPrice'] = this.checkedCon;
+    this.res['discount'] = this.discount;
+    this.res['discount_unit'] = this.discount_unit;
+    this.res['modeofpayment'] = this.patientbillInfo.modeofpayment
+
+    this.loader.loadingPresent();
+    this.slotbooking.getBill(this.res).subscribe((data) => {
+      this.billing = data;
+
+      console.log(this.billing)
+
+      if (data['code'] == 200) {
+        this.loader.loadingDismiss();
+        console.log(this.billing)
+        this.presentAlert_1();
+        // this.presentModal();
+        //this.ngOnInit()
+      }
+    })
+  }
+  /// end.......///
+
+  async presentAlert_1() {
+    let alert = this.alertctrl.create({
+      cssClass: ['alertLogCss'],
+      message: "Appointment Created Successfully",
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            //console.log('Confirm Cancel: blah');
+            this.ngZone.run(() => {
+              this.navctrl.navigateRoot('/appointment');
+              //   this.router.navigateByUrl('/appointment');
+              //formDirective.get(0).resetForm();
+              // window.location.reload()
+            })
+          }
+        }
+      ]
+
+    });
+    (await alert).present();
+  }
+  async presentAlert(msg) {
+    let alert = this.alertctrl.create({
+      cssClass: ['alertLogCss'],
+      message: msg,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.submitted = false
+            this.RegisterForm.reset()
+            this.bookSlotForm.reset()
+          }
+        }
+      ],
+
+    });
+    (await alert).present();
+  }
+
+  async presentModal() {
+    const modal = await this.modal.create({
+      cssClass: "my-modal",
+      component: PaymentmodalPage,
+      componentProps: { responce: this.billing }
+    });
+
+    return await modal.present();
+  }
+  dismiss() {
+    this.modal.dismiss({
+      'dismissed': true
+    });
+  }
+
+}

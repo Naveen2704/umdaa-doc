@@ -1,0 +1,517 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title class=" font-weight-bold small">BOOK APPOINTMENTS</ion-title>
+    <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <!-- <div class="main_header">
+    <h3 class="m-0">Book Your Appointment</h3>
+    <h5>This information will let us know more about your Condition</h5>
+  </div> -->
+  <ion-row>
+    <div class="col-md-12 p-0 ">
+
+      <mat-horizontal-stepper  labelPosition="bottom" linear #stepper class="myClass" >
+
+        <mat-step label="Patient Details" [stepControl]="RegisterForm" editable="false">
+          <ion-card class=" book-card   my_card m-2">
+            <ion-card-header class="pb-0">
+              <ion-text text-left>
+                <hr class="hr-text" data-content="Let's start with the basic details.">
+              </ion-text>
+            </ion-card-header>
+            <ion-card-content >
+         
+              <form [formGroup]="RegisterForm" #PatientForm="ngForm" (ngSubmit)="onSubmit(RegisterForm.value)">
+                <ion-row>
+                  <ion-col size-md="2" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Title</ion-label>
+                      <ion-select  [(ngModel)]="patient.title" formControlName="title" interface="popover" placeholder="Please select Title">
+                        <ion-select-option type="text" *ngFor="let title of titles">{{title}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-md="4" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">First Name <ion-text color="danger">*</ion-text>
+                      </ion-label>
+                      <ion-input text-capitalize  type="text" maxlength="25" clearInput=true (keypress)="onKeyPress($event)" [(ngModel)]="firstname"
+                        formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+                      </ion-input>
+
+                    </ion-item>
+                    <!-- //  <ion-icon name="information-circle"></ion-icon> <span>Please Enter First Name</span> -->
+                    <div *ngIf="submitted && f.firstname.errors" class="invalid">
+                      <div *ngIf="f.firstname.errors.required">First Name is required</div>
+                    </div>
+                  </ion-col>
+                  <ion-col size-md="4" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Last Name</ion-label>
+                      <ion-input text-capitalize maxlength="25" (keypress)="onKeyPress($event)" clearInput=true type="text"
+                        formControlName="lastname"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-md="2" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Language</ion-label>
+                      <ion-select value="English" [(ngModel)]="patient.language" formControlName="language" interface="popover" placeholder="Please select language">
+                        <ion-select-option type="text" *ngFor="let lang of languages">{{lang}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-md="2" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Sex</ion-label>
+                      <ion-select  [(ngModel)]="patient.gender" formControlName="gender" interface="popover" placeholder="Please select Gender">
+                        <ion-select-option *ngFor="let gender of genders">{{gender}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-md="5" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Mobile <ion-text color="danger">*</ion-text>
+                      </ion-label>
+                      <!-- <ion-icon slot="end"  name="information-circle"></ion-icon>
+                                     <div>Plese Enter Valid Mobile Number</div> -->
+                      <ion-input type="text" maxlength="10" clearInput=true (keypress)="numberOnly_m($event)"
+                        formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" [(ngModel)]="mobile"></ion-input>
+                    </ion-item>
+                    <div *ngIf="submitted && f.mobile.errors" class="invalid">
+                      <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+                      <div *ngIf="f.mobile.errors.minlength">Mobile must be 10 Digits</div>
+                    </div>
+                  </ion-col>
+
+                  <ion-col size-md="5" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Email </ion-label>
+                      <ion-input type="email" formControlName="email" clearInput=true
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+
+                    </ion-item>
+                    <div *ngIf="submitted && f.email.errors">
+                      <!-- <div *ngIf="f.email.errors.required" class="invalid">Email is required</div> -->
+                      <div *ngIf="f.email.errors.email" class="invalid">Email must be a valid email address</div>
+                    </div>
+                  </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size-md="2" size-xs="6">
+                    <ion-item>
+                      <ion-label position="floating">Age</ion-label>
+                      <ion-input type="text" (keypress)="numberOnly_A($event)"  formControlName="age">
+                     
+                    </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-md="2" size-xs="6">
+                    <ion-item style="margin-top: 14px;">
+                     
+                    <ion-select class="no-padding" placeholder="Please select agetype" [(ngModel)]="patient.agetype" formControlName="agetype" interface="popover">
+                    <ion-select-option type="text" *ngFor="let type of agetypes">{{type}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                  </ion-col>
+                  <ion-col size-md="4" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Occupation</ion-label>
+                      <ion-input text-capitalize formControlName="occupation" type="text" maxlength="50" (keypress)="onKeyPress($event)"
+                        clearInput=true></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size-md="4" size-xs="12">
+                    <ion-item>
+                      <ion-label position="floating">Area <ion-text color="danger">*</ion-text>
+                      </ion-label>
+                      <ion-input text-capitalize formControlName="location" maxlength="50" (keypress)="onKeyPress($event)" [(ngModel)]="location"
+                        clearInput=true [ngClass]="{ 'is-invalid': submitted && f.location.errors }"></ion-input>
+
+                    </ion-item>
+                    <div *ngIf="submitted && f.location.errors" class="invalid">
+                      <div *ngIf="f.location.errors.required">Location is required</div>
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <div class="submit" margin>
+                      <!-- <ion-button class="login " size="default"  type="submit"  expand="block" matStepperNext>Book Appointment<ion-icon name="arrow-forward"></ion-icon></ion-button> -->
+                      <button mat-button type="submit" class="my_bg_v" float-right matStepperNext>NEXT</button>
+                      <!-- <button mat-button type="button" class="my_bg_v" (click)="opendailog(1)"> open</button> -->
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </mat-step>
+        <mat-step label="Book your Slot" [stepControl]="bookSlotForm" editable="false">
+            <ion-card class="book-card  my_card m-2">
+              <ion-card-header class="pb-0">
+                <ion-text text-left>
+                  <hr class="hr-text" data-content="Book your Slots">
+                </ion-text>
+              </ion-card-header>
+              <form [formGroup]="bookSlotForm" editable="false">
+                <ion-row>
+                  <ion-col size-md="3" size-xs="12">
+                    <ion-col *ngIf="checkRoleId == '6'">
+                      <ion-item>
+                        <ion-label position="stacked">Select Doctor</ion-label>
+            
+                        <ion-select (ionChange)="changeDoctor($event)" interface="popover" formControlName="doctor_id" [(ngModel)]="selectedDoc" placeholder="Please select Doctor">
+                          <ion-select-option *ngFor="let data of nurseList" [value]="data.doctor_id">
+                            <p >{{data.doctor_name}}</p>
+                          </ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label position="stacked">Select priority</ion-label>
+            
+                        <ion-select value="none" interface="popover" id="priority" formControlName="priority"
+                          [(ngModel)]="patientInfo.priority" placeholder="Please select priority">
+                          <ion-select-option value="pregnancy">Pregnancy</ion-select-option>
+                          <ion-select-option value="elderly">Elderly</ion-select-option>
+                          <ion-select-option value="children">Children</ion-select-option>
+                          <ion-select-option value="sick">Sick</ion-select-option>
+                          <ion-select-option value="other">Other</ion-select-option>
+                          <ion-select-option value="none" selected="true">None</ion-select-option>
+  
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label position="stacked">Select booking mode</ion-label>
+                      
+                        <ion-select value="Walk-in" interface="popover" id="bookingMode" formControlName="bookingMode"
+                          [(ngModel)]="patientInfo.bookingMode" placeholder="Please select booking mode" 
+                          [ngClass]="{ 'is-invalid': submittedd && slot.bookingMode.errors }"
+                          >
+  
+                          <ion-select-option value="Mobile">Mobile</ion-select-option>
+                          <ion-select-option value="Walk-in" >Walk-in</ion-select-option>
+                        </ion-select>
+                        
+                      </ion-item>
+                      <div *ngIf="submittedd && slot.bookingMode.errors" class="invalid">
+                        <div *ngIf="slot.bookingMode.errors.required">Booking mode required</div>
+                        
+                      </div>
+                    </ion-col>
+                    <ion-col>
+                      <ion-item>
+                        <ion-label position="stacked">Slot booking Date</ion-label>
+                
+                        <ion-datetime type="date" id="bookingDate" formControlName="bookingDate"
+                          [(ngModel)]="patientInfo.bookingDate" [min]="minDate" max="2022-12-31T08:00:00Z" displayFormat="DD/MM/YYYY"
+                          (ionChange)="createSlots(patientInfo.bookingDate)"></ion-datetime>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <div class="mt-3">
+                        <ion-checkbox style="margin-right:10px;" id="sms" formControlName="sms"
+                          [(ngModel)]="patientInfo.sms"  (ionChange)="smsReminder($event)"></ion-checkbox>
+                        <span>SMS REMINDER</span>
+                      </div>
+                    </ion-col>
+                  </ion-col>
+                  <ion-col size-md="9" size-xs="12">
+                    <mat-tab-group mat-align-tabs="center" (selectedTabChange)="yourFn(patientInfo.bookingDate,$event,selectedDoc)">
+                     <mat-tab label="Walk-in Slots"> 
+                       <div class="min_height">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="m_haeder d-flex">
+                              <div class="text-left col-6 my-auto font-weight-bold">
+                                Morning Session
+                              </div>
+                              <div class="text-right col-6" *ngIf="checkRoleId == '4'">
+                                <!-- <button mat-raised-button (click)="addslot()" style="border-radius: 30px;"><mat-icon>add</mat-icon> Add Slot</button> -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       
+                   
+                      <ion-row>
+                        <ion-col>
+                         
+                          <button mat-button class="my_bg_v m-1 " *ngFor="let timingss1 of morningAr" 
+                          
+                          [disabled]=" (clickedDate == loadDate && (timingss1) <= loadTime ) || (timingss1 =='No Slots Available')?'true':'false'"
+                            (click)="trueclick_M(timingss1,stepper)" >
+                            {{timingss1}}
+    
+                          </button>
+                        </ion-col>
+                      </ion-row>
+                       </div>
+                     
+                       <div class="min_height">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="m_haeder d-flex">
+                          <div class="text-left col-6 my-auto font-weight-bold">
+                            Afternoon Session
+                          </div>
+                          <div class="text-right col-6" *ngIf="checkRoleId == '4'">
+                            <!-- <button mat-raised-button (click)="addslot()" style="border-radius: 30px;"><mat-icon>add</mat-icon> Add Slot</button> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <ion-row>
+                      <ion-col >
+                        <button mat-button class="my_bg_v m-1 " *ngFor="let timingss2 of afternoonAr"
+                        [disabled]=" (clickedDate == loadDate && timingss2 <= loadTime) || (timingss2 =='No Slots Available')?'true':'false'"
+                          (click)="trueclick_A(timingss2,stepper)"  >
+                          {{timingss2}}
+  
+                        </button>
+                      </ion-col>
+                    </ion-row>
+                       </div>
+                       <div class="min_height_last">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="m_haeder d-flex">
+                          <div class="text-left col-6 my-auto font-weight-bold">
+                            Evening Session
+                          </div>
+                          <div class="text-right col-6" *ngIf="checkRoleId == '4'">
+                            <!-- <button mat-raised-button (click)="addslot()" style="border-radius: 30px;"><mat-icon>add</mat-icon>Add Slot</button> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <ion-row>
+                      <ion-col>
+                        <button mat-button class="my_bg_v m-1 "  *ngFor="let timingss3 of eveningAr"
+                        [disabled]=" (clickedDate == loadDate && timingss3<=loadTime) || (timingss3 =='No Slots Available')?'true':'false'"
+                          (click)="trueclick_E(timingss3,stepper)" >{{timingss3}}</button>
+                      </ion-col>
+                    </ion-row>
+                    </div>
+                     </mat-tab>
+                    <mat-tab label="Tele Consultation Slots"> 
+                     
+                      <div class="min_height">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="m_haeder d-flex">
+                              <div class="text-left col-6 my-auto font-weight-bold">
+                                Morning Session
+                              </div>
+                              <div class="text-right col-6" *ngIf="checkRoleId == '4'">
+                                <!-- <button mat-raised-button (click)="addslot()" style="border-radius: 30px;"><mat-icon>add</mat-icon> Add Slot</button> -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <ion-row>
+                          <ion-col>
+                            <button mat-button class="my_bg_v m-2 " *ngFor="let timingss1 of morningAr" 
+                            [disabled]=" (clickedDate == loadDate && (timingss1) <= loadTime ) || (timingss1 =='No Slots Available')?'true':'false'"
+                              (click)="trueclick_M(timingss1,stepper)" >
+                              {{timingss1}}
+      
+                            </button>
+                          </ion-col>
+                        </ion-row>
+                        </div>
+                        <div class="min_height">
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="m_haeder d-flex">
+                                <div class="text-left col-6 my-auto font-weight-bold">
+                                  Afternoon Session
+                                </div>
+                                <div class="text-right col-6" *ngIf="checkRoleId == '4'">
+                                  <!-- <button mat-raised-button (click)="addslot()" style="border-radius: 30px;"><mat-icon>add</mat-icon> Add Slot</button> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <ion-row>
+                          <ion-col >
+                            <button mat-button class="my_bg_v m-2 " *ngFor="let timingss2 of afternoonAr"
+                            [disabled]=" (clickedDate == loadDate && timingss2 <= loadTime) || (timingss2 =='No Slots Available')?'true':'false'"
+                              (click)="trueclick_A(timingss2,stepper)"  >
+                              {{timingss2}}
+      
+                            </button>
+                          </ion-col>
+                        </ion-row>
+                        </div>
+                        <div class="min_height_last">
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="m_haeder d-flex">
+                                <div class="text-left col-6 my-auto font-weight-bold">
+                                  Evening Session
+                                </div>
+                                <div class="text-right col-6" *ngIf="checkRoleId == '4'">
+                                  <!-- <button mat-raised-button (click)="addslot()" style="border-radius: 30px;"><mat-icon>add</mat-icon> Add Slot</button> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <ion-row>
+                          <ion-col>
+                            <button mat-button class="my_bg_v m-2 "  *ngFor="let timingss3 of eveningAr"
+                            [disabled]=" (clickedDate == loadDate && timingss3<=loadTime) || (timingss3 =='No Slots Available')?'true':'false'"
+                              (click)="trueclick_E(timingss3,stepper)" >{{timingss3}}</button>
+                          </ion-col>
+                        </ion-row>
+                      </div>
+                      
+                     </mat-tab>
+                    </mat-tab-group>
+                  </ion-col>
+                </ion-row>
+              </form>
+            </ion-card>
+        </mat-step>
+
+        <mat-step label="Make Payment" editable="false" completed="false">
+          <ion-row>
+            <ion-col size-md="5" size-xs="12">
+              <ion-card class=" card-1 my_card">
+                <ion-card-header>
+                  <ion-text text-left>
+                    <hr class="hr-text" data-content="Patient Info">
+                  </ion-text>
+                </ion-card-header>
+                <div class="d-inline pl-3 pr-3">
+                  <ion-row>
+                    <ion-col size-md="4" size-lg="3" size-xl="3">
+                      <ion-label class="custom_fsize">Name</ion-label>
+                    </ion-col>
+                    <ion-col>
+                      <ion-label class="font-weight-semibold pl-2">{{MorePatientInfo?.full_name | titlecase}}</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size-md="4" size-lg="3" size-xl="3">
+                      <ion-label class="custom_fsize">Mobile </ion-label>
+                    </ion-col>
+                    <ion-col >
+                      <ion-label class="font-weight-semibold pl-2">{{MorePatientInfo?.mobile}}</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size-md="4" size-lg="3" size-xl="3">
+                      <ion-label class=" custom_fsize" >Umr </ion-label>
+                    </ion-col>
+                    <ion-col >
+                      <ion-label class="font-weight-semibold pl-2"> {{MorePatientInfo?.umr_no}}</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size-md="4" size-lg="3" size-xl="3">
+                      <ion-label class="custom_fsize">Date </ion-label>
+                    </ion-col>
+                    <ion-col>
+                      <ion-label class="font-weight-semibold pl-2">{{ patientInfoget?.appointment_date | date: 'dd/MM/yy'}}</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size-md="4" size-lg="3" size-xl="3">
+                      <ion-label class="custom_fsize">Time </ion-label>
+                    </ion-col>
+                    <ion-col>
+                      <ion-label class="font-weight-semibold pl-2">{{ patientInfoget?.appointment_time_slot }}</ion-label>
+                    </ion-col>
+                  </ion-row>
+
+                </div>
+              </ion-card>
+            </ion-col>
+            <ion-col size-md="7" size-xs="12">
+              <ion-card class=" card-1 my_card">
+                <ion-card-header>
+                  <ion-text text-left>
+                    <hr class="hr-text" data-content="Payment Details">
+                  </ion-text>
+                </ion-card-header>
+                  <p style="color:red; font-size:10px;" class="ml-4">NOTE : Registration Amount Must be Checked</p>
+                <form id="billPayment" #billForm="ngForm" (ngSubmit)="SaveBill()">
+                  <ion-list>
+                    <ion-item>
+                      <ion-checkbox slot="start" type="checkbox" color="primary" (ionChange)="paymentTotals()"
+                        value="{{payment.registration_fee}}" id="regPrice" name="regPrice"
+                        [(ngModel)]="patientbillInfo.regPrice"></ion-checkbox>
+
+                      <ion-label text-wrap>Registration</ion-label>
+                      <ion-label fixed text-right>₹{{payment.registration_fee}}</ion-label>
+                    </ion-item>
+                    <ion-item class="item_borded">
+                      <ion-checkbox slot="start" checked="true" (ionChange)="paymentTotals()" color="primary"
+                        value="{{payment.consulting_fee}}" id="conPrice" name="conPrice"
+                        [(ngModel)]="patientbillInfo.conPrice"></ion-checkbox>
+                      <ion-label text-wrap>Consultation</ion-label>
+                      <ion-label fixed text-right>₹{{payment.consulting_fee}}</ion-label>
+                    </ion-item>
+
+                    <ion-row>
+                      <div class="d-flex mt-2 ml-3 align-items-center">
+                        <ion-label text-wrap class="mr-2">Discount</ion-label>
+                        <ion-input id="discount" [disabled]="disabled" class="form-control mx-sm-3" [(ngModel)]="patientbillInfo.discount"
+                          (keypress)="numberOnly_D($event)" name="discount" value="0" min="0" maxLength="3" type="text"
+                          (ionChange)="paymentTotals()"></ion-input>
+                        <ion-select interface="popover" [disabled]="disabled" [(ngModel)]="patientbillInfo.discount_unit" name="discount_unit"
+                          id="discount_unit" (ionChange)="paymentTotals()" placeholder="Select type">
+                          <ion-select-option value="INR" selected>INR</ion-select-option>
+                          <ion-select-option value="%">%</ion-select-option>
+                        </ion-select>
+                      </div>
+                    </ion-row>
+
+                    <ion-item>
+                      <ion-label text-wrap>Total Amount</ion-label>
+                      <ion-label fixed text-right id="totalPrice">₹{{totalPrice}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label position="stacked">Mode Of Payment</ion-label>
+                      <ion-select id="modeofpayment" interface="popover" [(ngModel)]="patientbillInfo.modeofpayment"
+                        name="modeofpayment" placeholder="Please select priority" ok-text="Ok" cancel-text="Cancel">
+                        <ion-select-option value="Cash" selected>Cash</ion-select-option>
+                        <ion-select-option value="Card">Card</ion-select-option>
+                       <ion-select-option value="UPI">UPI</ion-select-option>
+                        <ion-select-option value="Net Banking">Net Banking</ion-select-option>
+                         <ion-select-option value="Other">Other</ion-select-option> 
+                      </ion-select>
+                    </ion-item>
+                  </ion-list>
+                  <div>
+                    <button mat-button class="login my_bg_v" size="default" type="submit">Make Payment</button>
+                    <!-- <ion-button  type="submit" class="login my_bg_v"  size="default" >Make Payment</ion-button> -->
+                  </div>
+                </form>
+
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </mat-step>
+
+      </mat-horizontal-stepper>
+
+    </div>
+  </ion-row>
+
+</ion-content>

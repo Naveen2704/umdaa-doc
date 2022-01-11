@@ -1,0 +1,30 @@
+<script type="application/javascript" crossorigin="anonymous" src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/VxAXDZ21424666393729.js"> </script>
+<div class="mat-body">  
+  <div class="row">
+    <div class="col-12 text-right">
+        <mat-icon (click)="close()" class="custom_css_btn">close</mat-icon>
+    </div>
+  </div>
+
+
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="MoneyForm" (ngSubmit)="addmoney(MoneyForm.value)">
+      <mat-form-field style="min-width: 250px;">
+        <mat-label>ADD MONEY</mat-label>
+        <input matInput  formControlName="amount">
+        <mat-error *ngIf=" MoneyForm.get('amount').hasError('required')">
+         Amount is required
+        </mat-error>
+      </mat-form-field>
+          <div class="text-right">
+            <a href="https://umdaa.co/p/4/refund-policies" target="_blank"> ? Refund Policy</a>
+
+          </div>
+        <button mat-raised-button type="submit">ADD</button>
+       
+       
+      </form>
+  </div>
+</div>
+</div>

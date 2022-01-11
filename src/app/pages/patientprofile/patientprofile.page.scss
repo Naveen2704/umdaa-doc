@@ -1,0 +1,118 @@
+.icon {
+    display: inline-block;
+    font-size: 35px;
+    color: #ffC977;
+    vertical-align: middle;
+   }
+   
+   .text{
+     display: inline-block;
+     vertical-align: middle;
+     //margin-left: 10px;
+   }
+   .size{
+     width: 100%;
+     height: 100%;
+   }
+   .p_image{
+    margin: 48px 163px;
+   }
+   .p_bg{
+    
+    background: linear-gradient(to bottom left, #0033cc 0%, #ccffff 100%);
+     border-radius:5px;
+     margin: 10px;
+       }
+       .h_bg{
+        background: linear-gradient(to bottom left, #0033cc 0%, #ccffff 100%);
+       }
+       .h_text{
+         text-transform: uppercase;
+         color: white;
+          font-size: 15px;
+       }
+   .p_text{
+     color:white;
+     font-size: 50px;
+   }
+   .c_p_text{
+    background: rgb(248, 245, 245);
+    border-radius: 10px;
+    text-align: center;
+   }
+   .c_padding{
+     padding: 20px;
+     margin: 20px;
+   }
+   
+   @media (max-width: 576px) {
+    ion-card{
+      width: 100%;
+    }
+    .p_image{
+      margin: 20px 100px;
+     }
+     .p_bg{
+    
+      background: linear-gradient(to bottom left, #0033cc 0%, #ccffff 100%);
+       border-radius:5px;
+       margin: 5px;
+         }
+         .h_bg{
+          background: linear-gradient(to bottom left, #0033cc 0%, #ccffff 100%);
+         }
+         .h_text{
+           text-transform: uppercase;
+           color: white;
+            font-size: 15px;
+         }
+     .p_text{
+       color:white;
+       font-size: 50px;
+     }
+     .c_p_text{
+      background: rgb(248, 245, 245);
+      border-radius: 10px;
+      text-align: center;
+     }
+     .c_padding{
+       padding: 0;
+       margin: 0;
+     }
+     ion-card{
+       padding: 0;
+       margin: 0;
+     }
+  }
+  
+  @media (max-width: 420px) {
+   
+  }
+  
+  @media (min-width: 820px) {
+    
+  }
+
+
+
+  .width{
+    width:60%;
+    margin: 30px auto;
+}
+
+.fw{
+    font-weight: 600;
+}
+.padl{
+    padding-left: 40%;
+}
+@media (max-width:772px){
+    .width{
+        width:100%;
+      //margin:20px auto
+    }
+    .padl{
+        padding-left: 40%;
+    }
+   
+}

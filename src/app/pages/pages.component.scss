@@ -1,0 +1,305 @@
+// ion-menu{
+//   ion-content{
+//       --ion-background-color:rgba(240, 251, 255, 0.986);
+// }
+// }
+
+ion-menu {
+  //--ion-background-color: var(--ion-color-transparent);
+ 
+  //--ion-text-color: var(--ion-color-transparent-contrast);
+
+  // ion-toolbar {
+  //   //--background: var(--ion-color-primary);
+  // }
+  // ion-icon {
+  //   color: var(--ion-color-primary-contrast);
+  // }
+  .menu-header-bg{
+    height: 180px;
+    width:330px;
+    background: #7590d6;
+    background:linear-gradient(90deg,#21396d 0%,#21396d 100%);
+    box-shadow:0px 1px 10px rgba(37, 40, 48, 0.5);
+    transform:rotate(-10deg);
+    border-radius:10px 10px 10px 50px;
+    margin-left: -18px;
+    margin-top: -50px;
+    margin-bottom: 15px;
+  }
+  .header-content{
+    // position: absolute;
+    // top:30px;
+    left: 32px;
+    // display: flex;
+    align-items: center;
+
+    // img{
+      // width:180px;
+      // height:72px;
+      // border-radius: 50%;
+     // border: 1px solid #5e7ccc;
+
+    // }
+    // h2{
+    //   font-weight:300;
+    //   color:white;
+    //   letter-spacing:0.4px;
+    // }
+  }
+  .actiHighlight{
+    background-color: red;
+  }
+  .menu-gradient{
+    margin:0px;
+
+    ion-icon {
+      margin-left:20px;
+      color:#86979f;
+      margin-inline-end:20px !important;
+    }p
+    ion-item{
+     
+      margin-bottom: 10px;
+
+    }
+   
+  }
+ion-item:active {
+  // background-color: #3e8e41;
+  //box-shadow: 0 5px var(--ion-color-theme);
+  border-left: 5px solid ;
+  color:#21396d;
+  padding-left:5px;
+
+  ion-icon{
+    color:#21396d;
+  }
+}
+//   ion-item:hover {
+
+//     // background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+//     // color:#fff;
+ 
+// }
+// ion-item{
+//   //--ion-background-color: var(--ion-color-transparent);
+//   //color: var(--ion-color-primary-contrast);
+//   //border: 1px solid #ffff; /* Green */
+//  // border-radius: 5px;
+//  // -webkit-transition-duration: 0.4s; /* Safari */
+//   //transition-duration: 0.4s;
+//  // margin:10px 10px;
+// }
+  ion-list {/* optional, but it needs when you use gradient as a background color.*/
+    background: transparent;
+  }
+}
+
+
+.split-pane-md.split-pane-visible>.split-pane-side{
+  max-width: 18%;
+}
+.avtatar {
+ margin-left: 100px;
+
+}
+
+
+// .menuicon{
+//   margin-left: 25px;
+//   font-size: 32px;
+//   margin-right: 13px;
+// }
+
+// .titleicon {
+//   position: absolute;
+//   width: 100%;
+//   left: 0;
+//   bottom: 0;
+//   text-align:center;
+// }
+// .icon-bar {
+//   //width: 100; /* Set a specific width */
+//   background: linear-gradient(to right, #00ccff 0%, #000066 100%);
+// }
+
+// .icon-bar a {
+//   display: block; /* Make the links appear below each other instead of side-by-side */
+//   text-align: center; /* Center-align text */
+//   padding: 16px; /* Add some padding */
+//   transition: all 0.3s ease; /* Add transition for hover effects */
+//   color: white; /* White text color */
+//   font-size: 36px; /* Increased font-size */
+// }
+
+// .icon-bar ion-label::hover {
+//   background: linear-gradient(to right, #ccffcc 0%, #66ffff 100%);
+//   color: #fff;
+// }
+
+
+
+
+//////////////@at-root
+
+
+ion-menu ion-content {
+  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+
+ion-menu.md ion-content {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 0px;
+  --padding-bottom: 20px;
+}
+
+// ion-menu.md ion-list {
+//   padding: 20px 0;
+// }
+
+ion-menu.md ion-note {
+  margin-bottom: 30px;
+}
+
+ion-menu.md ion-list-header,
+ion-menu.md ion-note {
+  padding-left: 10px;
+}
+
+ion-menu.md ion-list#inbox-list {
+  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
+}
+
+ion-menu.md ion-list#inbox-list ion-list-header {
+  font-size: 22px;
+  font-weight: 600;
+
+  min-height: 20px;
+}
+
+ion-menu.md ion-list#labels-list ion-list-header {
+  font-size: 16px;
+
+  margin-bottom: 18px;
+
+  color: #757575;
+
+  min-height: 26px;
+}
+
+ion-menu.md ion-item {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  border-radius: 4px;
+}
+
+ion-menu.md ion-list#inbox-list ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+}
+
+ion-menu.md ion-list#inbox-list ion-item.selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-menu.md ion-list#labels-list  ion-item.selectedd {
+  --background: rgba(var(--ion-color-primary-rgb), 0.14);
+}
+
+ion-menu.md ion-list#labels-list ion-item.selectedd ion-icon  {
+  color: var(--ion-color-primary);
+}
+ion-menu.md ion-item ion-icon {
+  color: #616e7e;
+}
+
+ion-menu.md ion-item ion-label {
+  font-weight: 600;
+}
+
+ion-menu.ios ion-content {
+  --padding-bottom: 20px;
+}
+
+ion-menu.ios ion-list {
+  padding: 20px 0 0 0;
+}
+
+ion-menu.ios ion-note {
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+
+ion-menu.ios ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 50px;
+}
+::ng-deep .inner-scroll{
+  padding-top:0px !important;
+}
+ion-menu.ios ion-item.selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-menu.ios ion-item ion-icon {
+  font-size: 24px;
+  color: #73849a;
+}
+
+ion-menu.ios ion-list#labels-list ion-list-header {
+  margin-bottom: 8px;
+}
+
+ion-menu.ios ion-list-header,
+ion-menu.ios ion-note {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+ion-menu.ios ion-note {
+  margin-bottom: 8px;
+}
+
+ion-note {
+  display: inline-block;
+  font-size: 16px;
+
+  color: var(--ion-color-medium-shade);
+}
+
+ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+
+select{
+  margin-left: 8px !important;
+  border: 0px !important;
+  outline: 0px !important;
+  width:94% !important;
+}
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+  }
+
+  button.mat-menu-item {
+    width: 100%;
+    min-width: 230px !important;
+    outline: none !important;
+}
+::ng-deep .my-menu {
+  width: 274px;
+}
+::ng-deep .mat-menu-panel {
+  min-width: 112px;
+  max-width: 220px !important;
+  overflow: auto;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 48px);
+  border-radius: 4px;
+  outline: 0;
+  min-height: 64px;
+}

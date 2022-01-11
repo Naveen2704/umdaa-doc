@@ -1,0 +1,31 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>paymentmodal</ion-title>
+    
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+<div class="container">
+  <div class="row">
+    <div class="center">
+        <ion-text color="secondary">
+            <h1>{{patientBillInfo.umr_no}}</h1>
+        </ion-text>
+        <ion-text color="light">
+            <h3>DATE:{{patientBillInfo.appointment_date}}</h3>
+            <h3>TIME:{{patientBillInfo.appointment_time_slot}}</h3>
+          </ion-text>
+          <ion-text color="danger">
+              <h4 >{{patientBillInfo.doctor_name}}</h4>
+          </ion-text>
+          <ion-button   expand="default"  (click)="closeModal()" routerLink="/appointment" color="primary">Close </ion-button>
+              <!-- <ion-button color="theme"  expand="default"  (click)="printinvoice()">
+
+                  Print Invoice </ion-button> -->
+    </div>
+     
+  </div>
+</div>
+
+</ion-content>

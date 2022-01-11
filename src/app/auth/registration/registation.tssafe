@@ -1,0 +1,668 @@
+import { Component, OnInit, ViewChild, ElementRef, Inject, NgZone, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup , Validators , FormControl } from '@angular/forms';
+import { PasswordValidator } from '../../validators/password-validator';
+// import {Router, ActivatedRoute, Params} from '@angular/router';
+import { AuthService } from '../../service/auth.service';
+import { NavController, AlertController, LoadingController } from '@ionic/angular'
+import { SelectService } from '../../service/select.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import { LoaderService } from 'src/app/service/loader.service';
+// import { MatDialog } from '@angular/material';
+import { PasswordStrengthValidator } from 'src/app/password-strength.validators';
+// import { AmazingTimePickerService } from 'amazing-time-picker';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { UploadComponent } from 'src/app/pages/he/upload/upload.component';
+import { SlottimingsComponent } from '../slottimings/slottimings.component';
+import { ExaminationService } from 'src/app/service/examination.service';
+// import { TimingsPage } from './timings/timings.page';
+
+@Component({
+  selector: 'app-registration',
+  templateUrl: './registration.page.html',
+  styleUrls: ['./registration.page.scss'],
+})
+export class RegistrationPage implements OnInit {
+  // export class RegisterPage implements OnInit {
+    @ViewChild(SlottimingsComponent,{static: false}) private myChild: SlottimingsComponent;
+    // @ViewChild(SlottimingsComponent) child;
+
+    validations_form: FormGroup;
+    matching_passwords_group : FormGroup;
+    responceData:any = [];
+    optionsList:any=[];
+    optionsDepart:any=[];
+    submitted: boolean;
+    showSpinner :any  = false;
+    loaderToShow: any;
+    loading: any;
+    timeoutTime: number;
+    hide:boolean =true;
+    closes:boolean =false;
+    hidee:boolean =false;
+    iconHide:boolean=true;
+    iconHideee:boolean=false;
+    day:any=[];
+  
+    slectedvalue: any;
+    addnew: boolean;
+    addnewdeprtment: boolean;
+    slecteddepvalue: any;
+    hideee: boolean = false;
+    finalValue: any;
+    pConfirm: boolean = false;
+    cpValue: any;
+    selectedTime: string;
+    firstFormGroup: FormGroup;
+    secondFormGroup: FormGroup;
+    startTime: boolean = false;
+    endTime:boolean = false;
+
+    monMorToTime: any = 'Monday';
+    monMorFromTime: any = 'Monday';
+    monAftToTime: any;
+    monAftFromTime: any;
+    monEvngToTime: any;
+    monEvngFromTime: any;
+    tueMorToTime: any  = 'Tuesday';
+    tueMorFromTime: any  = 'Tuesday';
+    tueAftToTime: any;
+    tueAftFromTime: any;
+    tueEvngToTime: any;
+    tueEvngFromTime: any;
+    wedMorToTime: any = 'Wednesday';
+    wedMorFromTime: any = 'Wednesday';
+    wedAftToTime: any;
+    wedAftFromTime: any;
+    wedEvngToTime: any;
+    wedEvngFromTime: any;
+    thurMorToTime: any = 'Thrusday';
+    thurMorFromTime: any = 'Thrusday';
+    thurAftToTime: any;
+    thurAftFromTime: any;
+    thurEvngToTime: any;
+    thurEvngFromTime: any;
+    friMorToTime: any = 'Friday';
+    friMorFromTime: any = 'Friday';
+    friAftToTime: any;
+    friAftFromTime: any;
+    friEvngToTime: any;
+    friEvngFromTime: any;
+    satMorToTime: any  = 'Saturday';
+    satMorFromTime: any  = 'Saturday';
+    satAftToTime: any;
+    satAftFromTime: any;
+    satEvngToTime: any;
+    satEvngFromTime: any;
+    sunMorToTime: any = 'Sunday';
+    sunMorFromTime: any = 'Sunday';
+    sunAftToTime: any;
+    sunAftFromTime: any;
+    sunEvngToTime: any;
+    sunEvngFromTime: any;
+    backId: string;
+    // @Output() setItemEvent  = new EventEmitter();
+    receivedChildMessage: string;
+  message: any = '';
+  days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    // @Output() messageToEmit = new EventEmitter<string>();
+    
+    
+    constructor(private examination:ExaminationService,private _dialog:MatDialog,public navCtrl:NavController,private  alrtctl:AlertController,public formBuilder: FormBuilder,private auth:AuthService,public navCtl:NavController,public select:SelectService, private alertctrl:AlertController, private router:Router,private loadingctrl:LoadingController , public loader:LoaderService,public zone:NgZone) {
+      this.dropDown();
+      
+    }
+  
+    onKeyPress(event) {
+      if ((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 97 && event.keyCode <= 122) || event.keyCode == 32 || event.keyCode == 46 ) {
+        
+        return true 
+      }
+      else {
+          return false
+      }
+  }
+  
+  
+  @ViewChild('stepper', { static: true }) stepper: ElementRef;
+  // // ngAfterViewInit() {
+  //   this.message = this.myChild.message;
+  //   console.log(this.message);
+  // }
+    ngOnInit() {
+
+      // let myCompOneObj = new SlottimingsComponent();
+  
+      // myCompOneObj.myFunctionOne();
+
+      // console.log(this.receivedChildMessage);
+      // this.showAlert(id);
+      // this.setItemEvent.emit(id);
+      // console.log("Bahubali");
+      this.firstFormGroup = this.formBuilder.group({
+        firstCtrl: ['', Validators.required]
+      });
+      this.secondFormGroup = this.formBuilder.group({
+        secondCtrl: ['', Validators.required]
+      });
+
+      this.examination.roleIdd.subscribe(user =>{
+        console.log(user);
+        console.log(user['Monday'][0]['Morning'][0]['from_time']);
+        // this.monMorToTime = user['Monday'][0]['Morning'][0]['from_time'];
+        if(user['Monday'][0]['Morning'][0]['from_time'] != '')
+        {
+          this.iconHideee=true;
+          this.iconHide=false;
+          this.monMorFromTime = user['Monday'][0]['Morning'][0]['from_time'];
+          this.monMorToTime = user['Monday'][0]['Morning'][1]['to_time'];
+        }else if(user['Tuesday'][0]['Morning'][0]['from_time'] != '')
+        {
+          this.tueMorFromTime = user['Tuesday'][0]['Morning'][0]['from_time'];
+          this.tueMorToTime = user['Tuesday'][0]['Morning'][1]['to_time'];
+        }else if(user['Wednesday'][0]['Morning'][0]['from_time'] != '')
+        {
+          this.wedMorFromTime = user['Wednesday'][0]['Morning'][0]['from_time'];
+          this.wedMorToTime = user['Wednesday'][0]['Morning'][1]['to_time'];
+        }else if(user['Thrusday'][0]['Morning'][0]['from_time'] != '')
+        {
+          this.thurMorFromTime = user['Thrusday'][0]['Morning'][0]['from_time'];
+          this.thurMorToTime = user['Thrusday'][0]['Morning'][1]['to_time'];
+        }else if(user['Friday'][0]['Morning'][0]['from_time'] != '')
+        {
+          this.friMorFromTime = user['Friday'][0]['Morning'][0]['from_time'];
+          this.friMorToTime = user['Friday'][0]['Morning'][1]['to_time'];
+        }else if(user['Saturday'][0]['Morning'][0]['from_time'] != '')
+        {
+          this.satMorFromTime = user['Saturday'][0]['Morning'][0]['from_time'];
+          this.satMorToTime = user['Saturday'][0]['Morning'][1]['to_time'];
+        }else if(user['Sunday'][0]['Morning'][0]['from_time'] != '')
+        {
+          this.sunMorFromTime = user['Sunday'][0]['Morning'][0]['from_time'];
+          this.sunMorToTime = user['Sunday'][0]['Morning'][1]['to_time'];
+        }else
+        {
+
+        }
+
+          // user['MomonMorToTimenday'][0]['Morning'][0]['from_time'] = e.target.value;
+        
+        // this.slotTimings=user
+       });
+    // }
+      // this.matching_passwords_group = new FormGroup({
+      //   password: new FormControl('', Validators.compose([
+      //     //  Validators.minLength(5),
+      //      Validators.required,
+      //     //  Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') //this is for the letters (both uppercase and lowercase) and numbers validation
+      //   ])),
+      //   confirm_password: new FormControl('', Validators.required)
+      // }, (formGroup: FormGroup) => {
+      //    return PasswordValidator.areEqual(formGroup);
+      // });
+  
+      // this.matching_passwords_group = new FormGroup({
+      //   password: new FormControl('', Validators.compose([
+  
+      //     // Validators.required, Validators.minLength(8), PasswordStrengthValidator
+  
+      //    Validators.minLength(5),
+      //     Validators.maxLength(8),
+      //     Validators.required,
+      //     Validators.pattern("(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Z\d@$!%*?&]{8,}$")
+      //     // Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
+          
+      //   ])),
+  
+      // //   password: [null, Validators.compose([
+      // //     Validators.required, Validators.minLength(8), PasswordStrengthValidator])]
+      // // }),
+  
+      //   confirm_password: new FormControl('', Validators.required)
+      // }, (formGroup: FormGroup) => {
+      //   return PasswordValidator.areEqual(formGroup);
+      // });
+  
+      this.validations_form = this.formBuilder.group({
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        registration_code:['',Validators.required],
+        password:['',Validators.required],
+        confirm_password:['',Validators.required],
+        email: ['', Validators.compose([
+            Validators.required,
+            // Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+          ])],
+        matching_passwords: this.matching_passwords_group,
+         mobile: ['', Validators.compose([
+            // Validators.pattern('[6-9]{1}[0-9]{9}'),
+            Validators.maxLength(10),
+            Validators.minLength(10),
+            Validators.required
+          ])],
+          qualification: [''],
+          clinic_id: [''],
+          department_id: [''],
+          department_name:[''],
+          clinic_name:[''],
+          clinic_location:['']
+          
+        });
+    }
+
+    
+    getMessage(message: string) {
+      this.receivedChildMessage = message;
+      console.log(message);
+    }
+
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off';
+  
+    passwordType_c: string = 'password';
+    passwordIcon_c: string = 'eye-off';
+    hideShowPassword() {
+        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    }
+    hideShowPassword_c() {
+      this.passwordType_c = this.passwordType === 'text' ? 'password' : 'text';
+      this.passwordIcon_c = this.passwordIcon === 'eyadd(e-off' ? 'eye' : 'eye-off';
+  }
+    get f() { return this.validations_form.controls; }
+  
+    validation_messages = {
+      
+      'password': [
+        { type: 'required', message: 'Password is required.' },
+        { type: 'pattern', message: 'Minimum 8 Characters with Atleast One Capital Letter,One Number,One Special Character' },
+      ],
+      'confirm_password': [
+        { type: 'required', message: 'Confirm password is required.' }
+      ],
+      'matching_passwords': [
+        { type: 'areEqual', message: 'Password mismatch.' }
+      ]
+       
+    };
+    public inputValidator(event: any) {
+      //console.log(event.target.value);
+      const pattern = /^[a-zA-Z0-9]*$/;   
+      //let inputChar = String.fromCharCode(event.charCode)
+      // if (!pattern.test(event.target.value)) {
+      //   event.target.value = event.target.value.replace(/[^a-zA-Z0-9]/g, "");
+      //   // invalid character, prevent input
+  
+      // }
+    }
+     numberOnly(event): boolean {
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+      }
+      return true;
+  
+    }
+  
+    // open() {
+    //   const amazingTimePicker = this.atp.open();
+    //   amazingTimePicker.afterClose().subscribe(time => {
+    //     console.log(time);
+    //   });
+    // }
+  
+  //   open() {
+  //     const amazingTimePicker = this.atp.open({
+  //         time:  this.selectedTime,
+  //         theme: 'dark',
+  //         arrowStyle: {
+  //             background: 'red',
+  //             color: 'white'
+  //         }
+  //     });
+  //     amazingTimePicker.afterClose().subscribe(time => {
+  //         this.selectedTime = time;
+  //     });
+  // }
+  // }
+  
+  add(a,b)
+  {
+      console.log(a,b);
+    
+      this.day = [this.monMorFromTime, this.tueMorFromTime, this.wedMorFromTime,
+        this.thurMorFromTime,this.friMorFromTime, this.satMorFromTime,this.sunMorFromTime 
+      ]
+    var data = { "Monday": [ 
+      { "Morning" : [{"from_time":this.monMorFromTime},{"to_time":this.monMorToTime}]} , 
+      { "Afternoon" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Evening" : [{"from_time":"text"},{"to_time":"text2"}]}
+    ],
+    "Tuesday": [ 
+      { "Morning" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Afternoon" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Evening" : [{"from_time":"text"},{"to_time":"text2"}]}
+    ] ,
+    "Wednesday": [ 
+      { "Morning" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Afternoon" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Evening" : [{"from_time":"text"},{"to_time":"text2"}]}
+    ],
+    "Thrusday": [ 
+      { "Morning" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Afternoon" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Evening" : [{"from_time":"text"},{"to_time":"text2"}]}
+    ],
+    "Friday": [ 
+      { "Morning" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Afternoon" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Evening" : [{"from_time":"text"},{"to_time":"text2"}]}
+    ],
+    "Saturday": [ 
+      { "Morning" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Afternoon" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Evening" : [{"from_time":"text"},{"to_time":"text2"}]}
+    ],
+    "Sunday": [ 
+      { "Morning" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Afternoon" : [{"from_time":"text"},{"to_time":"text2"}]} , 
+      { "Evening" : [{"from_time":"text"},{"to_time":"text2"}]}
+    ] 
+    }
+         console.log(data)
+         this.examination.roleId(data);
+        //  this.examination.roleIdd.subscribe(data => {console.log(data);
+        //   this.backId=data});
+          
+    // this.iconHide =false;
+    const dialog_ref = this._dialog.open(SlottimingsComponent,{
+      panelClass: ['myapp-no-padding-dialog'],
+      data:{
+        clickedDay:a,
+        day:this.day,
+        session:b
+      }
+    })
+    dialog_ref.afterClosed().subscribe(result => {
+      // console.log("Fasak");
+      // console.log(result);
+      this.ngOnInit();
+    });
+    // this.startTime = true;
+    // this.endTime = true;
+    // this.presentAlertt();
+  }
+
+  nextPopUp()
+  {
+    const dialog_ref = this._dialog.open(SlottimingsComponent,{
+      panelClass: ['myapp-no-padding-dialog'],
+      data:{
+        day:'Tele Consultant',
+        session:''
+      }
+    })
+  }
+  
+  async presentAlertt() {
+    let alert = this.alrtctl.create({
+      cssClass:['alertLogCss'],
+      message: "Add Slot Timings Here",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          // console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Save',
+          handler: () => {
+            // this.zone.run(()=>{
+            //   localStorage.removeItem('data')
+            //   localStorage.removeItem('roleId')
+            //   this.navCtrl.navigateRoot('/login');
+            //   localStorage.removeItem('appointments');
+            // })
+          }
+        }
+      ],
+      
+    });
+    (await alert).present();
+  }
+  
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  //     width: '250px',
+  //     data: {name: this.name, animal: this.animal}
+  //   });
+  
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     this.animal = result;
+  //   });
+  // }
+    
+  signUp(data)
+  
+  {
+    console.log(data);
+    console.log(data.password==''?'Apple':'Banana');
+    if(data.password =='')
+    {
+      this.hidee =  true;
+    }
+    else{
+      this.hidee = false;
+    }
+    if(data.confirm_password =='')
+    {
+      this.hideee =  true;
+    }
+    else{
+      this.hideee = false;
+    }
+  
+    // console.log(this.finalValue);
+    // console.log(this.cpValue);
+  
+  
+  
+    // this.validations_form.get('password').value;
+    // console.log(this.validations_form.get('password').value);
+    // console.log(data.password,data.confirm_password);
+    // if(data.password == null)
+    // {
+    //     this.hidee = true;
+    // }else{
+    //   this.hidee= false;
+    // }
+    // if(data.confirm_password == null)
+    // {
+    //     this.hidee = true;
+    // }else{
+    //   this.hidee= false;
+    // }
+    this.submitted = true;
+    if(data.first_name && data.registration_code && data.email && data.mobile ){
+      // this.stepper.next();
+        // this.loader.loadingPresent();
+        // this.auth.postData(data).subscribe((data)=>
+  
+        //   {
+            
+        //     if(data["code"]=="200")
+        //     {
+        //       this.responceData = data;
+        //       console.log(this.responceData)
+        //       this.loader.loadingDismiss();
+        //       this.presentAlert("Registered successfully Login with Email or Mobile");
+              
+        //     }else{
+        //       this.loader.loadingDismiss();
+        //       return  this.presentAlert(data["message"]);  
+              
+        //     }
+        //   });
+   
+      
+  }else{
+  
+  }
+  
+  
+  var n = this.finalValue.localeCompare(this.cpValue);
+  console.log(n);
+  
+  if(n != 0)
+  {
+    this.presentAlert("Password Pattern Not Matched");
+  }
+  
+  
+  
+  
+  }
+  
+  
+  // async signUp(data) {
+  
+  //   if(this.submitted = true){
+  //     return;
+  //   }
+  //   const loader = await this.loadingctrl.create({
+  //     message: 'Loading...',
+  //   });
+  //   loader.present().then(() => {               // show loader
+  //     this.auth.postData(data).subscribe(res => {
+  //        if(res["code"]=="200"){
+  //         this.responceData = res;
+  //         loader.dismiss();  
+  //         this.presentAlert("Thank You for succesful Registration with Us"); 
+  //       } else{
+  //         return  this.presentAlert(res["message"]); 
+  //       }
+  //     },
+  // );
+  
+  //                           // dismiss loader
+  //   });
+  // }
+  
+  dropDown() {
+    this.select.dropDown().subscribe((data: any) => {
+      // console.log(data["result"]["clinics"]);
+       this.optionsList = data["result"]["clinics"];
+      // console.log(this.optionsList);
+       //console.log(this.slectedvalue);
+       this.optionsDepart = data["result"]["departments"];
+   
+    });
+  }
+  
+  
+  async presentAlert(msg) {
+    let alert = this.alertctrl.create({
+      cssClass:['alertLogCss'],
+      message: msg,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            //console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            this.zone.run(()=>{
+              this.navCtl.navigateRoot('/login');
+            })
+           
+            // this.navCtl.navigateRoot(LoginPage, {}, {animate: true, direction: 'forward'});
+          }
+        }
+      ],
+      
+    });
+    (await alert).present();
+  }
+  
+  
+  checkClincValue(event)
+  
+  { 
+    //console.log(event.detail.value)
+    this.slectedvalue = event.detail.value;
+    //console.log(this.slectedvalue);
+    if(this.slectedvalue == 0)
+    {
+     return this.addnew = true;
+    }else{
+      this.addnew = false;
+    }
+  }
+  
+  checkDeprtValue(event){
+    this.slecteddepvalue = event.detail.value;
+   // console.log(event.detail.value);
+    if(this.slecteddepvalue == 0)
+    {
+     return this.addnewdeprtment = true;
+    }else{
+      this.addnewdeprtment = false;
+    }
+  }
+  
+  checkPassword(e)
+  {
+    this.hidee=false;
+    this.closes =true;
+    // console.log(e.target.value);
+    this.finalValue= e.target.value;
+    var format =/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    console.log(format.test(e.target.value));
+    if(e.target.value.length >= 8 && format.test(e.target.value) == true)
+    {
+      this.hide =false;
+      this.closes =false;
+      // e.target.classList.remove('ion-invalid');
+      // var element = document.getElementById("myDIV") as HTMLElement;
+      // element.classList.add("mystyle");
+      // e.target.classList.remove('ion-invalid');
+    }
+    else{
+      this.hide = true;
+      // var element = document.getElementById("myDIV") as HTMLElement;
+      // element.classList.remove("mystyle");
+      // e.target.classList.add('ion-invalid');
+    }
+    
+  }
+  
+  checkCPassword(e)
+  {
+    this.hideee=false;
+    this.pConfirm = true;
+    this.cpValue=e.target.value;
+      // console.log(e.target.value);
+      // console.log(this.finalValue);
+      var n = e.target.value.localeCompare(this.finalValue);
+      console.log(n);
+      if(n == 0)
+      {
+        this.pConfirm = false;
+      }
+      else{
+        this.pConfirm = true;
+      }
+  }
+
+  fasak()
+  {
+    console.log("fasak");
+  }
+  
+  }

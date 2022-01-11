@@ -1,0 +1,107 @@
+<!-- <ion-header >
+<ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="patientprofile/{{patient_id}}"></ion-back-button>
+</ion-buttons>
+<ion-title class="text-muted font-weight-bold small" >PATIENT PROFILE EDIT</ion-title> 
+</ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card  class=" book-card card-1 my_card" >
+        <ion-card-header  class="my_card-header">
+            <div class="my_card-icon my_bg_v my_card-icon_xs_padding">
+               <ion-text text-left color="favorite" >
+                   <h6>PATIENT DETAILS</h6>
+                   <p>Edit Patient Details</p>
+               </ion-text>
+            </div>
+           </ion-card-header>
+        <ion-card-content margin>
+            <form [formGroup]="registerForm"  (ngSubmit)="EditProfileUpdate(registerForm.value)" >
+              <ion-row>
+                <ion-col size-md="2" size-xs="12">
+                  <ion-item>
+                    <ion-label position="floating">Title</ion-label>
+                    <ion-select formControlName="title" [(ngModel)]="Patient_Edit.title" placeholder="Please select Title">
+                        <ion-select-option type="text" *ngFor="let title of titles" >{{title}}</ion-select-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col size-md="5" size-xs="12">
+                  <ion-item >
+                    <ion-label position="floating" >First Name</ion-label>
+                    <ion-input  type="text"  maxlength="25"  clearInput=true   formControlName="first_name"  [(ngModel)]="Patient_Edit.first_name"></ion-input>
+                    
+                </ion-item>
+
+                </ion-col>
+                <ion-col size-md="5" size-xs="12"> 
+                  <ion-item>
+                    <ion-label position="floating">Last Name</ion-label>
+                    <ion-input maxlength="25"  clearInput=true  type="text" formControlName="last_name" [(ngModel)]="Patient_Edit.last_name"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="2" size-xs="12">
+                  <ion-item>
+                    <ion-label position="floating"  >Sex</ion-label>
+                    <ion-select  formControlName="gender" [(ngModel)]="Patient_Edit.gender"  placeholder="Please select Gender">
+                       <ion-select-option *ngFor="let gender of genders" >{{gender}}</ion-select-option>
+                     </ion-select>
+                </ion-item>
+                </ion-col>
+                <ion-col size-md="5" size-xs="12">
+                  <ion-item>
+                      <ion-label position="floating">Mobile</ion-label>
+                      <ion-input type="tel"  maxlength="10"  clearInput=true
+                       formControlName="mobile" [(ngModel)]="Patient_Edit.mobile"></ion-input>
+                   </ion-item>
+               
+                </ion-col>
+                
+                <ion-col size-md="5" size-xs="12">
+                  <ion-item>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input type="email" formControlName="email" [(ngModel)]="Patient_Edit.email" ></ion-input>
+                 
+               </ion-item>
+              
+                </ion-col>
+                
+              </ion-row>
+              
+              <ion-row>
+                <ion-col size-md="2" size-xs="12">
+                  <ion-item>
+                    <ion-label position="floating">Age</ion-label>
+                     <ion-input type="tel"   [(ngModel)]="Patient_Edit.age" formControlName="age" ></ion-input> 
+                  </ion-item>
+                </ion-col>
+                    <ion-col size-md="5" size-xs="12">
+                        <ion-item>
+                            <ion-label position="floating">Occupation</ion-label>
+                            <ion-input formControlName="occupation" type="text"  [(ngModel)]="Patient_Edit.occupation" maxlength="50"  clearInput=true  ></ion-input>
+                           </ion-item>
+                      </ion-col>
+                <ion-col size-md="5" size-xs="12">
+                    <ion-item>
+                        <ion-label  position="floating">Area</ion-label>
+                        <ion-input formControlName="location"   maxlength="50"  clearInput=true   [(ngModel)]="Patient_Edit.location" ></ion-input>
+                     
+                  </ion-item>
+                
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                    <div class="submit" margin >
+                        <!-- <ion-button class="login " size="default"  type="submit"  expand="block" matStepperNext>Book Appointment<ion-icon name="arrow-forward"></ion-icon></ion-button> 
+                        <ion-button type="submit" style="color: #ffff;" color="theme" float-right  >Update Profile</ion-button>
+                      </div>
+                </ion-col>
+              </ion-row>
+            </form>
+        </ion-card-content>
+     </ion-card>
+</ion-content> -->

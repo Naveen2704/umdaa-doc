@@ -1,0 +1,57 @@
+<div class="mat-body overflow">
+  <div class="row">
+      <div class="col-12 ">
+          <div class="reeports_section p-2">
+            <div class="table-responsive">
+             <table mat-table [dataSource]="(summaryList)" class="table table-responsive w-100 d-block d-md-table">
+  
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+              <!-- Position Column -->
+              <!-- <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element ;let i= index"> {{i+1}} </td>
+              </ng-container> -->
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>  DATE </th>
+                <td mat-cell *matCellDef="let element"> {{element.appointment_date | date: 'dd/MM/yyyy'}} </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef>  DOCTOR</th>
+                <td mat-cell *matCellDef="let element"> {{element.doctor |titlecase}} </td>
+              </ng-container>
+            
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> SUMMARY </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <div class="btn_custom" *ngIf="element.pdf_status ==1 ">
+                      <button mat-raised-button (click)="shortsummary(element.appointment_id)" >SHORT</button>    
+                      <button mat-raised-button (click)="fullsummary(element.appointment_id)">FULL</button> 
+                     
+                    </div>
+                    <button mat-raised-button  *ngIf="element.expert_opinion_status == 1" (click)="pre(element.expert_opinion_id)">Pre Summary</button>
+                    <span style="color:red;" *ngIf="element.pdf_status == 0">CLICK SUBMIT IN PRESCRIPTION TO SEE SUMMARY</span>
+                     </td>
+              </ng-container>
+            
+             
+             
+            
+                
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" class="text-left"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="text-left"></tr>
+            </table>
+            <div *ngIf="summaryList.length == 0" class="no-records">
+              No records found
+            </div>
+            </div>
+          </div>
+            
+      </div>
+  </div>
+  </div>

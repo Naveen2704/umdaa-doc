@@ -1,0 +1,261 @@
+<div class="mat-body">
+    <mat-tab-group backgroundColor="primary" mat-align-tabs="left">
+      <mat-tab label="Health Education"> 
+        <div class="container">
+          <div class="row mt-2">
+            <div class="col-12 col-lg-6 col-md-6 mb-3" *ngFor="let articles of hearticles; let i=index">
+              <mat-card class="p-2 bottom">
+                
+                <div class="row">
+                  <div class="col-12">
+                    <p class="text-right"><i>{{articles.fullname}}</i></p>
+                    <!-- <span class="badge badge-info pull-right" style="font-weight:400;font-size:13px;">{{ article.article_status |uppercase }}</span> -->
+    
+    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-lg-4 col-md-4">
+                    <div class="border side">
+                      <!-- <iframe class="w-100 {{ (articles.type == 'video')?'d-block':'d-none' }}" height="175" [src]="getUrlH(articles)" frameborder="0" allow="picture-in-picture" allowfullscreen></iframe> -->
+    
+                      <iframe   class="w-100 {{ (articles.type == 'video')?'d-block':'d-none' }}" height="175" [src]="'https://www.youtube.com/embed/' + articles.video |urlsafe" frameborder="0"  allowfullscreen></iframe>
+                      <div class="row {{ (articles.type == 'image')?'d-block':'d-none' }} over">
+                        <div class="col-12">
+                         <!-- <img class="image" height="200"  src="assets/logo/umdaa_logo_1.png"> -->
+                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                           <div class="carousel-inner">
+                             <div class="carousel-item {{ (i==0)?'active':''}} zindexbutton"  *ngFor = "let image of articles.article_image; let i=index"  >
+                               <img    src="{{(image=='')?'assets/logo/umdaa_logo_1.png':image}}" alt="Not Found">
+                                <div class="middle">
+                                  <button    mat-raised-button [lightbox]=""  (click)="imageview(articles.article_id)"  class="my_bg_v mr-2 click-button">View Image</button>
+    
+                                </div>
+                             </div>
+     
+                           </div>
+                           <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                             <span class="sr-only">Previous</span>
+                           </a>
+                           <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                             <span class="sr-only">Next</span>
+                           </a> -->
+                         </div>
+                        </div>
+                      </div>
+                      <div class="row {{ (articles.type == 'pdf')?'d-block':'d-none' }} over">
+                        <!-- <div class="col-12">
+                         <a href="{{article.pdf}}" target="_blank" >
+                           <img class="d-block w-100" height="200" src="assets/icon/pdf-icon.png" alt="First slide">
+                         </a>
+                        </div> -->
+                        <div class="col-12 zindexbutton">
+                         <img class="d-block w-100"  src="assets/icon/pdf-icon.png" alt="First slide">
+                         <div class="middle">
+                         <a href="{{articles.pdf}}" target="_blank" >
+                         <button mat-raised-button class="my_bg_v mr-2 click-button" >View Pdf</button>
+                        </a>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-8 col-md-8">
+                    <h6 class="card-title" style="text-align: justify;
+                    text-indent: 50px; font-weight:bold;">{{articles.article_title | titlecase}}
+                    </h6>
+                    <div class="more" [class.show]="articles.show">
+                      <p class="text-muted">{{articles.description}}</p>
+                     </div>
+                     <div class="showmore my-auto">
+                      <span style ="color:blue;cursor: pointer;" *ngIf="articles.description.length > 100" (click)="articles.show = !articles.show">{{ articles.show ? 'Read less': 'Read More' }}</span>                   </div>
+                    
+                   
+                  </div>
+                </div>
+             
+              </mat-card> 
+            </div>
+          </div>
+         </div>
+           
+        
+      </mat-tab>
+      <mat-tab label="Your Articles"> 
+       <div class="container-fluid">
+        <div class="row mt-3">
+          <div class="col-12">
+                    <div class="header_section  text-right">
+                        <button mat-stroked-button (click)="upload()"  class="my_bg_v"><mat-icon>add</mat-icon>UPLOAD</button>
+                    </div>
+            </div>
+         </div>
+        <div class="row mt-2">
+          <div class="col-12 col-lg-6 col-md-6 mb-3" *ngFor="let article of articles; let i=index">
+            <mat-card class="p-2 bottom">
+              
+              <div class="row">
+                <div class="col-12">
+                  <p class="text-right"><i>{{article.fullname}}</i></p>
+                  <span class="badge badge-info pull-right" style="font-weight:400;font-size:13px;">{{ article.article_status |uppercase }}</span>
+  
+  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-4 col-md-4">
+                  <div class="border side">
+                    <video class="w-100 {{ (article.type == 'video')?'d-block':'d-none' }}" src="{{article.posted_url}}"     controls></video> 
+  
+                    <!-- <iframe class="w-100 {{ (article.type == 'video')?'d-block':'d-none' }}" height="200" [src]="getUrl(article)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                    <div class="row {{ (article.type == 'image')?'d-block':'d-none' }} over">
+                      <div class="col-12">
+                       <!-- <img class="image" height="200"  src="assets/logo/umdaa_logo_1.png"> -->
+                       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                         <div class="carousel-inner">
+                           <div class="carousel-item {{ (i==0)?'active':''}} zindexbutton" *ngFor = "let image of article.article_image; let i=index" >
+                             <img    src="{{(image=='')?'assets/logo/umdaa_logo_1.png':image}}" alt="Not Found">
+                              <div class="middle">
+                                <button    mat-raised-button [lightbox]=""  (click)="imageviewyour(article.article_id)"  class="my_bg_v mr-2 click-button">View Image</button>
+  
+                              </div>
+                           </div>
+   
+                         </div>
+                         <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                           <span class="sr-only">Previous</span>
+                         </a>
+                         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                           <span class="sr-only">Next</span>
+                         </a> -->
+                       </div>
+                      </div>
+                    </div>
+                    <div class="row {{ (article.type == 'pdf')?'d-block':'d-none' }} over">
+                      <!-- <div class="col-12">
+                       <a href="{{article.pdf}}" target="_blank" >
+                         <img class="d-block w-100" height="200" src="assets/icon/pdf-icon.png" alt="First slide">
+                       </a>
+                      </div> -->
+                      <div class="col-12 zindexbutton">
+                       <img class="d-block w-100"  src="assets/icon/pdf-icon.png" alt="First slide">
+                       <div class="middle">
+                       <a href="{{article.pdf}}" target="_blank" >
+                       <button mat-raised-button class="my_bg_v mr-2 click-button" >View Pdf</button>
+                      </a>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8 col-md-8">
+                  <h6 class="card-title" style="text-align: justify;
+                  text-indent: 50px; font-weight:bold;">{{article.article_title | titlecase}}
+                  </h6>
+                  <div class="more" [class.show]="article.show">
+                    <p class="text-muted">{{article.description}}</p>
+                   </div>
+                   <div class="showmore my-auto">
+                    <span style ="color:blue;cursor: pointer;" *ngIf="article.description.length > 150" (click)="article.show = !article.show">{{ article.show ? 'Read less': 'Read More' }}</span>
+                   </div>
+                  
+                 
+                </div>
+              </div>
+              <div class="changes">
+                <div class="row ">
+                  <div class="col-12 d-flex">
+                    <div class=" m-2">
+                     <button  *ngIf="article.article_status === 'reviewed'"  mat-button  (click)="approve(article.article_id)" class=" mr-2 my_bg_v">Approve</button>
+                     <button   *ngIf="article.article_status === 'reviewed'"   mat-button  (click)="comment(article.article_id)" class="my_bg_v">Need Changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="change">
+                <div class="row ">
+                  <div class="col-12">
+                   <div class="class" *ngIf="article.article_id == id">
+                     <form class="m-3" [formGroup]="Commentform" (ngSubmit)="submitC(Commentform.value,article.article_id)">
+                       <mat-form-field class="w-100">
+                     
+                         <textarea matInput  formControlName ="comment" placeholder="Add Comment Here" required></textarea>
+                         <mat-error  *ngIf="isSubmitted && Commentform.get('comment').hasError('required')">Comment is required</mat-error>
+         
+                       </mat-form-field>
+                       <div class="text-center mt-2 p-0">
+                         <button mat-raised-button  type="submit"  class="my-3 m-0 p-0 my_bg_v"   >SUBMIT</button>
+                       </div> 
+                     </form>
+                  </div>
+                  </div>
+                </div>
+               
+              </div>
+            </mat-card> 
+          </div>
+        </div>
+       </div>
+      </mat-tab>
+    </mat-tab-group>
+   </div>
+
+
+   
+<!-- 
+    <div class="container">
+      <div class="row">
+        <div class="m">
+          <div class="news-card z-depth-1" itemscope="" itemtype="http://schema.org/NewsArticle">
+            <span content="" itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://inshorts.com/en/news/22yrold-man-grabs-actress-and-flashes-private-parts-at-her-in-5star-hotel-booked-1612175392583"></span>
+            <span itemtype="https://schema.org/Person" itemscope="itemscope" itemprop="author">
+              <span itemprop="name" content="Anmol Sharma"></span>
+            </span>
+            <span itemprop="description" content="22-yr-old man grabs actress and flashes private parts at her in 5-star hotel, booked"></span>
+            <span itemprop="image" itemscope="" itemtype="https://schema.org/ImageObject">
+              <meta itemprop="url" content="https://static.inshorts.com/inshorts/images/v1/variants/jpg/m/2021/02_feb/1_mon/img_1612147651513_607.jpg?">
+              <meta itemprop="width" content="864">
+              <meta itemprop="height" content="483">
+            </span>
+            <span itemtype="https://schema.org/Organization" itemscope="itemscope" itemprop="publisher">
+              <span itemprop="url" content="https://inshorts.com/"></span>
+              <span itemprop="name" content="Inshorts"></span>
+              <span itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject">
+                <span itemprop="url" content="https://assets.inshorts.com/inshorts/images/v1/variants/jpg/m/2018/11_nov/21_wed/img_1542823931298_497.jpg"></span>
+                <meta itemprop="width" content="400">
+                <meta itemprop="height" content="60">
+              </span>
+            </span>
+            <div class="news-card-image" style="background-image: url('https://static.inshorts.com/inshorts/images/v1/variants/jpg/m/2021/02_feb/1_mon/img_1612147651513_607.jpg?')">
+            </div>
+            <div class="news-card-title news-right-box">
+              <a class="clickable" onclick="ga('send', {'hitType': 'event', 'eventCategory': 'TitleOfNews', 'eventAction': 'clicked', 'eventLabel': '22-yr-old%20man%20grabs%20actress%20and%20flashes%20private%20parts%20at%20her%20in%205-star%20hotel%2C%20booked)' });" style="color:#44444d!important" href="/en/news/22yrold-man-grabs-actress-and-flashes-private-parts-at-her-in-5star-hotel-booked-1612175392583">
+                <span itemprop="headline">22-yr-old man grabs actress and flashes private parts at her in 5-star hotel, booked</span>
+              </a>
+              <div class="news-card-author-time news-card-author-time-in-title">
+                <a href="/prev/en/news/22yrold-man-grabs-actress-and-flashes-private-parts-at-her-in-5star-hotel-booked-1612175392583"><span class="short">short</span></a> by <span class="author">Anmol Sharma</span> / 
+                <span class="time" itemprop="datePublished" content="2021-02-01T10:29:52.000Z">03:59 pm</span> on <span clas="date">01 Feb 2021,Monday</span>
+              </div>
+            </div>
+            <div class="news-card-content news-right-box">
+              <div itemprop="articleBody">A 22-year-old man, suspected to be a member of housekeeping staff at a five-star hotel in Mumbai, has been booked by the police for molesting an actress in a washroom. While the actress was changing her clothes, the accused grabbed her and flashed private parts at her, police said. The actress was shooting for a web series in the hotel.</div>
+              <div class="news-card-author-time news-card-author-time-in-content">
+                <a href="/prev/en/news/22yrold-man-grabs-actress-and-flashes-private-parts-at-her-in-5star-hotel-booked-1612175392583"><span class="short">short</span></a> by <span class="author">Anmol Sharma</span> / 
+                <span class="time" itemprop="dateModified" content="2021-02-01T10:29:52.000Z">03:59 pm</span> on <span class="date">01 Feb</span>
+              </div>
+            </div>
+            
+              <div class="news-card-footer news-right-box">
+                <div class="read-more">read more at <a class="source" onclick="ga('send', {'hitType': 'event', 'eventCategory': 'ReadMore', 'eventAction': 'clicked', 'eventLabel': 'LatestLY' });" target="_blank" href="https://www.latestly.com/agency-news/india-news-woman-guest-molested-at-mumbai-five-star-hotel-one-booked-2296200.html/amp?utm_campaign=fullarticle&amp;utm_medium=referral&amp;utm_source=inshorts ">LatestLY</a></div>
+              </div>
+            
+          
+          </div>
+        </div>
+      </div>
+  </div>
+ -->

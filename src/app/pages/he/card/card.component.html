@@ -1,0 +1,84 @@
+<div [@cardAnimator]="animationState" (@cardAnimator.done)="resetAnimationState($event)"   *ngIf="i<hearticles.length">
+
+<mat-card class="example-card" style="height: 100vh;
+display: flex;
+flex-direction: column;overflow: hidden;">
+  <iframe    class="{{ (hearticles[i]?.type == 'video')?'d-block':'d-none' }} tab" style="max-height: 300px; min-height:250px; width:100%;" [src]="'https://www.youtube.com/embed/' + hearticles[i]?.video |urlsafe" frameborder="0"  allowfullscreen></iframe>
+
+  <div class=" {{ (hearticles[i]?.type == 'image')?'d-block':'d-none' }} ">
+  
+      <div class="{{ (i==0)?'active':''}} "  *ngFor = "let image of hearticles[i]?.article_image; let i=index"  >
+        <!-- <a href="https://blog.angular.io/under-the-hood-of-the-language-service-ab763c26f522?source=collection_home---4------0-----------------------" data-action="open-post" data-action-value="https://blog.angular.io/under-the-hood-of-the-language-service-ab763c26f522?source=collection_home---4------0-----------------------" class="u-block u-xs-height170 u-height350 u-width100pct u-floatLeft  u-backgroundSizeCover u-backgroundOriginBorderBox u-backgroundColorGrayLight u-borderLighter" style="background-image: url(&quot;https://cdn-images-1.medium.com/max/2600/0*8xLKo0IHv25RGqs5&quot;);background-position: 50% 50% !important;"></a> -->
+        <!-- <img  mat-card-image style="max-width: inherit; background-image: url(image)" src="{{(image=='')?'src/assets/logo/umdaa_logo_1.png':image}}" alt="Not Found"  > -->
+        <!-- <div  [style.background-image]="'url( 'hearticles[i]?.article_image')'"> -->
+          <!-- <div style="max-height: 300px;min-height: 200px;border: 1px solid rgba(0, 0, 0, 0.15) !important;background: url({{image}});background-repeat: no-repeat;background-position: 50% 50%;background-size: contain;"></div> -->
+
+        <div   [ngStyle]="{'background': 'url(' + image + ') no-repeat 50% 50% / cover border-box', 'max-height':'300px','min-height':'250px', 'border': '1px solid rgba(0,0,0,.15)!important'}" class="tab"></div>
+        </div>
+     
+ 
+    
+  </div>  
+  <div class=" {{ (hearticles[i]?.type == 'pdf')?'d-block':'d-none' }} tab">
+    <div   style="height:300px; border: 1px solid rgba(0,0,0,.15)!important;"  [ngStyle]="{'background': 'url(' + hearticles[i]?.pdf + ') no-repeat 50% 50% / cover border-box'}"></div>
+  </div>
+    <!-- <div class="">
+     <img class="d-block "  src="assets/icon/pdf-icon.png" alt="First slide">
+     <div class="">
+     <a href="{{hearticles[i]?.pdf}}" target="_blank" >
+     <button mat-raised-button class="" >View Pdf</button>
+    </a>
+    </div> -->
+  <!-- </div>
+  </div> -->
+  <mat-card-content class="p-2 mb-0">
+    <p style="font-size: 18px;
+     text-decoration: none;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  " class="mb-0">{{hearticles[i]?.article_title }}</p>
+    <p style="
+    height: 300px;
+    overflow: auto;
+    color: #777272;
+    font-size: 16px; margin-top:10px;">
+      {{hearticles[i]?.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="p-2" id="custom_action">
+    <a class="p-2" href="/prev/en/news/22yrold-man-grabs-actress-and-flashes-private-parts-at-her-in-5star-hotel-booked-1612175392583"><span class="short" style="font-size:13px">Source by</span></a>  <span class="author" style="font-size:13px">{{hearticles[i]?.article_author}}</span> 
+
+    <div  *ngIf=" hearticles[i]?.read_article_link != null">
+      <a href="{{hearticles[i]?.read_article_link}}" target="_blank" class="ml-2">Read more</a>
+    </div>
+  </mat-card-actions>
+  <div class="row bottomRow">
+    <div class="col-3 text-center">
+      <button mat-button   matTooltip="home"  (click)='cardAnimation("swipedown")' [disabled]="i===0"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    </div>
+    <div class="col-3 text-center">
+      <button mat-button   matTooltip="home"  (click)="back()"><mat-icon>home</mat-icon></button>
+
+    </div>
+    <div class="col-3 text-center">
+      <button mat-button  matTooltip="share"  class=" btn-2" (click)="share(hearticles[i]?.article_title,hearticles[i]?.description,hearticles[i]?.article_image,hearticles[i]?.article_id)"><mat-icon>share</mat-icon></button>
+    </div>
+    <div class="col-3 text-center">
+      <button mat-button  matTooltip="share"  class=" btn-2" (click)='cardAnimation("swipeup")' [disabled]="i===articles"><mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+  </div>
+
+</mat-card>
+
+
+
+ 
+<!-- <div class="help_1 d-block d-md-block d-lg-none d-xl-none">
+  
+  
+
+</div> -->

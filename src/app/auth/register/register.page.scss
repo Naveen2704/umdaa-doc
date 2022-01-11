@@ -1,0 +1,383 @@
+
+
+small {
+  font-size: 92% !important;
+}
+
+ion-label {
+  span{
+    color: red;
+    //font-size: 10px;
+  }
+}
+
+.side_layout{
+  //background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  //background-color: #10367a;
+    background-color: #3b5998;
+ // background-color: #edbf2b;
+
+
+}
+
+.reg_bg{
+  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  //opacity: 0.3;
+}
+//  .reg_bg_blur{
+//   //background: rgba($color: #000000, $alpha: 0.3);
+//   //float: left;
+// }
+
+.support{
+  margin-top: 333px;
+  color: #ffff;
+}
+ion-text h6{
+  font-size: 14px;
+  margin: 0 auto;
+}
+// .card{
+//   width: 95%;
+//   //margin: 0 auto;
+//   margin:0px auto 0px auto;
+//   //position: absolute;
+//   top: 50%;
+// }
+@media screen and (min-width: 320px) and (max-width:930px)  {
+  .image{
+    margin: 0px  auto;
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+  
+}
+@media screen and (min-width:360px) and (max-width:640px) {
+
+  .image{
+    margin: 0px  auto;
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+
+}
+@media screen and (min-width:375px) and (max-width:812px) {
+
+  .image{
+    margin: 0px auto;
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+
+}
+
+/* Tablets, iPads (portrait and landscape) ---------- */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  .image{
+    margin: 0px auto;
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px){
+  .image{
+    margin: 160px  auto;
+    position: relative;
+  }
+}
+/* Desktops and laptops ---------- */
+@media screen and (min-width: 1224px){
+  .image{
+    margin: 160px  auto;
+    position: relative;
+  }
+}
+ 
+/* Large screens ---------- */
+@media screen and (min-width: 1824px){
+  .image{
+    margin: 160px  auto;
+    position: relative;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// .btn{
+//     margin: 20px 100px;
+//     padding: 5px 10px;
+    
+// }
+// @media screen and (min-width: 320px) and (max-width: 768px){
+//     .card{
+//       width:100%;
+//       //margin-top: 100px;
+//       margin:80px auto;
+//       padding: 0;
+         
+//   }
+//   .login{
+//     margin: 0px 0px;
+//     font-size: 13px;
+//     text-transform: uppercase;
+//     letter-spacing: 0.1em;
+//     font-family: 'Source Sans Pro', sans-serif;
+// }
+//   }
+//   /* Tablets, iPads (portrait and landscape) ---------- */
+//   @media screen and (min-width: 768px) and (max-width: 1024px){
+//     .card{
+//       width:100%;
+//       //margin-top: 100px;
+//       margin:80px auto;
+         
+//   }
+//   .login{
+//     margin: 0px 0px;
+//     font-size: 13px;
+//     text-transform: uppercase;
+//     letter-spacing: 0.1em;
+//     font-family: 'Source Sans Pro', sans-serif;
+// }
+//   }
+//   /* Desktops and laptops ---------- */
+//   @media screen and (min-width: 1224px){
+//     .card{
+//               //width:75%;
+//               //margin-top: 100px;
+//               //margin:80px auto;
+//               //height:100%;
+//               margin: 0 auto;
+                 
+//           }
+//           .login{
+//             margin: 0px 150px;
+//             font-size: 13px;
+//             text-transform: uppercase;
+//             letter-spacing: 0.1em;
+//             font-family: 'Source Sans Pro', sans-serif;
+//         }
+//   }
+//   /* Large screens ---------- */
+//   @media screen and (min-width: 1824px){
+//     .card{
+//       width:50%;
+//       //margin-top: 100px;
+//       margin:80px auto;
+      
+         
+//   }
+//   .login{
+//     margin: 0px 150px;
+//     font-size: 13px;
+//     text-transform: uppercase;
+//     letter-spacing: 0.1em;
+//     font-family: 'Source Sans Pro', sans-serif;
+// }
+
+//   }
+  
+// .error-message
+// {
+//   color: red;
+//   font-size: 14px;
+//   margin-left: 10px;
+//   margin-top: 10px;
+// }
+// .signup_btn{
+//    // margin: 0 auto;
+//     justify-content:flex-end;
+// }
+// .signup_section{
+//   display: -webkit-box; 
+//      display: -webkit-flex; 
+//      display: flex;
+// }
+// .text-sign{
+//   text-align: center;
+//   font-size: 15px;
+//   font-family: 'Source Sans Pro', sans-serif;
+// }
+// .r_card{
+//   display: block;
+//   margin: 0 auto;
+//   top: 12%;
+//   //position: ;
+//   position: absolute;
+// }
+
+
+
+.auth-container{
+  display: flex;
+  min-height:fit-content;
+
+}
+.auth-image{
+  width: 50%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  // min-height: 100vh;
+}
+.auth-login{
+  -webkit-box-flex: 1;
+    flex: 1;
+    min-height: -webkit-fit-content;
+    min-height: -moz-fit-content;
+    
+}
+.auth-container .auth-login-card{
+  width: 100%;
+  -webkit-box-flex: 1;
+  flex: 1;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  // min-height: 100vh;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0 -4px 5px 0 rgba(0,0,0,.12)!important;
+  // height: 100vh;
+}
+
+.auth-login-card{
+  position: relative!important;
+  box-shadow: none!important;
+  padding-top: 2rem!important;
+}
+
+.auth-container .auth-login-card .auth-login-main{
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  -webkit-box-flex: 1;
+  flex: 1;
+  padding-bottom: 20px;
+}
+
+.auth-container .auth-login-card .auth-login-main .umdaa-logo{
+  //  height: 50px;
+    margin-bottom: 38px;
+}
+.auth-container .auth-login-card .auth-view{
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  width: 100%;
+}
+.auth-view .auth-subtitle{
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 2rem 2rem .5rem;
+  color: #1c465d;
+  margin: 0 0 8px;
+    font-size: 18px;
+}
+.auth-form{
+  display: -webkit-box;
+    display: inline-table;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 100%;
+}
+.example-full-width{
+ 
+  width: 250px;
+    max-width: 298px;
+    height: 50px;
+    margin-top: 30px;
+}
+.signup-btn{
+  width:298px;
+  margin: 0 auto;
+ 
+}
+
+.auth-form .auth-forgot{
+  display: -webkit-box;
+    display: flex;
+    width: 100%;
+    color: #1c465d;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+.auth-OR{
+  display: -webkit-box;
+    display: flex;
+    width: 100%;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.auth-login{
+  display: -webkit-box;
+    display: flex;
+    width: 100%;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    
+}

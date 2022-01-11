@@ -1,0 +1,44 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="title">
+    <h4>Login</h4>
+    <p>Lets get started</p>
+  </div>
+
+  <form  [formGroup]="login_form" #myLogin="ngForm" (ngSubmit)="login(login_form.value,myLogin)">
+                 
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Mobile</mat-label>
+        <span matPrefix><mat-icon>phone</mat-icon></span>
+        <input type="tel" matInput  autocomplete="off" formControlName="email" >
+  
+      </mat-form-field>
+     
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Password</mat-label>
+        <span matPrefix><mat-icon>enhanced_encryption</mat-icon></span>
+        <input type="password" matInput  autocomplete="off" formControlName="password" [type]="hide ? 'text' : 'password'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : ' visibility_off'}}</mat-icon>
+
+
+      </mat-form-field>
+  
+      <div class="ion-margin-top ion-text-right forget ">
+        <a  style="color:#10367a;"  (click)="forgot()" >Forgot Password?</a>
+      </div>
+    
+      <div class="ion-margin-top">
+        <ion-button expand="block" type="submit" class="my_bg_v">LOGIN</ion-button>
+      </div>
+    
+      <div class="ion-margin-top ion-text-center">
+        <a (click)="dismiss()">Close</a>
+      </div>
+</form>
+
+ 
+</ion-content>

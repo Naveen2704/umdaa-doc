@@ -1,0 +1,340 @@
+<ion-header>
+    <ion-toolbar >
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/dashboard" routerLink="/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="font-weight-bold small">APPOINTMENTS</ion-title>
+        <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="roleId == '4'" class="background">
+    <!-- <iframe src="https://tokbox.com/embed/embed/ot-embed.js?embedId=31ced376-6b33-4faf-bff6-2a3bd232c2c7&room=1234&iframe=true" width=400 height=400 scrolling="auto" allow="microphone; camera" ></iframe> -->
+    <!-- <ion-refresher slot="fixed" >
+        <ion-refresher-content
+          pullingIcon="chevron-down-circle-outline"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher> -->
+    <ion-grid>
+        <div class="help">
+            <button mat-mini-fab  matTooltip="Help"  class="my_bg_v" (click)="help()"><mat-icon>help_outline</mat-icon></button>
+          </div>
+        <ion-row  data-step="1" data-intro="Search appointments by UMR/Name/Mobile and Next available appointments on calender icon" data-position="right">
+            <ion-col size-md="6" size-lg="4" size-xs="12">
+                <ion-searchbar   type="text" placeholder="UMR/Name/Mobile" name="term" [(ngModel)]="terms" (ngModelChange)="searchResult(terms)" autocomplete="off"></ion-searchbar>
+                <!-- <ion-note>Enter more than 3 Letters</ion-note> -->
+            </ion-col>
+            <ion-col size-md="6" size-lg="3" size-xs="12" >
+                <div class=" text-muted  mat-subheading-1  m-2 text-right" >
+                    <mat-form-field class="w-100" appearance="outline">
+                        <!-- <mat-label>Select date</mat-label> -->
+                        <input matInput [matDatepicker]="picker" class="text-right" 
+                        [min]="startDate"   (dateChange)="addEvent( $event)" name="date" [(ngModel)]="date " disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </ion-col>
+        </ion-row>
+     
+    <div *ngIf="showFirst">
+        <p class="mat-subheading-2 text-center">Loading...</p>
+    </div>
+    <div *ngIf="showSecond">
+        <div class="ml-3">
+            <span style="font-size:14px;">Click on card to enter into case-sheet ; Click on button to change status</span>
+        </div>
+        <ion-row class="justify-content-center" *ngIf="appointmentsList.length > 0"  data-step="2" data-intro="Appointments list <br> <br> N->New appointment <br> F/u -> Followup (no pay) <br> R->Repeat appointment (pays)" data-position="right">
+
+            <ion-col size-md="4"  size-lg="4" size-xl="3" size-xs="9" *ngFor="let appointment of appointmentsList">
+                <ion-card class="card-2">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-card-content>
+                        <div class="videoicon">
+   
+                            <span *ngIf = "appointment.slot_type == 'video call'">
+                                <button mat-mini-fab aria-label="Example icon button with a menu icon" color="primary">
+                                <!-- <i class="fa fa-video-camera" style="color:#ffff;" aria-hidden="true"></i> -->
+                                <mat-icon>videocam</mat-icon>
+                              </button>
+                            </span>
+                        </div>
+                                
+                        <!-- <div class="link" (click)="statuscheck(roleId,appointment.appointment_id,appointment.status,appointment.mobile)" > -->
+                            <div class="link" (click)="statuscheck(roleId,appointment.appointment_id,appointment.status,appointment.mobile)" >
+                            <div class="text-right h-30">
+                                 <div class="position" *ngIf = "appointment.status == 'waiting'">
+                                    <!-- {{waitingTime}} Mins  -->
+                                    <div *ngIf = "appointment.slot_type != 'video call'">
+                                        <div *ngIf = "appointment.check_in_time != null">
+                                          <span class="font-weight-bold" >{{appointment.waiting_time}} MIN</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div> 
+                                <ion-badge color="danger" slot="end" *ngIf="appointment.priority !='none' && appointment.priority !='None' && appointment.priority !=''">
+                                    <span  class="fs my-auto">  {{appointment.priority | uppercase}}</span>
+                                </ion-badge>
+                            </div>
+
+                            <div class=" new  ion-text-center image h-130">
+                                <img [src]="appointment.photo !=null ? appointment.photo:myImgUrl" alt="image not found"
+                                    class="resp-img" onerror="this.onerror=null; this.src='assets/icon/my.png'">
+                                    <span [ngStyle]="(appointment.appointment_type == 'N') ? {'color':'green','font-weight':'bold','font-size':'10px'}:(appointment.appointment_type == 'F') ? {'color':'red','font-weight':'bold','font-size':'10px'} : (appointment.appointment_type == 'R') ? {'color':'orange','font-weight':'bold','font-size':'10px'}:''"  [attr.data-content]="(appointment.appointment_type == 'N')?'N':(appointment.appointment_type =='F')?'F/U':(appointment.appointment_type == 'R')?'R':''"></span>
+                                <h2 class="mat-subheading-1 font-weight-bold mt-2 mb-1 text ">
+                                    {{appointment.full_name | titlecase }}
+                                </h2>
+                               
+                                <p class="text-muted  small">
+                                    #{{appointment.umr_no}}
+                                </p>
+
+                                <div class="d-flex px-1 w-100 align-items-center ">
+                                    <div class="w-100">
+                                        <ion-badge color="favorite"
+                                            class="mb-1 font-weight-light text-muted small text-uppercase">
+                                            {{appointment.gender}}</ion-badge>
+                                    </div>
+                                    <div class="w-100">
+                                        <ion-badge color="favorite"
+                                            class="mb-1 font-weight-light text-muted small text-uppercase">
+                                            {{appointment.age}}</ion-badge>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex px-1 w-100 align-items-center text-center">
+                            <div class="w-100 col-50">
+                                <ion-row>
+                                    <ion-col class="p-0">
+                                        <ion-label class="" color="warning">
+                                            {{appointment.doctor_name}}
+                                        </ion-label>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col class="p-0">
+                                        <label
+                                            class="mb-1 font-weight-light text-muted small ">{{appointment.department | titlecase}}</label>
+
+                                    </ion-col>
+                                </ion-row>
+                                <div>
+                                    <ion-row>
+                                        <ion-col class="p-0 align-items-center text-center">
+                                            <button class="btn btn-sm index" style="margin-top: 5px;margin-bottom: 5px;"
+                                    [ngStyle]="(appointment.status === 'in_consultation' )? {'background-color':'#10dc60','color':'white','text':'myText'}: 
+                                    (appointment.status === 'closed') ? {'background-color':'#EF5350','color':'white'}:
+                                    (appointment.status === 'booked') ? {'background-color':'#e3edff','color':'black'}:
+                                    (appointment.status === 'checked_in') ? {'background-color':'green','color':'white'}:
+                                    (appointment.status === 'vital_signs') ? {'background-color':'#2a94a5','color':'white'}:
+                                    (appointment.status === 'waiting') ? {'background-color':'orange','color':'white'}:''"
+                                    (click)="changeStatus(appointment.appointment_id,appointment.status,appointment.mobile,appointment.doctor_id)"
+                                    id="{{appointment.appointment_id}}">
+
+                                    {{appointment.status=="in_consultation"?"FINISH":appointment.status=="closed"?"CLOSED":appointment.status=="booked"?"NOT CHECKED IN":
+                                    appointment.status=="checked_in"?"CHECKED IN":appointment.status=="vital_signs"?"Vital Signs":
+                                    appointment.status=="waiting"?"START":''}}
+                                   
+                                </button>
+
+                                        </ion-col>
+                                    </ion-row>
+                                    <div *ngIf="appointment.rmp_id_status != '0'"class="c-doctors-carousel-card__bookmark flex-ai-center u-bold u-color--white u-cushion--left-less u-d-flex u-pos-abs u-xxx-small-font-size">Partner</div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-50">
+                            </div>
+                        </div>
+
+
+
+                        <ion-footer>
+                            <div class="d-flex px-1 w-100 align-items-center ">
+                                <div class="w-100">
+                                    <label class="mb-1 font-weight-normal text-muted small text-uppercase ">
+                                        {{appointment.appointment_date | date: 'dd/MM/yy' }}</label>
+                                </div>
+                                <div class="w-100 text-right">
+                                    <label class="mb-1 font-weight-normal text-muted small text-uppercase  ">
+                                        {{appointment.appointment_time.slice(0,5)  }}</label>
+                                </div>
+                            </div>
+                            
+                        </ion-footer>
+
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-col>
+
+        </ion-row>
+        <div *ngIf="!appointmentsList  || appointmentsList.length == 0" class="center-screen">
+            <p class="mat-subheading-2 text-center">No Results</p>
+        </div>              
+    </div>
+        <div class="book">
+            <button mat-raised-button class="my_bg_v" (click)="bookapp()" style="border-radius: 30px;"><mat-icon>add</mat-icon>Book</button>
+        </div>
+    </ion-grid>
+</ion-content>
+<ion-content *ngIf="roleId == '6'">
+    <ion-grid>
+        <ion-row  >
+            <ion-col size-md="6" size-lg="4" size-xs="12">
+                <ion-searchbar   type="text" placeholder="UMR/Name/Mobile" name="term" [(ngModel)]="terms" (ngModelChange)="searchResult(terms)" autocomplete="off"></ion-searchbar>
+                <!-- <ion-note>Enter more than 3 Letters</ion-note> -->
+            </ion-col>
+            <ion-col size-md="6" size-lg="3" size-xs="12" >
+                <div class=" text-muted  mat-subheading-1  m-2 text-right" >
+                    <mat-form-field class="w-100" appearance="outline">
+                        <!-- <mat-label>Select date</mat-label> -->
+                        <input matInput [matDatepicker]="picker" class="text-right" 
+                        [min]="startDate"   (dateChange)="addEvent( $event)" name="date" [(ngModel)]="date " disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker disabled="false"></mat-datepicker>
+                      </mat-form-field>
+                </div>
+            </ion-col>
+          
+        </ion-row>
+        <div class="ml-3">
+            <span style="font-size:14px;">Click on card to enter into case-sheet ; Click on button to change status</span>
+        </div>
+        <div *ngIf="!appointmentsList  || appointmentsList.length === 0" class="center-screen">
+            <p class="mat-subheading-2 text-center">No Results</p>
+        </div>
+        <ion-row class="justify-content-center" *ngIf="appointmentsList  || appointmentsList.length > 0">
+
+
+            <ion-col size-md="4"  size-lg="4" size-xl="3" size-xs="9" *ngFor="let appointment of appointmentsList | search : terms ">
+
+                <ion-card class="card-2">
+                    <ion-ripple-effect></ion-ripple-effect>
+                    <ion-card-content>
+                        <div class="videoicon">
+   
+                            <span *ngIf = "appointment.slot_type == 'video call'">
+                                <button mat-mini-fab aria-label="Example icon button with a menu icon" color="primary">
+                                    <mat-icon>videocam</mat-icon>
+                              </button>
+                            </span>
+                        </div>
+                        
+                        <div class="link" (click)="statuscheck(roleId,appointment.appointment_id,appointment.status,appointment.mobile)" >
+                            
+                            <div class="text-right h-30">
+                                 <div class="position" *ngIf = "appointment.status == 'waiting'">
+                                    <!-- {{waitingTime}} Mins  -->
+                                    <div *ngFor="let data of appWaitingTime">
+                                        <div *ngIf="data.appointment_id == appointment.appointment_id">
+                                          <span class="font-weight-bold">{{data.waiting_time}} MIN</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div> 
+                                <ion-badge color="danger" slot="end" *ngIf="appointment.priority !='none' && appointment.priority !='None' && appointment.priority !=''">
+                                    <span  class="fs my-auto">  {{appointment.priority | uppercase}}</span>
+                                </ion-badge>
+                            </div>
+
+                            <div class=" new  ion-text-center image h-130">
+                                <img [src]="appointment.photo !=null ? appointment.photo:myImgUrl" alt="image not found"
+                                    class="resp-img" onerror="this.onerror=null; this.src='assets/icon/my.png'">
+                                    <span [ngStyle]="(appointment.appointment_type == 'N') ? {'color':'green','font-weight':'bold','font-size':'10px'}:(appointment.appointment_type == 'F') ? {'color':'red','font-weight':'bold','font-size':'10px'} : (appointment.appointment_type == 'R') ? {'color':'orange','font-weight':'bold','font-size':'10px'}:''"  [attr.data-content]="(appointment.appointment_type == 'N')?'N':(appointment.appointment_type =='F')?'F/U':(appointment.appointment_type == 'R')?'R':''"></span>
+                                <h2 class="mat-subheading-1 mt-2 font-weight-bold mb-1 text ">
+                                    {{appointment.full_name | titlecase }}
+                                </h2>
+                               
+                                <p class="text-muted  small">
+                                    #{{appointment.umr_no}}
+                                </p>
+
+                                <div class="d-flex px-1 w-100 align-items-center ">
+                                    <div class="w-100">
+                                        <ion-badge color="favorite"
+                                            class="mb-1 font-weight-light text-muted small text-uppercase">
+                                            {{appointment.gender}}</ion-badge>
+                                    </div>
+                                    <div class="w-100">
+                                        <ion-badge color="favorite"
+                                            class="mb-1 font-weight-light text-muted small text-uppercase">
+                                            {{appointment.age}}</ion-badge>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex px-1 w-100 align-items-center text-center">
+                            <div class="w-100 col-50">
+                                <ion-row>
+                                    <ion-col class="p-0">
+                                        <ion-label class="" color="warning">
+                                            {{appointment.doctor_name}}
+                                        </ion-label>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col class="p-0">
+                                        <label
+                                            class="mb-1 font-weight-light text-muted small ">{{appointment.department | titlecase}}</label>
+
+                                    </ion-col>
+                                </ion-row>
+                                <div>
+                                    <ion-row>
+                                        <ion-col class="p-0 align-items-center text-center">
+                                            <button class="btn btn-sm index" style="margin-top: 5px;margin-bottom: 5px;"
+                                    [ngStyle]="(appointment.status === 'in_consultation' )? {'background-color':'#10dc60','color':'white','text':'myText'}: 
+                                    (appointment.status === 'closed') ? {'background-color':'#EF5350','color':'white'}:
+                                    (appointment.status === 'booked') ?  {'background-color':'#e3edff','color':'black'}:
+                                    (appointment.status === 'checked_in') ? {'background-color':'green','color':'white'}:
+                                    (appointment.status === 'vital_signs') ? {'background-color':'#2a94a5','color':'white'}:
+                                    (appointment.status === 'waiting') ? {'background-color':'orange','color':'white'}:''"
+                                    (click)="changeStatus(appointment.appointment_id,appointment.status,appointment.mobile,appointment.doctor_id)"
+                                    id="{{appointment.appointment_id}}">
+
+                                    {{appointment.status=="in_consultation"?"IN CONSULT":appointment.status=="closed"?"CLOSED":appointment.status=="booked"?"NOT CHECKED IN":
+                                    appointment.status=="checked_in"?"CHECKED IN":appointment.status=="vital_signs"?"Vital Signs":
+                                    appointment.status=="waiting"?"FOR CONSULT":''}}
+                                   
+                                </button>
+
+                                        </ion-col>
+                                    </ion-row>
+                                </div>
+                                
+                            </div>
+                            <div class="col-50">
+                            </div>
+                        </div>
+
+
+
+                        <ion-footer>
+                            <div class="d-flex px-1 w-100 align-items-center ">
+                                <div class="w-100">
+                                    <label class="mb-1 font-weight-normal text-muted small text-uppercase ">
+                                        {{appointment.appointment_date | date: 'dd/MM/yy' }}</label>
+                                </div>
+                                <div class="w-100 text-right">
+                                    <label class="mb-1 font-weight-normal text-muted small text-uppercase  ">
+                                        {{appointment.appointment_time.slice(0,5)  }}</label>
+                                </div>
+                            </div>
+                        </ion-footer>
+
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-col>
+
+        </ion-row>
+        <div class="book">
+            <button mat-raised-button class="my_bg_v" (click)="bookapp()" style="border-radius: 30px;"><mat-icon>add</mat-icon>Book</button>
+        </div>
+    </ion-grid>
+</ion-content>

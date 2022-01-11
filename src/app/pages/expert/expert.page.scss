@@ -1,0 +1,84 @@
+::ng-deep .mat-tab-label{
+  opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-header {
+    background-color: #0b1271!important;
+  
+    }
+    
+    ::ng-deep .mat-tab-label{
+      padding: 0 16px !important;
+    }
+    // ion-content {
+    //     --background:rgba(240, 251, 255, 0.986);
+    // }
+    [dir='rtl'] .example-option-img {
+        margin-right: 0;
+        margin-left: 8px;
+      }
+      .example-button-row {
+        display: table-cell;
+        width: 490px;
+      }
+      section {
+        display: table;
+      }
+      .mat-card-title{
+        font-size:18px !important;
+      }
+      .flex-spacer{
+        flex-grow: 1;
+      }
+      button:focus {
+        outline: none !important;
+    }
+
+    .div-table {
+      display: table;         
+      width: auto;         
+  
+    }
+    .div-table-row {
+      display: table-row;
+      width: auto;
+      clear: both;
+    }
+    .div-table-col {
+      float: left; /* fix for  buggy browsers */
+      display: table-column;         
+      width: 200px;         
+    }
+  //   ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  //     background-color: #00d440 !important;
+  // }
+
+  :host  ::ng-deep  .mat-tab-group.mat-background-primary .mat-tab-header, .mat-tab-group.mat-background-primary .mat-tab-header-pagination, .mat-tab-group.mat-background-primary .mat-tab-links, .mat-tab-nav-bar.mat-background-primary .mat-tab-header, .mat-tab-nav-bar.mat-background-primary .mat-tab-header-pagination, .mat-tab-nav-bar.mat-background-primary .mat-tab-links {
+    background-color: #0d0d0e3b !important;
+  }
+  
+  ::ng-deep .mat-tab-label-container{
+  .mat-tab-list{
+    .mat-ink-bar {
+      background-color: #ffffff !important
+    }
+  }
+  }
+  
+  ::ng-deep  .mat-tab-label-active{
+    color: #ffffff !important
+    }
+    ::ng-deep .mat-tab-label, .mat-tab-link {
+    color: #3bd6ac !important
+    
+    }
+    
+    ::ng-deep .mat-tab-header-pagination-chevron {
+    border-color: rgb(255 255 255 / 87%) !important;
+    }
+    ::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+    border-color: rgb(245 242 242) !important;
+    } 
+    ion-content {
+      --background:rgba(240, 251, 255, 0.986);
+    }

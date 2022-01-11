@@ -1,0 +1,561 @@
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../../service/data.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Validators, FormBuilder, FormGroup, FormControl,FormArray } from '@angular/forms';
+import { element } from 'protractor';
+import { AlertController } from '@ionic/angular';
+import { NavController} from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+
+@Component({
+  selector: 'app-checklist',
+  templateUrl: './checklist.page.html',
+  styleUrls: ['./checklist.page.scss'],
+})
+export class ChecklistPage implements OnInit {
+
+  beforelists:any = [];
+  data:string = "";
+  totallist:string="";
+  lists1:any = [];
+  lists2:any = [];
+  afterlists:any = [];
+  duringlists:any = [];
+  errors:any = [];
+  marked = true;
+  consent_checklist:any = [];
+  checkedItems:any="";
+  SchoolDetailsForm : FormGroup;    
+  Consent_Form:any="";
+  id:any="";
+  remark = "";
+  toggleBool: boolean=false;
+  filter=true;
+  beforedata:any=[];
+  impbefore:any=[];
+  resultArr:any=[];
+  resultArr1:any=[];
+  isDisabled:boolean=true;
+  map='before';
+  mapp='after';
+  mappp='during';
+  count:any=[];
+  names:any='';
+  inputDisabled: boolean = false;
+  isDisabledd:boolean=true;
+  loading: any;
+
+
+  changeEvent(event) {
+    if (event.target.checked) {
+        this.toggleBool= false;
+    }
+    else {
+        this.toggleBool= true;
+    }
+}
+
+triggerafterrEvent(res)
+{
+console.log(res);
+((document.getElementById(res) as HTMLInputElement).disabled)=!((document.getElementById(res) as HTMLInputElement).disabled);
+}
+ 
+ 
+  triggerSomeEvent($event) {
+   
+      this.isDisabled = !this.isDisabled;
+      return;
+    
+  }
+
+  triggerafterEvent()
+  {
+    this.isDisabledd = !this.isDisabledd;
+    return;
+  
+  }
+
+  //  isDisable = true;
+  triggerEvent(id) {
+    console.log(id);
+    // id.disabled=!id.disabled;
+    // console.log(this.consent_checklist.get('remark').value);
+    ((document.getElementById(id) as HTMLInputElement).disabled)=!((document.getElementById(id) as HTMLInputElement).disabled);
+    // if(value === ){
+      // this.isDisable = !this.isDisable;
+      // return;
+    // }
+
+  }
+
+  // getCheckedvalue () {
+  //   this.checkedItems =  this.beforelists.filter(value => {
+  //     return value.isChecked;
+  //   });
+  //   console.log(this.checkedItems);
+  //  }
+
+
+  
+
+  public profileForm: FormGroup;
+ 
+ items: any;
+// checkedItems:any;
+
+ constructor(private route: ActivatedRoute,private router:Router, public nav: NavController,public loadingController: LoadingController,private dataService: DataService,private fb:FormBuilder,public alertController: AlertController) {
+  // this.createform(response);
+  this.getBeforeList(),
+    this.getAfterList(this.beforelists),
+    this.getDuringList(this.afterlists)
+
+    // this.select = [ {name : "Paul", key : "bonjour"}, {name : "Alfred", key : "aurevoir"}] 
+}
+getCheckedvalue () {
+ this.checkedItems =  this.items.filter(value => {
+   return value.isChecked;
+ });
+ console.log(this.checkedItems);
+}
+
+createBeforeForm(beforeres)
+{  
+  localStorage.setItem("before1", JSON.stringify(beforeres));
+}
+
+createform(response)    
+{   
+
+
+console.log(response);
+var uniqueNames = [];
+for(var i = 0; i< response.length; i++){    
+    if(uniqueNames.indexOf(response[i].category) === -1){
+         uniqueNames.push(response[i].category);     
+        // console.log(this.plate);  
+    }        
+}
+this.count = uniqueNames.length;
+
+console.log(this.count );   
+
+
+for(i = 0; i< uniqueNames.length; i++){  
+  this.names = uniqueNames[i];  
+  console.log(this.names);
+  // alert(uniqueNames[i]);      
+}
+
+
+  //  let myList = JSON.parse(localStorage.getItem("before1"));
+  //  console.log(this.impbefore);
+  //    this.impbefore=myList;
+  let arr=[];    
+  for(let i=0;i<response.length;i++)    
+  {   
+    // console.log(data[i]);   
+    arr.push(this.BuildFormDynamic(response[i]))         
+  }    
+
+    this.SchoolDetailsForm =  this.fb.group({    
+      anesthetist : [''],   
+      assisted_by:[''], 
+      UHID:[''],
+      checked_by:[''], 
+      nurse:[''],
+      done_by:[''],  
+      patient_consent_form_id:[''],
+      consent_check_list:this.fb.array(arr)    
+    })   
+    
+ 
+}  
+
+
+    
+BuildFormDynamic(product):FormGroup{  
+console.log(product);
+
+ console.log( product.length);
+
+ return this.fb.group({    
+       Consent_Form:[product.description],
+       checked:1, 
+       category:[product.category],
+       checklist_id: [product.checklist_id],
+       doctor_review: [''],
+       patient_checklist_id: [product.patient_checklist_id],
+       remark:['']   
+  })    
+}    
+    
+  SaveData()    
+  {    
+    if(this.SchoolDetailsForm.get('checked_by').value==''||this.SchoolDetailsForm.get('assisted_by').value==''
+    ||this.SchoolDetailsForm.get('done_by').value==''||this.SchoolDetailsForm.get('anesthetist').value==''||
+    this.SchoolDetailsForm.get('nurse').value==''){
+      console.log("please fill this");
+      this.presentAlert();
+      // alert("Please Fill All Required Fields");
+    }
+    // console.log(this.SchoolDetailsForm.get('checked_by').value); 
+    else{   
+    this.dataService.checklist(this.SchoolDetailsForm.value).subscribe((data)=>{
+      //  this.SchoolDetailsForm.reset();
+      // form.SchoolDetailsForm.markAsPristine();
+      // this.SchoolDetailsForm.resetForm();
+       console.log(data);
+
+       this.presentAlertConfirm();
+       
+    });}
+  
+  }
+  
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      // header: 'Confirm!',
+      message: 'Please Fill All The *  Fields',
+      buttons: [
+     {
+          text: 'Continue',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Successfully Submitted!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            // console.log('Confirm Okay');
+            this.navigate();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  navigate()
+  {
+    this.router.navigateByUrl('checklist');
+  }
+  // changeTrigger()
+  // {
+  //   this.isDisabled = !this.isDisabled;
+  //   return; 
+  // }
+
+  toggleVisibility(e){
+    this.marked = e.target.checked;
+    console.log(this.marked);
+  }
+
+  checkdata()
+  {
+    console.log(this.profileForm.value);
+  }
+
+  // changeCheck(event){
+  //   console.log(event);
+  //   this.disabledAgreement =  !event.target.checked;
+  //   console.log(this.disabledAgreement);
+  // }
+
+  validation_messages = {
+    'Checked': [
+        { type: 'required', message: 'Checked is required.' },
+      ],
+      'Nurse': [
+        { type: 'required', message: 'Name is required.' }
+      ],
+  
+    }
+
+
+
+
+  ngOnInit() {
+     this.presentLoadingWithOptions();
+    // let myList = JSON.parse(localStorage.getItem("before1"));
+    // console.log(myList);
+    // this.impbefore=myList;
+     this.createform(this.resultArr1);  
+    // this.createform1(this.afterlists);
+    this.route.params.subscribe(data => {
+      this.data = data.title
+      this.id=data.id
+      this.getBeforeList()
+    });
+
+    this.profileForm = this.fb.group({
+      Checked: ['', Validators.required],
+      Assisted: ['',Validators.required],
+      // consent_check_list: this.fb.array([this.getList()]),
+      consent_check_list:this.checklist_array(),
+      Nurse:['',Validators.required],
+      UHID:['',Validators.required],
+      Procedure:['',Validators.required],
+      Anesthetist:['',Validators.required]
+    });
+
+  }
+    async presentLoadingWithOptions() {
+      const loading = await this.loadingController.create({
+        spinner: "bubbles",
+        duration: 1000,
+        message: 'Please wait...',
+        translucent: true,
+         animated:true,
+       
+        cssClass: 'custom-class custom-loading'
+      });
+      // this.setFilteredItems();
+      return await loading.present().then(() => {});
+  
+    }
+
+  checklist_array()
+  {
+    const arr = this.beforelists.map(element=>{
+      return this.fb.control(false);
+    });
+    return this.fb.array(arr);
+  }
+
+
+  // get items_imp_data()
+  // {
+  //   return <FormArray>this.profileForm.get('consent_check_list');
+  // }
+
+
+  getList()
+  {
+    return this.fb.group({
+      remark:[]
+    });
+  }
+
+  createItem(): FormGroup {
+    return this.fb.group({
+      before: []
+    });
+  }
+
+  // checkedbtn : boolean = true
+
+  // changeEvent(event) {
+  //   console.log("event.target.value",event);
+  //   if(event.checked){
+  //      this.checkedbtn = false;
+  //      console.log("checkedbtn value",this.checkedbtn);
+  //   }else{
+  //      this.checkedbtn = true;
+  //   }        
+  //  }
+
+   getBeforeList()
+   {
+  //   this.loading = this.loadingController.create({
+  //     message: 'Authenticating...'
+  // });
+
+  // loading.present();
+
+    // let loader = loadingController({content…});
+    // loading.present();
+     console.log(this.id);
+    //  loading.present();
+     this.dataService.getBeforeDescription(this.id).subscribe((data)=>{
+      // this.loading.dismissAll();
+        // console.log(data);
+       let myItem = JSON.parse(localStorage.getItem("key"));
+       this.lists1 = myItem["result"]["checklist_master"];
+       console.log(this.lists1);
+       this.beforelists = data["result"]["consent_check_list"];
+       console.log(this.beforelists);
+       
+      this.beforelists.map((a)=>{
+      let obj2 =  this.lists1.find((b)=> a.checklist_id === b.checklist_id);
+      if(obj2)
+        Object.assign(a,obj2);
+      return a;
+      });
+
+      console.log(this.beforelists);
+      // this.createform();
+      this.createBeforeForm(this.beforelists);
+      this.beforedata=this.beforelists;
+      this.getAfterList(this.beforelists);
+
+
+     });
+   }
+
+   getAfterList(res)
+   {
+  //   this.loading = this.loadingController.create({
+  //     message: 'Authenticating...'
+  // });
+     this.dataService.getAfterDescription(this.id).subscribe((data)=>{
+      // this.loading.dismissAll();
+        // console.log(data);
+       let myItem = JSON.parse(localStorage.getItem("key"));
+       this.lists2 = myItem["result"]["checklist_master"];
+      //  console.log(this.lists1);
+       this.afterlists = data["result"]["consent_check_list"];
+      //  console.log(this.afterlists);
+       
+      this.afterlists.map((a)=>{
+      let obj2 =  this.lists1.find((b)=> a.checklist_id === b.checklist_id);
+      if(obj2)
+        Object.assign(a,obj2);
+      return a;
+      });
+
+      console.log(this.afterlists);
+      console.log(res);
+      // this.createform1(this.afterlists);
+      let resultArr = [];
+
+      resultArr= resultArr.concat(this.afterlists);
+      resultArr= resultArr.concat(res);
+    
+      console.log(resultArr);
+      this.getDuringList(resultArr);
+       this.createform(resultArr);
+
+
+      });
+   }
+
+   getDuringList(res)
+   {
+  //   this.loading = this.loadingController.create({
+  //     message: 'Authenticating...'
+  // });
+  // this.loading.present();
+    console.log(res);
+     this.dataService.getDuringDescription(this.id).subscribe((data)=>{
+      // this.loading.dismissAll();
+       let myItem = JSON.parse(localStorage.getItem("key"));
+       this.lists2 = myItem["result"]["checklist_master"];
+       console.log(this.lists1);
+       this.duringlists = data["result"]["consent_check_list"];
+       console.log(this.duringlists);
+       
+      this.duringlists.map((a)=>{
+      let obj2 =  this.lists2.find((b)=> a.checklist_id === b.checklist_id);
+      if(obj2)
+        Object.assign(a,obj2);
+      return a;
+      });
+
+      console.log(this.duringlists);
+      let resultArr1 = [];
+
+      resultArr1= resultArr1.concat(this.duringlists);
+      resultArr1= resultArr1.concat(res);
+    
+      console.log(resultArr1);
+      // this.duringlists(resultArr);
+      this.createform(resultArr1);
+      });
+   }
+       toggleDependencies(e,count){
+
+        
+        console.log(e)
+        console.log(count)
+        var elem;
+        var id;
+        elem = document.querySelector('.bf_inn')
+        console.log(elem)
+        elem.classList.remove('check-disabled');
+        // for(var i = 1;i<=count;i++)
+        // {
+        //   id = '#bf_inn_check_'+i
+        //   console.log(id)
+        //   // if(e.checked == true){
+        //   // }
+        //   // else
+        //   // {
+        //   //   elem.classList.add('check-disabled');
+        //   // }
+        // }
+        
+      }
+    
+      //  isDisable = true;
+      triggerEvent(e,id) {
+        console.log(e,id);
+
+        this.disabled = !this.disabled 
+        if(e.checked == true){
+         
+           //(document.getElementById(id) as HTMLInputElement).disabled = !(document.getElementById(id) as HTMLInputElement).disabled;
+            this.f.consent_check_list[id].remark.enable()
+           
+        }
+      
+    //  var myId = "fruit_3";
+     // var elm = (( <HTMLInputElement>document.getElementById(id) ).disabled)
+      // console.log(elm);
+
+     // return elm != elm
+      //  (document.getElementById(id) as HTMLInputElement).disabled = !(document.getElementById(id) as HTMLInputElement).disabled;
+        // (document.getElementById("abc") as HTMLInputElement).disabled =! (document.getElementById("abc") as HTMLInputElement).disabled ;
+         //this.disabled == false;
+    //      this.SchoolDetailsForm.controls.consent_check_list.get('remark').value();
+    //      console.log(this.SchoolDetailsForm.controls.consent_check_list.get('remark').value())
+    //     console.log(id);
+    //  //   console.log((document.getElementById(id)).value);
+      // var elm = (document.getElementById(id).disabled);
+       // console.log(elm);
+        // console.log(document.getElementById(id) as HTMLInputElement).disabled);
+        // if(id == 3)
+        // {
+         // ((document.getElementById(id) as HTMLInputElement).disabled)=!((document.getElementById(id) as HTMLInputElement).disabled) ;
+        // }
+      
+        // return this.textValue ='';
+   //   (this.SchoolDetailsForm.controls.consent_check_list.get('remark').disabled()) =! (this.SchoolDetailsForm.controls.consent_check_list.get('remark').disabled) ;
+    //  this.disabled=!this.disabled;
+          // if((document.getElementById(id) as HTMLInputElement).disabled == false)
+          // {
+            
+          // this.imp12 = 1;
+          // // document.getElementById(id).clear();
+          // return this.testing = id;
+    
+          // }
+          // else{
+          //   this.imp12 =0;
+          //   return this.testing = id;
+    
+          // }
+  
+       
+      }
+}

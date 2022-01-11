@@ -1,0 +1,139 @@
+       
+     
+       <ion-app>
+        <!-- <ion-header fixed>
+            <ion-toolbar>
+              <ion-title>UMDAA</ion-title>
+          
+              <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+              </ion-buttons>
+              <ion-chip slot="end">
+                  <ion-avatar >
+                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                  </ion-avatar>
+                  <ion-label>{{userDetails.email}}</ion-label>
+                </ion-chip> -->
+                
+                <!-- <ion-button color="primary" slot="end" expand="block" size="small" (click)="logout()"><ion-icon name="md-power"></ion-icon></ion-button> -->
+
+                  <!-- <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon> --
+            </ion-toolbar>
+            
+          </ion-header> -->
+            
+              <ion-content  style="padding:0px !important">
+                <!-- <ion-split-pane>
+                   
+                  <ion-menu contentId="content"  type="overlay">
+                    <ion-content >
+                    <div class="menu-header-bg"></div>
+                    <div class="header-content">
+                      <img src="assets/icon/Umdaa_Logo.png" alt="">
+                       <ion-title>
+                        <h2>UMDAA</h2>
+                      </ion-title> -
+                    </div>
+                    <ion-list class="menu-gradient" lines="none">
+                      <ion-menu-toggle auto-hide="false" *ngFor="let p of Apppages">
+                        <ion-item [routerLink]="p.url" routerDirection="root" class="active" >
+                          <ion-icon slot="start" [name]="p.icon"> </ion-icon>
+                          <ion-label >
+                            {{p.title}}
+                          </ion-label>
+                        </ion-item> 
+                    </ion-menu-toggle>
+                    </ion-list>
+                    </ion-content>
+                      <ion-header>
+                          <ion-toolbar color="primary">
+                            <div class="d-inline-flex">
+                              <div >
+                                <img src="assets/logo/logo_1.png" width="55px" height="55px">
+                              </div>
+                              <div class="my-auto">
+                                
+                              </div>
+                            </div>
+
+                            <img text-center src="../../assets/logo/logo.png"> -->
+                            <!-- <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon> -->
+                            <!-- <ion-chip >
+                                <ion-avatar >
+                                  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                                </ion-avatar>
+                                <ion-label>{{userDetails.email}}</ion-label>
+                              </ion-chip> -
+                          </ion-toolbar>
+                        </ion-header> -->
+                    <!-- <ion-content >
+                          <ion-list class="menu-gradient" lines="none">
+                              <ion-menu-toggle auto-hide="false" *ngFor="let p of Apppages">
+                                <ion-item [routerLink]="p.url" routerDirection="root" >
+                                  <ion-icon slot="start" [name]="p.icon"> </ion-icon>
+                                  <ion-label >
+                                    {{p.title}}
+                                  </ion-label>
+                                </ion-item> 
+                            </ion-menu-toggle>
+                            </ion-list>
+                  </ion-content> 
+                    </ion-menu>
+                   
+                      <ion-router-outlet id="content" main></ion-router-outlet>
+                  
+              </ion-split-pane> -->
+                
+
+              <ion-split-pane contentId="main-content" no-padding>
+                <ion-menu contentId="main-content" type="overlay">
+                  <ion-content>
+                    <div class="header-content text-center">
+                      <img src="./assets/logo/logo.png" alt="">
+                    </div>
+                    <ion-list id="inbox-list" class="p-2 mt-2" *ngIf="roleId == '4'">
+             
+                     <button mat-button  [matMenuTriggerFor]="menu" class="pl-2 w-100 my_bg_v" >{{ default_clinic }} 
+                       <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true">arrow_drop_down</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu" class="my-menu" >
+                        <button mat-menu-item *ngFor="let clinic of clinicsInfo;let i=index"  (click)="changeClinic(clinic)">{{ clinic.clinic_name  |titlecase}}</button>
+
+                      </mat-menu>
+                    </ion-list>
+                    <ion-list id="inbox-list">
+                      <ion-menu-toggle auto-hide="false" *ngFor="let p of Apppages; let i = index">
+                        <div *ngIf="p.access == 1;then route else noroute"></div>
+                        <ng-template #route>
+                          <ion-item [routerLink]="p.url" routerDirection="root" lines="none" detail="false" [class.selected]="selectedIndex == i" (click)="selectedIndex = i" >
+                            <ion-icon slot="start" [name]="p.icon"> </ion-icon>
+                            <!-- <mat-icon slot="start">{{p.icon}}</mat-icon> -->
+                            <ion-label >
+                              {{p.title}}
+                              <!-- <ion-badge color="dark" class="pull-right" *ngIf="p.badge != 0">{{ p.badge }}</ion-badge> -->
+                            </ion-label>
+                          </ion-item> 
+                        </ng-template>
+                        <ng-template #noroute>
+                          <ion-item lines="none" detail="false" [class.selected]="selectedIndex == i" (click)="openPopup(p.title)" >
+                            <ion-icon slot="start" [name]="p.icon"> </ion-icon>
+                            <!-- <ion-icon slot="start" [name]="p.icon"> </ion-icon> -->
+                            <!-- <mat-icon slot="start">{{p.icon}}</mat-icon> -->
+                            <ion-label >
+                              {{p.title}}
+                              <!-- <ion-badge color="dark" class="pull-right" *ngIf="p.badge != 0">{{ p.badge }}</ion-badge> -->
+                            </ion-label>
+                          </ion-item> 
+                        </ng-template>
+                        
+                    </ion-menu-toggle>
+                    </ion-list>
+            
+              
+                  </ion-content>
+                </ion-menu>
+                <ion-router-outlet id="main-content" ></ion-router-outlet>
+              </ion-split-pane>
+              </ion-content> 
+            </ion-app>
+      

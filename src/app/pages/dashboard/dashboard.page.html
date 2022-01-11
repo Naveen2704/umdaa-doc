@@ -1,0 +1,266 @@
+
+    <ion-header #header >
+        <ion-toolbar >
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-title class="font-weight-bold small">
+                DASHBOARD
+            </ion-title>
+            <!-- <ion-chip slot="end">
+              <ion-avatar >
+                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+              </ion-avatar>
+               <ion-label>{{info.email}}</ion-label>            
+            </ion-chip> -->
+
+            <!-- <ion-button color="primary" slot="end" expand="block" size="small" (click)="logout()"><ion-icon name="md-power"></ion-icon></ion-button>  -->
+
+            <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon>
+        </ion-toolbar>
+    </ion-header>
+
+<ion-content  >
+    <!-- <iframe src="https://tokbox.com/embed/embed/ot-embed.js?embedId=31ced376-6b33-4faf-bff6-2a3bd232c2c7&room=DEFAULT_ROOM&iframe=true" width=800 height=640 scrolling="auto" allow="microphone; camera" ></iframe> -->
+
+
+    <!-- <div id="otEmbedContainer" style="width:800px; height:640px"></div>
+                    <script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=31ced376-6b33-4faf-bff6-2a3bd232c2c7&room=DEFAULT_ROOM"></script> -->
+    <!-- <iframe src="https://tokbox.com/embed/embed/ot-embed.js?embedId=31ced376-6b33-4faf-bff6-2a3bd232c2c7&room=DEFAULT_ROOM&iframe=true" width=800 height=640 scrolling="auto" allow="microphone; camera" ></iframe> -->
+  
+            <ion-card  *ngIf="roleId == '4'" class="mt-2" style="background-color: white;"   data-intro="Enable Tele-Consultation and Expert Opinion depending upon your availability ">
+                <ion-row >
+                    <ion-col>
+                       
+                            
+                        <mat-slide-toggle #toggleElement [checked]="checked" (change)="notifytele($event)">Enable Tele-Consultation Service<span *ngIf ="online" style="color:green; margin-left:5px;" id="blink">(Online)  </span><span *ngIf ="offline" style="color:red; margin-left:5px;" >(Offline)</span></mat-slide-toggle>
+                    </ion-col>
+                    <!-- <ion-col>
+                      
+                        <mat-slide-toggle (change)="notifyexpert($event)">Enable Expert-Opinion Service <span *ngIf ="onlineE" style="color:green; margin-left:5px;" id="blink">(Online)</span><span *ngIf ="offlineE" style="color:red; margin-left:5px;" >(Offline)</span></mat-slide-toggle>
+                        
+                    </ion-col> -->
+                </ion-row>
+                </ion-card> 
+     
+  
+    <ion-row  >
+        <ion-col size-md="12" size-lg="12"  size-xl="12" size-xs="12" >
+                <div class="row intro_1" >
+                    <div class="pl-4">
+                        <ion-text class="text-center">
+                            <h6 > All appointments </h6>
+                        </ion-text>
+                    </div>             
+                </div>
+                <div class="row"  data-intro="If you are new please fill up the settings page <br> All appointments info">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12  ">
+                        <ion-card class="my_card_d"   >
+                            <ion-card-header class="my_card-header_all">
+                                
+                                 
+                                    
+                                        
+                                <!-- <div class="my_card-icon my_bg_v my_card-icon_md_padding">
+                                    <ion-text class="text-center">
+                                        <h6 style="font-size:12px;"> ALL APPOINTMENTS </h6>
+                                    </ion-text>
+                                </div> -->
+                            </ion-card-header>
+                            <ion-card-content>
+                                <div *ngIf="!appointmentsList  || appointmentsList.length === 0;else other_content" class="center-screen">
+                                  <div class="class" *ngIf="roleId == '4'">
+                                        <!-- <img src="https://www.yashicacraftstudio.com/NoResult.png" width="250px"  alt="" class="noresult"> -->
+                                    <p style="font-size: 16px;
+                                    font-weight: 500;">Fill up the settings page for optimal usage</p>
+                                    <!-- <p class="mat-subheading-2 text-center">No Results</p> -->
+                                    <div class="text-center mt-4">
+                                        <button mat-raised-button class="my_bg_v" (click)="bookapp()" style="border-radius: 30px;"><mat-icon>add</mat-icon>SETTINGS</button>
+                                    </div>
+                                  </div>
+                                  <div class="class" *ngIf="roleId == '6'">
+                                    <!-- <img src="https://www.yashicacraftstudio.com/NoResult.png" width="250px"  alt="" class="noresult"> -->
+                                <p style="font-size: 16px;
+                                font-weight: 500;">Fill up the doctors settings page for optimal usage</p>
+                               
+                              </div>
+                                </div>
+                                <ng-template #other_content>
+                                    <ion-list  >
+                                        <ion-row class="justify-content-around" >
+                                            <ion-col size-md="12" size-lg="12"  size-xl="12" size-xs="12" >
+                                                <div class="table-responsive">
+                                                <table class="table table-hover  table-borderless"  id="appTable"  >
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">PATIENT</th>
+                                                        <th scope="col">APPOINTMENT</th>
+                                                        <!-- <th scope="col">WAITED</th> -->
+                                                        <th scope="col">UMR</th>
+                                                        <th scope="col">STATUS</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                        <tr *ngFor="let appointment of appointmentsList ;let i = index"  (click)="route(appointment.appointment_id )">
+                                                          <td style="width:35px !important;">
+                                                              <img src="assets/Default.jpg" class="rounded-circle appIcon mr-2">
+                                                          </td>
+                                                          <td style="min-width: 100px; max-width: 100px;">
+                                                              
+                                                              <div  style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                                                                  <span class="font-weight-bold">
+                                                                      {{ appointment.title | titlecase }}
+                                                                      {{ appointment.first_name | titlecase }}
+                                                                  </span>
+                                                                  <br>
+                                                                  <span >{{ appointment.age }} {{ appointment.age_unit }},{{ appointment.gender }}</span>
+                                                              </div>
+                                                          </td>
+                                                          <td> {{appointment.appointment_time.slice(0,5)  }}</td>
+                                                          <!-- <td>26Min</td> -->
+                                                          <td>{{ appointment.umr_no }}</td>
+                                                          <td> <span class="badge badge-primary text-uppercase">{{appointment.status.replace("_"," ")}}</span></td>
+                                                        </tr>
+                                                       
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-list>
+                                </ng-template>
+                               
+                            </ion-card-content>
+                        </ion-card>
+                    </div>
+                </div>
+            
+        </ion-col>
+    </ion-row>
+    <ion-row  >
+        
+        <ion-col size-md="12" size-lg="12" size-xl="12" size-xs="12">
+            <div class="row">
+                <div class="pl-4">
+                    <ion-text class="text-center">
+                        <h6 class="ml-2"> Revenue {{DahboardHeader.header | titlecase}} </h6>
+                    </ion-text>
+                </div>
+          
+            </div>
+                <ion-row class="mt-2"   data-intro="All Revenue info" >
+
+                    <ion-col size-md="4" size-lg="12"  size-xl="3" size-xs="12" *ngFor="let drevenue of DasshboardRevenue">
+                        <ion-card class="my_card">
+                            <ion-card-header class="my_card-header text-right">
+                                <div class="my_card-icon float_l my_bg_v my_card-icon_md_padding" style="min-width: 56px;">
+                                    <fa-icon *ngIf="drevenue.title == 'Revenue'" [icon]="faRupeeSign" size="2x" class="pr-2">
+                                    </fa-icon>
+                                    <fa-icon *ngIf="drevenue.title == 'Discounts'" [icon]="faMoneyBillAlt" size="2x">
+                                    </fa-icon>
+                                </div>
+                                <ion-card-subtitle>{{drevenue.title}}</ion-card-subtitle>
+                                <ion-card-title>{{drevenue.value}}</ion-card-title>
+                            </ion-card-header>
+                            <div class="my_card-footer">
+                                <div class="my_card_stats">
+
+                                    <ion-card-subtitle style="margin: 10px;">{{DahboardHeader.header | titlecase}}
+                                    </ion-card-subtitle>
+                                </div>
+                            </div>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col size-md="4" size-lg="12"  size-xl="3" size-xs="12">
+                        <ion-card class="my_card">
+                            <ion-card-header class="my_card-header text-right">
+                                <div class="my_card-icon  float_l my_bg_v my_card-icon_md_padding" style="min-width: 56px;">
+                                    <fa-icon [icon]="faHandshake" size="2x"></fa-icon>
+                                </div>
+                                <ion-card-subtitle>{{Crevenues.title}} ({{Crevenues.number}})</ion-card-subtitle>
+                                <!-- <ion-card-subtitle>({{Crevenues.number}})</ion-card-subtitle> -->
+
+                                <span></span>
+                                <ion-card-title>{{Crevenues.value}}</ion-card-title>
+                            </ion-card-header>
+                            <div class="my_card-footer">
+                                <div class="my_card_stats">
+
+                                    <ion-card-subtitle style="margin: 10px;">{{DahboardHeader.header | titlecase}}
+                                    </ion-card-subtitle>
+                                </div>
+                            </div>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col size-md="4" size-lg="12"  size-xl="3" size-xs="12">
+                        <ion-card class="my_card">
+                            <ion-card-header class="my_card-header text-right">
+                                <div class="my_card-icon  float_l my_bg_v my_card-icon_md_padding">
+                                    <!-- <ion-icon name="albums" class="my_card_i"></ion-icon> -->
+                                    <!-- <i class="fas fa-procedures" class="my_card_i"></i> -->
+                                    <!-- <fa-icon [icon]="['fas','fa-procedures']" size="4x"></fa-icon> -->
+                                    <fa-icon [icon]="faProcedures" size="2x"></fa-icon>
+                                </div>
+                                <ion-card-subtitle>{{Prrevenues.title}} ({{Prrevenues.number}})</ion-card-subtitle>
+                                <ion-card-title>{{Prrevenues.value}}</ion-card-title>
+                            </ion-card-header>
+                            <div class="my_card-footer">
+                                <div class="my_card_stats">
+
+                                    <ion-card-subtitle style="margin: 10px;">{{DahboardHeader.header | titlecase}}
+                                    </ion-card-subtitle>
+                                </div>
+                            </div>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col size-md="4" size-lg="12"  size-xl="3" size-xs="12">
+                        <ion-card class="my_card">
+                            <ion-card-header class="my_card-header text-right">
+                                <div class="my_card-icon  float_l my_bg_v my_card-icon_md_padding" style="min-width: 56px;">
+                                    <fa-icon [icon]="faPrescriptionBottleAlt" size="2x" class="pr-2"></fa-icon>
+                                </div>
+                                <ion-card-subtitle>{{Phrevenues.title}} ({{Phrevenues.number}})</ion-card-subtitle>
+                                <ion-card-title>{{Phrevenues.value}}</ion-card-title>
+                            </ion-card-header>
+                            <div class="my_card-footer">
+                                <div class="my_card_stats">
+
+                                    <ion-card-subtitle style="margin: 10px;">{{DahboardHeader.header | titlecase}}
+                                    </ion-card-subtitle>
+                                </div>
+                            </div>
+                        </ion-card>
+                    </ion-col>
+                    <ion-col size-md="4" size-lg="12"  size-xl="3" size-xs="12">
+                        <ion-card class="my_card">
+                            <ion-card-header class="my_card-header text-right">
+                                <div class="my_card-icon  float_l my_bg_v my_card-icon_md_padding" style="min-width: 56px;">
+                                   <mat-icon style="font-size:30px;">biotech</mat-icon>
+                                </div>
+                                <ion-card-subtitle>Lab Charges</ion-card-subtitle>
+                                <ion-card-title>0.00</ion-card-title>
+                            </ion-card-header>
+                            <div class="my_card-footer">
+                                <div class="my_card_stats">
+
+                                    <ion-card-subtitle style="margin: 10px;">{{DahboardHeader.header | titlecase}}
+                                    </ion-card-subtitle>
+                                </div>
+                            </div>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            
+        </ion-col>
+    </ion-row>
+    
+   
+
+
+</ion-content>
+
+<div class="help">
+    <button mat-mini-fab  matTooltip="Help"  class="my_bg_v" (click)="help()"><mat-icon>help_outline</mat-icon></button>
+  </div>

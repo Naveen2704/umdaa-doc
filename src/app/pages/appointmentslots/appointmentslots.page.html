@@ -1,0 +1,213 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>BOOK DOCTORS SLOTS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="card">
+
+    <ion-card-content>
+      <ion-radio-group>
+         <ion-grid>
+            <ion-row>
+                <ion-col >
+                  <ion-item>
+                    <ion-label position="stacked">Select priority</ion-label>
+                      <ion-select id="priority" placeholder="Please select priority" ok-text="Ok" cancel-text="Cancel">
+                        <ion-select-option value="Pregnency">Pregnency</ion-select-option>
+                        <ion-select-option value="Elderly">Elderly</ion-select-option>
+                        <ion-select-option value="Children">Children</ion-select-option>
+                        <ion-select-option value="Sick">Sick</ion-select-option>
+                        <ion-select-option value="Other">Other</ion-select-option>
+                        <ion-select-option value="None">None</ion-select-option>
+                      </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col >
+                  <ion-item>
+                    <ion-label position="stacked">Select booking mode</ion-label>
+                    <ion-select id="bookingMode"  placeholder="Please select booking mode" ok-text="Ok" cancel-text="Cancel">
+                        <ion-select-option value="Mobile">Mobile</ion-select-option>
+                        <ion-select-option value="Walk-in">Walk-in</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>  
+                <ion-col >      
+                  <ion-item>
+                   <ion-label position="stacked">Slot booking Date</ion-label>
+                      <!-- <ion-datetime  (ionChange)="date($event)" displayFormat="MM/DD/YYYY" placeholder="" [min]="minDate"></ion-datetime>                  
+                      <ion-datetime id="bookingDate" [(ngModel)]="selectedDate" [value]="minDate" [min]="minDate" displayFormat="MM/DD/YYYY" (ionChange)="createSlots()"  pickerFormat="" ></ion-datetime>   </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      
+                       <!-- <div style="display: flex;margin: 10px;" *ngFor="let entry of form">
+                          <ion-checkbox style="margin-right:10px;" id="sms" [(ngModel)]="entry.isChecked"></ion-checkbox>
+                          <span>SMS REMINDER</span>
+                       </div>    -
+                       <ion-checkbox style="margin-right:10px;" id="sms" ></ion-checkbox>
+                          <span>SMS REMINDER</span>
+                         
+                      
+                  </ion-col>
+                    
+                </ion-row>
+              <div  >
+                
+                  <ion-row>
+                      <ion-col size-md="2" size-xs="12" >
+                      <ion-label>Morning</ion-label>
+                      <ion-text>
+                        <h4>
+                          8:00am - 12:00pm
+                        </h4>
+                      </ion-text>
+                      </ion-col>
+                      <ion-col size-md="10" size-xs="12">
+                      <ion-button class="button_bg" fill="outline"  *ngFor="let timingss1 of morningAr" (click)="trueclick(timingss1)"  >{{timingss1}}</ion-button> 
+                      </ion-col> 
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size-md="2" size-xs="12">
+                      <ion-label>Afternoon</ion-label>
+                      <ion-text >
+                        <h4>
+                          1:00pm - 5:00pm
+                        </h4>
+                      </ion-text>
+                      </ion-col>
+                      <ion-col size-md="10" size-xs="12">
+                      <ion-button class="button_bg"  fill="outline" *ngFor="let timingss2 of afternoonAr" (click)="trueclick(timingss2)" >{{timingss2}}</ion-button> 
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col size-md="2" size-xs="12">
+                    <ion-label>Evening</ion-label>
+                    <ion-text>
+                      <h4>
+                        6:00pm - 9:00pm
+                      </h4>
+                    </ion-text>
+                    </ion-col>
+                    <ion-col size-md="10" size-xs="12">
+                    <ion-button class="button_bg"  fill="outline" *ngFor="let timingss3 of eveningAr" (click)="trueclick(timingss3)">{{timingss3}}</ion-button> 
+                    </ion-col>
+                  </ion-row>
+              </div>
+          </ion-grid>
+         </ion-radio-group>
+         </ion-card-content>
+    </ion-card>
+</ion-content>
+
+
+<ion-card  class="card card-1" style="margin: 1px;">
+    <ion-card-content>
+        <!-- <form [formGroup]="registerForm"  (ngSubmit)="onSubmit(registerForm.value)">
+          <ion-row>
+            <ion-col size-md="6">
+              <ion-row>
+              <ion-col size-md="3">
+                  <ion-item>
+                      <ion-label position="floating">Title</ion-label>
+                      <ion-select  formControlName="title" placeholder="Plaese select Title">
+                          <ion-select-option type="text" *ngFor="let title of titles" >{{title}}</ion-select-option>
+                       </ion-select>
+                  </ion-item>
+              </ion-col>
+               <ion-col size-md="9">
+                  <ion-item>
+                      <ion-label position="floating" >First Name</ion-label>
+                      <ion-input  type="text" formControlName="firstname"  [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"></ion-input>
+                </ion-item>
+                <div *ngIf="submitted && f.firstname.errors" class="invalid">
+                    <div *ngIf="f.firstname.errors.required">First Name is required</div>
+                </div>
+               </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="3">
+                    <ion-item>
+                        <ion-label position="floating"  >Sex</ion-label>
+                        <ion-select  formControlName="gender"  placeholder="Plaese select Gender">
+                           <ion-select-option *ngFor="let gender of genders">{{gender}}</ion-select-option>
+                         </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col size-md="9">
+                    <ion-item>
+                        <ion-label position="floating">Age</ion-label>
+                         <ion-input type="tel" maxLength="2" formControlName="age" ></ion-input> 
+                </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                      <ion-label position="floating">Email</ion-label>
+                      <ion-input type="email" formControlName="email"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+                   
+                 </ion-item>
+                 <div *ngIf="submitted && f.email.errors" >
+                     <div *ngIf="f.email.errors.required" class="invalid">Email is required</div>
+                     <div *ngIf="f.email.errors.email" class="invalid">Email must be a valid email address</div>
+                 </div>
+                 </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col size-md="6">
+              <ion-row>
+                <ion-col>
+                <ion-item>
+                    <ion-label position="floating"  >Last Name</ion-label>
+                    <ion-input type="text" formControlName="lastname" ></ion-input>
+                  </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label position="floating">Mobile</ion-label>
+                            <ion-input type="tel" maxlength="10"  formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }"></ion-input>
+                         </ion-item>
+                         <div *ngIf="submitted && f.mobile.errors" class="invalid">
+                             <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+                         </div>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label position="floating">Occupation</ion-label>
+                                <ion-input formControlName="occupation" type="text" ></ion-input>
+                               </ion-item>
+                          </ion-col>
+                        </ion-row>
+            </ion-col>
+          </ion-row>
+
+          
+          <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label  position="floating">Area</ion-label>
+                    <ion-textarea formControlName="location"   [ngClass]="{ 'is-invalid': submitted && f.location.errors }"></ion-textarea>
+                 
+              </ion-item>
+              <div   *ngIf="submitted && f.location.errors" class="invalid">
+                  <div *ngIf="f.location.errors.required">Location is required</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <div class="submit" margin >
+                    <ion-button class="login" size="default"  type="submit"  expand="block" matStepperNext>Book Appointment<ion-icon name="arrow-forward"></ion-icon></ion-button>
+                  </div>
+            </ion-col>
+          </ion-row>
+        </form> 
+    </ion-card-content>
+ </ion-card> -->

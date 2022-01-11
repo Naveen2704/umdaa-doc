@@ -1,0 +1,18 @@
+
+
+
+   
+<span style="color: red;font-size: 16px;" mat-dialog-title>This appointment is closed add more on below</span> 
+<div class="reffarals" *ngIf="refferal">
+  <mat-slide-toggle (change)="Change($event)">Reffer to Doctor</mat-slide-toggle>
+</div> 
+<div mat-dialog-content>
+  <div class="reiview">
+    <mat-slide-toggle  (change)="onChange($event)">Ask For <b class='text-primary'>Google Review</b></mat-slide-toggle>
+  </div>
+ 
+</div>
+<div mat-dialog-actions class="text-right">
+  <button mat-raised-button [mat-dialog-close]="data.animal" (click)="close()" cdkFocusInitial>Close</button>
+  <!-- <button mat-raised-button [mat-dialog-close]="data.animal" (click)="finish()">Finish</button> -->
+</div>

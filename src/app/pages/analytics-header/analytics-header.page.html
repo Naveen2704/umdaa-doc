@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar >
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/dashboard" routerLink="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="font-weight-bold small">Analytics</ion-title>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+    
+    <div class="container my_row">
+      <div class="my-2">
+        <div class="row ">
+          <div class="col-12  col-md-4 col-lg-6 col-xl-4 my-3">
+            <mat-chip-list aria-label="Fish selection"  [multiple]="true">
+              <mat-chip color="primary" [selected]="isselected(item.name)" #chip (click)="selectMe(item.name)"  *ngFor="let item of lists">{{item.name}}</mat-chip>
+            </mat-chip-list>
+          </div>
+          <div class="col-12  col-md-4 col-lg-3 col-xl-4 my-lg-4 ">
+            <mat-form-field appearance="fill" class="fromdate">
+              <mat-label>From Date</mat-label>
+              <input matInput [matDatepicker]="picker" disabled  (dateInput)="fromDatee($event.value)">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker disabled="false" #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="todate ml-2">
+              <mat-label>To Date</mat-label>
+              <input matInput [matDatepicker]="picker2" disabled  (dateInput)="endDateee($event.value)">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker disabled="false" #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-12  col-md-4 col-lg-3 col-xl-4 my-lg-4  d-flex">
+            <div class="form-group w-50">
+              <select class="form-control" id="exampleFormControlSelect1" (change)="getPeriod($event)">
+                <option value='interval'>Select Interval</option>
+                <option value='Weekly'>Weekly</option>
+                <option value='Quarterly'>Quarterly</option>
+                <option value='Monthly'>Monthly</option>
+                <!-- <option value='Half-Yearly'>Half-Yearly</option> -->
+                <option value='Annually'>Annually</option>
+              </select>
+            </div>
+            <div class="w-50 ml-2 ">
+              <button mat-raised-button color="primary" (click)="search()"><mat-icon>search</mat-icon>Search</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+ 
+  </section>
+</ion-content>

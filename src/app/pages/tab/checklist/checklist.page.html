@@ -1,0 +1,304 @@
+<!-- <ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-header>
+          
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="" >
+                </ion-back-button>
+              </ion-buttons>
+          <ion-title> {{data}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    </ion-card-header>
+    <ion-card-content> 
+
+       <ion-row>
+      <ion-col size-md="12" #pageTop>
+          <form [formGroup]="SchoolDetailsForm" (ngSubmit)="SaveData()" #target> 
+            <ion-row>
+                  <ion-col size-md="4" size-xs="6">
+
+  <ion-item>
+    <ion-label position="floating"><span style="color:red;size:15px">*</span>Checked By</ion-label>
+    <ion-input type="text" size="text" formControlName="checked_by"  ></ion-input> 
+    </ion-item>
+    <div *ngIf="submitted && f.checked_by.errors" >
+        <div *ngIf="f.checked_by.errors.required " style="color:red">checked_by is required</div>
+    </div>
+                  </ion-col>
+                  <ion-col size-md="4" size-xs="6" >
+                    <ion-item>
+                      <ion-label position="floating" ><span  style="color:red">*</span>Assisted By</ion-label>                       
+                      <ion-input  type="text"  formControlName="done_by"  ></ion-input>        
+                    </ion-item>  
+                    <div *ngIf="submitted && f.done_by.errors" >
+                        <div *ngIf="f.done_by.errors.required"  style="color:red">Assisted By is required</div>
+                    </div>             
+                  </ion-col>
+                  <ion-col >
+                      <ion-item>
+                        <ion-label  position="floating"><span  style="color:red">*</span>Nurse</ion-label>                       
+                        <ion-input  type="text"  formControlName="nurse"  ></ion-input>        
+                      </ion-item> 
+                      <div *ngIf="submitted && f.nurse.errors" >
+                          <div *ngIf="f.nurse.errors.required"  style="color:red">Nurse is required</div>
+                      </div>                
+                   </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                    <ion-label  position="floating"><span style="color:red">*</span>Procedure By</ion-label>                       
+                    <ion-input  type="text" formControlName="assisted_by"  ></ion-input>
+                    </ion-item> 
+                    <div *ngIf="submitted && f.assisted_by.errors" >
+                        <div *ngIf="f.assisted_by.errors.required"  style="color:red">Procedure By is required</div>
+                    </div>                         
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="floating">UHID NO</ion-label>       
+                    <ion-input value="123456" readonly  ></ion-input>                
+                   <ion-input formControlName="UHID" value="Readonly" readonly class="form-controll"></ion-input>         
+                  </ion-item>               
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                      <ion-label  position="floating"><span  style="color:red">*</span>Anesthetist</ion-label>                       
+                       <ion-input  type="text" formControlName="anesthetist"  ></ion-input>        
+                    </ion-item>    
+                    <div *ngIf="submitted && f.anesthetist.errors" >
+                        <div *ngIf="f.anesthetist.errors.required" style="color:red">Anesthetist is required</div>
+                    </div>               
+                </ion-col>
+          
+            </ion-row>
+
+
+
+  <ion-grid  *ngIf="count==2">
+ 
+    <ion-row >
+       
+          <ion-col size-md="6" size-xs="12">
+              <div>
+
+                  <ion-toolbar >
+                  
+                      <ion-checkbox (click)="triggerSomeEvent($event)" slot="start"></ion-checkbox>            
+                      <h2 padding><b>Before Procedure Check</b></h2>
+                      </ion-toolbar>    
+                      <ion-row formArrayName="consent_check_list" *ngFor="let cd of SchoolDetailsForm['controls'].consent_check_list['controls'] ;let i=index;">
+                          <ion-col  size-md="12" size-xs="12" *ngIf="(cd.get('category').value) == 'before'">
+                            <ion-item  formGroupName={{i}} class="outlined">
+                             
+                          
+                        <ion-checkbox slot="start"  [disabled]="isDisabled" (click)="triggerEvent(i)"> </ion-checkbox>     
+                            
+                             <ion-label position="stacked">{{cd.get('Consent_Form').value}}</ion-label>  
+                           
+                             <ion-input type="text" id="{{i}}" #reset formControlName="remark" disabled></ion-input> 
+                             <ion-input type="hidden" formControlName="category" value="{{cd.get('category').value}}" placeholder="{{cd.get('category').value}}"></ion-input> 
+                            <ion-input type="hidden" formControlName="checked" [(ngModel)]="imp12"  *ngIf="testing == i" id="{{i}}"></ion-input>
+                            <ion-input type="hidden" formControlName="checklist_id" value="{{cd.get('checklist_id').value}}"></ion-input>
+                            <ion-input type="hidden" formControlName="doctor_review" value="1" placeholder="{{cd.i}}" ></ion-input>
+                            <ion-input type="hidden" formControlName="patient_checklist_id" value="{{cd.get('patient_checklist_id').value}}"></ion-input>
+                         
+                            </ion-item> 
+                          </ion-col>
+                      </ion-row> 
+                  </div>         
+          </ion-col>
+
+          <ion-col size-md="6" size-xs="12">
+              
+              <div >
+                 
+      <ion-toolbar >
+          <ion-checkbox (click)="triggerafterEvent($event)" slot="start"></ion-checkbox>            
+          <h2 padding><b>After Procedure Check</b></h2>
+          </ion-toolbar>    
+          <ion-row formArrayName="consent_check_list" *ngFor="let cd of SchoolDetailsForm['controls'].consent_check_list['controls'] ;let y=index;">
+              <ion-col  size-md="12" size-xs="12" *ngIf="(cd.get('category').value) == 'after'">
+                <ion-item  formGroupName={{y}} class="outlined" >
+                    <ion-label position="stacked">{{cd.get('Consent_Form').value}}</ion-label> 
+                 <ion-checkbox slot="start" [disabled]="isDisabledd" (ionChange)="triggerafterrEvent(y)"> </ion-checkbox>
+                
+                <ion-input type="text" id="{{y}}" formControlName="remark" disabled></ion-input>
+                <ion-input type="hidden" formControlName="checked" [(ngModel)]="impAfter12"  *ngIf="afterTesting == y"  ></ion-input>
+
+                <ion-input type="hidden" formControlName="category" value="{{cd.get('category').value}}" placeholder="{{cd.get('category').value}}"></ion-input> 
+
+               
+     
+                <ion-input type="hidden" formControlName="checklist_id" value="{{cd.get('checklist_id').value}}"></ion-input>
+                <ion-input type="hidden" formControlName="doctor_review" value="1" placeholder="{{cd.i}}" ></ion-input>
+                <ion-input type="hidden" formControlName="patient_checklist_id" value="{{cd.get('patient_checklist_id').value}}"></ion-input>
+                
+                </ion-item> 
+              </ion-col>
+          </ion-row>  
+                
+                </div>  
+            </ion-col>
+        
+    </ion-row>
+    
+  </ion-grid>  
+
+<ion-grid class="row responsive-md" *ngIf="count==1">
+    <ion-row>
+        
+  
+
+      <ion-col size-md="12" size-xs="12">
+        <div>
+
+            <ion-toolbar >
+            
+                <ion-checkbox (click)="triggerSomeEvent($event)" slot="start"></ion-checkbox>            
+                <h2 padding><b>Before Procedure Check</b></h2>
+                </ion-toolbar>    
+                <ion-row formArrayName="consent_check_list" *ngFor="let cd of SchoolDetailsForm['controls'].consent_check_list['controls'] ;let i=index;">
+                    <ion-col  size-md="12" size-xs="12" *ngIf="(cd.get('category').value) == 'before'">
+                      <ion-item  formGroupName={{i}} class="outlined">
+                       
+                    
+                  <ion-checkbox slot="start"  [disabled]="isDisabled" (click)="triggerEvent(i)"> </ion-checkbox>     
+                      
+                       <ion-label position="stacked">{{cd.get('Consent_Form').value}}</ion-label>  
+                     
+                       <ion-input type="text" id="{{i}}" #reset formControlName="remark" disabled></ion-input> 
+                       <ion-input type="hidden" formControlName="category" value="{{cd.get('category').value}}" placeholder="{{cd.get('category').value}}"></ion-input> 
+                      <ion-input type="hidden" formControlName="checked" [(ngModel)]="imp12"  *ngIf="testing == i" id="{{i}}"></ion-input>
+                      <ion-input type="hidden" formControlName="checklist_id" value="{{cd.get('checklist_id').value}}"></ion-input>
+                      <ion-input type="hidden" formControlName="doctor_review" value="1" placeholder="{{cd.i}}" ></ion-input>
+                      <ion-input type="hidden" formControlName="patient_checklist_id" value="{{cd.get('patient_checklist_id').value}}"></ion-input>
+                   
+                      </ion-item> 
+                    </ion-col>
+                </ion-row> 
+            </div>         
+    </ion-col>
+        
+    </ion-row>
+  </ion-grid>
+
+<ion-grid class="row responsive-md" *ngIf="count==3">
+    <ion-row>
+        
+  
+
+      <ion-col size-md="4" size-xs="12">
+        <div>
+
+            <ion-toolbar >
+            
+                <ion-checkbox (click)="triggerSomeEvent($event)" slot="start"></ion-checkbox>            
+                <h2 padding><b>Before Procedure Check</b></h2>
+                </ion-toolbar>    
+                <ion-row formArrayName="consent_check_list" *ngFor="let cd of SchoolDetailsForm['controls'].consent_check_list['controls'] ;let i=index;">
+                    <ion-col  size-md="12" size-xs="12" *ngIf="(cd.get('category').value) == 'before'">
+                      <ion-item  formGroupName={{i}} class="outlined">
+                       
+                    
+                       <ion-checkbox slot="start"  [disabled]="isDisabled" (click)="triggerEvent(i)"> </ion-checkbox>     
+                      
+                       <ion-label position="stacked">{{cd.get('Consent_Form').value}}</ion-label>  
+                     
+                       <ion-input type="text" id="{{i}}" #reset formControlName="remark" disabled></ion-input> 
+                       <ion-input type="hidden" formControlName="category" value="{{cd.get('category').value}}" placeholder="{{cd.get('category').value}}"></ion-input> 
+                      <ion-input type="hidden" formControlName="checked" [(ngModel)]="imp12"  *ngIf="testing == i" id="{{i}}"></ion-input>
+                      <ion-input type="hidden" formControlName="checklist_id" value="{{cd.get('checklist_id').value}}"></ion-input>
+                      <ion-input type="hidden" formControlName="doctor_review" value="1" placeholder="{{cd.i}}" ></ion-input>
+                      <ion-input type="hidden" formControlName="patient_checklist_id" value="{{cd.get('patient_checklist_id').value}}"></ion-input>
+                   
+                      </ion-item> 
+                    </ion-col>
+                </ion-row> 
+            </div>         
+    </ion-col>
+
+    <ion-col size-md="4" size-xs="12">
+        
+        <div >
+           
+<ion-toolbar >
+    <ion-checkbox (click)="triggerafterEvent($event)" slot="start"></ion-checkbox>            
+    <h2 padding><b>After Procedure Check</b></h2>
+    </ion-toolbar>    
+    <ion-row formArrayName="consent_check_list" *ngFor="let cd of SchoolDetailsForm['controls'].consent_check_list['controls'] ;let y=index;">
+        <ion-col  size-md="12" size-xs="12" *ngIf="(cd.get('category').value) == 'after'">
+          <ion-item  formGroupName={{y}} class="outlined" >
+              <ion-label position="stacked">{{cd.get('Consent_Form').value}}</ion-label> 
+           <ion-checkbox slot="start" [disabled]="isDisabledd" (ionChange)="triggerafterrEvent(y)"> </ion-checkbox>
+          
+          <ion-input type="text" id="{{y}}" formControlName="remark" disabled></ion-input>
+          <ion-input type="hidden" formControlName="checked" [(ngModel)]="impAfter12"  *ngIf="afterTesting == y"  ></ion-input>
+
+          <ion-input type="hidden" formControlName="category" value="{{cd.get('category').value}}" placeholder="{{cd.get('category').value}}"></ion-input> 
+
+         
+
+          <ion-input type="hidden" formControlName="checklist_id" value="{{cd.get('checklist_id').value}}"></ion-input>
+          <ion-input type="hidden" formControlName="doctor_review" value="1" placeholder="{{cd.i}}" ></ion-input>
+          <ion-input type="hidden" formControlName="patient_checklist_id" value="{{cd.get('patient_checklist_id').value}}"></ion-input>
+          
+          </ion-item> 
+        </ion-col>
+    </ion-row>  
+          
+          </div>  
+      </ion-col>
+  
+           <ion-col size-md="4" size-xs="12">
+           <h1>Before</h1> 
+                <div >
+           <ion-toolbar >
+                    <ion-checkbox (click)="triggerduringEvent($event)" slot="start"></ion-checkbox>            
+                    <h2 padding><b>During Procedure Check</b></h2>
+                    </ion-toolbar>    
+                    <ion-row formArrayName="consent_check_list" *ngFor="let cd of SchoolDetailsForm['controls'].consent_check_list['controls'] ;let i=index;">
+                        <ion-col  size-md="12" size-xs="12" *ngIf="(cd.get('category').value) == 'during'">
+                          <ion-item  formGroupName={{i}}  class="outlined"  >
+                       <ion-checkbox slot="start" id="{{i}}" [disabled]="isDisab" (ionChange)="triggerDuringEvent(i)"> </ion-checkbox> -
+                          <ion-label position="stacked">{{cd.get('Consent_Form').value}}</ion-label> 
+                          <ion-checkbox slot="start" [disabled]="isDisab" (ionChange)="triggerDuringEvent(i)"> </ion-checkbox>
+                          <ion-input type="text"  id="{{i}}" formControlName="remark" disabled></ion-input> 
+                           <ion-input type="hidden" formControlName="category" value="{{cd.get('category').value}}" placeholder="{{cd.get('category').value}}"></ion-input> 
+                          <ion-input type="hidden" formControlName="checked"  [(ngModel)]="impDuring12"  *ngIf="DuringTesting == i"></ion-input>
+                          <ion-input type="hidden" formControlName="checklist_id" value="{{cd.get('checklist_id').value}}"></ion-input>
+                          <ion-input type="hidden" formControlName="doctor_review" value="1" placeholder="{{cd.i}}" ></ion-input>
+                          <ion-input type="hidden" formControlName="patient_checklist_id" value="{{cd.get('patient_checklist_id').value}}"></ion-input>
+                         
+                          </ion-item> 
+                        </ion-col>
+                    </ion-row>   
+                  
+                  </div>  
+              </ion-col>
+        
+    </ion-row>
+  </ion-grid>
+ <ion-grid  *ngIf="count==0">
+    <ion-row>
+        <h1>No CheckList Available for {{data}}</h1>
+        
+    </ion-row>
+  </ion-grid> 
+              
+               <ion-button type="submit" *ngIf="count!=0">Submit</ion-button> 
+              <button ion-button default="true" outline="true" *ngIf="count!=0" color="accent">Submit</button>         
+            
+                 <input type="submit" value="Submit" color="danger"> 
+                                                  
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  
+  </ion-content> -->

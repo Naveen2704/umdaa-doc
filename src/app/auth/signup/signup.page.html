@@ -1,0 +1,241 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="title">
+    <h4>Signup</h4>
+    <p>Register with Umdaa Health Care to get started</p>
+  </div>
+
+  <form  [formGroup]="validations_form" (ngSubmit)="signUp(validations_form.value)">
+  
+      <div class="row">
+        <div class="col-12 d-flex p-0">
+          <div class="col-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>First name</mat-label>
+              <input matInput  formControlName="firstname" required>
+            </mat-form-field>
+          </div>
+          <div class="col-6 ">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput  formControlName="lastname">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 d-flex p-0">
+          <div class="col-6 col-xl-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Mobile</mat-label>
+              <input type="tel" maxlength="10" matInput formControlName="mobile" required>
+            </mat-form-field>
+           
+          </div>
+          <div class="col-6  col-xl-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput formControlName="email" autocomplete="off" required>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 d-flex p-0">
+          <div class="col-6  col-xl-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Qualification</mat-label>
+              <input type="text" #input [value]="input.value.toUpperCase()" matInput formControlName="qualification">
+            </mat-form-field>
+           
+          </div>
+          <div class="col-6 col-xl-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Reg No</mat-label>
+              <input type="text" matInput formControlName="reg" required>
+            </mat-form-field>
+            
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 d-flex p-0">
+          <div class="col-6  col-xl-6">
+            <div formGroupName="matching_passwords" >
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="password" [type]="hide ? 'text' : 'password'" required >
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : ' visibility_off'}}</mat-icon>
+
+            </mat-form-field>
+            <div class="validation-errors error-message">
+        
+              <ng-container *ngFor="let validation of validation_messages.password">
+               
+                <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('password').hasError(validation.type) && (validations_form.get('matching_passwords').get('password').dirty )">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+            </div>
+          </div>
+          <div class=" col-6 col-xl-6">
+            <div formGroupName="matching_passwords" >
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input type="password" matInput formControlName="confirm_password" required>
+              
+            </mat-form-field>
+            <div class="validation-errors error-message">
+              <ng-container *ngFor="let validation of validation_messages.confirm_password">
+                <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+              <!-- These validations are for the form group -->
+             <div class="validation-errors error-message">
+              <ng-container *ngFor="let validation of validation_messages.matching_passwords">
+                <div class="error-message" *ngIf="validations_form.get('matching_passwords').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 d-flex p-0">
+          <div class="col-6  col-xl-6">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Clinic/ Practice Place</mat-label>
+              <!-- <mat-select  formControlName="clinic_id" (selectionChange)="checkClincValue($event)" >
+                <mat-option value="0"><span style="font-weight: bold; color:rgb(216, 77, 77);">Add New Clinic</span></mat-option>
+                <mat-option value="{{option.clinic_id}}" *ngFor="let option of optionsList" >
+                  {{option.clinic_name}}
+                </mat-option>
+              </mat-select> -->
+              <mat-select formControlName="clinic_id" (selectionChange)="checkClincValue($event)"  required>
+                <mat-select-filter [placeholder]="'Search Clinics'" [displayMember]="'clinic_name'" [array]="variables2" (filteredReturn)="filteredList5 =$event"></mat-select-filter>
+                <mat-option value="0"><span style="font-weight: bold; color:rgb(216, 77, 77);">Add New Clinic</span></mat-option>
+                <mat-option *ngFor="let item of filteredList5" [value]="item.clinic_id">
+                  {{item.clinic_name}}
+                </mat-option>
+                
+              </mat-select>
+            </mat-form-field>
+            
+          </div>
+          <div class="col-6 col-xl-6" >
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Department</mat-label>
+              <!-- <mat-select  formControlName="department_id" (selectionChange)="checkDeprtValue($event)">
+                <mat-option value="0"><span style="font-weight: bold; color:rgb(216, 77, 77);">Add New Department</span></mat-option>
+                <mat-option *ngFor="let option of optionsDepart" value="{{option.department_id}}" >
+                  {{option.department_name}}
+                </mat-option>
+              </mat-select> -->
+              <mat-select formControlName="department_id" (selectionChange)="checkDeprtValue($event)" required>
+                <mat-select-filter [placeholder]="'Search Department'" [displayMember]="'department_name'" [array]="variables3" (filteredReturn)="filteredList6 =$event"></mat-select-filter>
+                <mat-option value="0"><span style="font-weight: bold; color:rgb(216, 77, 77);">Add New Department</span></mat-option>
+                <mat-option *ngFor="let item of filteredList6" [value]="item.department_id">
+                  {{item.department_name}}
+                </mat-option>
+                
+              </mat-select>
+            </mat-form-field>
+           
+          
+          </div>
+        </div>
+      </div>
+      <div class="row" formGroupName="clinic_info">
+        <div class="col-xl-12 d-flex p-0" >
+        
+          <div class=" col-6 col-xl-6" *ngIf="addnew">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Clinic Name</mat-label>
+              <input matInput formControlName="clinic_name">
+            </mat-form-field>
+          </div>
+          <div class="col-6 col-xl-6" *ngIf="addnew" >
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Clinic Address</mat-label>
+              <input matInput  formControlName="clinic_location">
+            </mat-form-field>
+            
+          </div>
+        </div>
+      </div>
+     
+      <div class="row">
+        <div class="col-xl-12 d-flex p-0" >
+          <div class="col-6  col-xl-6" *ngIf="addnewdeprtment" >
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Department Name</mat-label>
+              <input matInput  formControlName="department_name">
+            </mat-form-field>
+            
+          </div>
+          
+        </div>
+      </div>
+      <!-- <div class="row ">
+        <p *ngIf="addnew" style="padding:0px 15px">Please check other modules you would prefer to have</p>
+        <div class="col-xl-12 d-flex p-0" >
+          <div class="col-xl-6 col-6" *ngIf="addnew" >
+            <mat-checkbox class="example-margin" color="primary" value="1" formControlName="fo">Front Office</mat-checkbox>
+            
+          </div>
+          <div class="col-xl-6 col-6" *ngIf="addnew">
+            <mat-checkbox class="example-margin" color="primary"  value="1" formControlName="ph">Pharmacy</mat-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-xl-12 d-flex p-0" >
+          <div class="col-xl-6 col-6" *ngIf="addnew" >
+            <mat-checkbox class="example-margin" color="primary" value="1"  formControlName="la">Lab</mat-checkbox>
+            
+          </div>
+          <div class="col-xl-6 col-6" *ngIf="addnew">
+            <mat-checkbox class="example-margin" color="primary" value="1" formControlName="nu">Nurse</mat-checkbox>
+          </div>
+        </div>
+      </div> -->
+      <div class="row ">
+        
+          <div class=" col-12" >
+          <mat-checkbox   (change)="declare($event)"  class="example-margin" color="primary">I have read and agree to the <a href=" https://umdaa.co/p/2/privacy-policy" target="_blank">Privacy Policy</a> and <a href="https://umdaa.co/p/1/terms-conditions" target="_blank">Terms & Conditions</a></mat-checkbox>
+            
+          </div>
+          
+       
+      </div>
+          <div class="ion-margin-top">
+            <ion-button expand="block" type="submit" class="my_bg_v" [disabled]="declaration">SIGN UP</ion-button>
+          </div>
+        
+          <div class="ion-margin-top ion-text-center">
+            <a (click)="dismiss()">Close</a>
+          </div>
+        
+    
+    
+ 
+    
+    
+   
+ 
+  
+   </form>
+
+ 
+
+ 
+</ion-content>

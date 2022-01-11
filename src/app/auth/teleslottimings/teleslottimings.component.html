@@ -1,0 +1,170 @@
+
+<div *ngIf="day != 'Tele Consultant' && day != 'More Clinics' ">
+  <div class="row">
+    <div class="col-12 text-right">
+        <mat-icon (click)="close()" class="custom_css_btn">close</mat-icon>
+    </div>
+  </div>
+  <div class="section">
+        <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <h5 style="text-align: center;">Add Slot Timings</h5>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-12">
+              <div class="col-12 from">
+              <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">From Time</label>
+                  <input type="time"  style="width:150px;" autocomplete="off" class="form-control"  (change)="timeOne($event)">
+                </div>
+              </form>
+            </div>
+            <div class="col-12 to">
+              <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">To Time</label>
+                  <input type="time" style="width:150px;" autocomplete="off"class="form-control"  (change)="timeTwo($event)">
+                </div>
+              </form>
+            </div> 
+          </div>       
+          </div>
+              <div>
+      
+                  <!-- <div class="row">
+                <div class="col-12 mt-3" *ngIf="dataTest">
+      
+                      <mat-checkbox color="primary" class="example-margin" [checked]="data" (change)="test($event)">Do you want to continue with same session timings!</mat-checkbox>
+              
+                </div>
+              </div> -->
+              <div class="row mt-2"  *ngIf="dataTest">
+                <!-- <div class="col-3"></div> -->
+                <div class="col-12">
+                  <div class="form-group">
+             
+                    
+  <mat-card *ngIf="dataTest">
+
+    <!-- <mat-card-title>Angular Material 8 Checkboxes</mat-card-title> -->
+
+    <mat-card-content>
+
+      <mat-list>
+
+        <mat-list-item>
+          <mat-checkbox  color="primary"
+          [(ngModel)]="master_checked"
+          [(indeterminate)]="master_indeterminate"
+          (change)="master_change()"
+          ><b  class="wrap-mat-radio-label">Do you want to continue with same session timings!</b></mat-checkbox>
+        </mat-list-item>
+
+        <mat-list-item *ngFor="let item of finalCount">
+          <mat-checkbox  color="primary"
+          [(ngModel)]="item.checked"
+          [disabled]="item.disabled"
+          [labelPosition]="item.labelPosition"
+          (change)="list_change()"
+          >{{ item.day }}</mat-checkbox>
+        </mat-list-item>
+
+      </mat-list>
+
+    </mat-card-content>
+  </mat-card>
+                    <!-- <mat-checkbox color="primary" class="example-margin" (change)="singleDay($event,i)" [checked]="dataSingle_i"  style="padding-right:20px;" *ngFor="let count of finalCount; let i = index">
+                    {{count.day}}
+                    </mat-checkbox> -->
+                  </div>
+                  <!-- <div class="form-group" *ngIf="times.length==finalCount.length">
+                    <mat-checkbox color="primary" class="example-margin" (change)="singleDay($event,i)" [checked]="true"  style="padding-right:20px;" *ngFor="let count of finalCount; let i = index">
+                    {{count.day}}
+                    </mat-checkbox>
+                  </div> -->
+              </div>
+            </div>
+                      
+            </div>
+
+          
+        <!-- <div class="container" *ngIf="dataTest"> -->
+      
+          <!-- <div class="col-3"></div> -->
+          
+        </div>
+        <!-- </div> -->
+        <div class="col-12 mt-3"  style="text-align: center;">
+          <button class="btn btn-primary" (click)="submitData()">Save</button>
+         </div>
+  </div>
+</div>
+<div *ngIf="day == 'Tele Consultant'">
+  <div class="row">
+    <div class="col-12 text-right">
+        <mat-icon (click)="close()" class="custom_css_btn">close</mat-icon>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mt-3">
+  
+              <mat-checkbox required color="primary" (change)="checkTeleSlots($event)" class="example-margin">Do you want to add Tele Consultantion Slots</mat-checkbox>
+              <div *ngIf="consult">
+                <div style="color:red;">Consultation Fees is required</div>
+            </div>
+        </div>
+        <div class="col-12 mt-3"  style="text-align: center;">
+          <button class="btn btn-danger" (click)="closee('no')">No</button>
+          <button class="btn btn-primary" style="margin-left: 15px;" (click)="closee('yes')">Yes</button>
+         </div>
+      </div>
+    </div>
+</div>
+</div>
+
+<div *ngIf="day == 'More Clinics'">
+  <div class="row">
+    <div class="col-12 text-right">
+        <mat-icon (click)="close()" class="custom_css_btn">close</mat-icon>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <div class="row">
+        <div class="row">
+          <div class="container">
+          <div class="col-12">
+            <h5 style="text-align: center;">Add Clinics</h5>
+          </div>
+        </div>
+        </div>
+        <div class="col-12 mt-3">
+          <ion-item >
+            <ion-label position="floating">Clinic / Practice Place</ion-label>
+            <ion-select    formControlName="clinic_id" placeholder="Please select clinic">
+              <ion-select-option value="0">
+                <ion-text color="danger">Add New Clinic</ion-text> 
+              </ion-select-option>
+               <ion-select-option *ngFor="let option of optionsList" value="{{option.clinic_id}}" text-wrap>{{option.clinic_name}}</ion-select-option>
+             
+            </ion-select>                           
+          </ion-item>
+              <!-- <mat-checkbox required color="primary" (change)="checkTeleSlots($event)" class="example-margin">Do you want to add Tele Consultantion Slots</mat-checkbox>
+              <div *ngIf="consult">
+                <div style="color:red;">Consultation Fees is required</div>
+            </div> -->
+        </div>
+        <div class="col-12 mt-3"  style="text-align: center;">
+          <!-- <button class="btn btn-danger" (click)="closee('no')">No</button> -->
+          <button class="btn btn-primary" style="margin-left: 15px;">Save</button>
+         </div>
+      </div>
+    </div>
+</div>
+</div>
+

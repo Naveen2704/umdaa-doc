@@ -1,0 +1,7 @@
+// .wrap-mat-radio-label {
+//     white-space: normal !important;
+// }
+::ng-deep .mat-checkbox-layout { white-space: normal !important; }
+::ng-deep .mat-checkbox-layout .mat-checkbox-label{
+    font-size:12px !important;
+}

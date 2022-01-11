@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8"/>
+  <title>UMDAA APP</title>
+
+  <base href="."/>
+
+  <!-- <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="msapplication-tap-highlight" content="no"/>
+  <meta name="theme-color" content="#0b712">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
+  <link rel="icon" type="image/png" href="assets/logo/favi.png"/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap" rel="stylesheet"> -->
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-material@latest/dist/all.css" crossorigin="anonymous"/> -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="preload" as="style" onload="this.rel = 'stylesheet'"href= "assets/css/bootrap.min.css"> 
+  <noscript>
+    <link rel="stylesheet" href= "assets/css/bootrap.min.css"> 
+  </noscript>
+  <link rel="preload" as="style" onload="this.rel = 'stylesheet'" href= "assets/css/font.min.css"> 
+  <noscript>
+    <link rel="stylesheet" href= "assets/css/font.min.css"  > 
+  </noscript>
+
+<!-- introo csss -->
+
+  <link rel="preload" as="style" onload="this.rel = 'stylesheet'" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/introjs.css"> 
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/introjs.css"  > 
+  </noscript>
+  <link rel="preload" as="style" onload="this.rel = 'stylesheet'" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/introjs.min.css"> 
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/introjs.min.css"  > 
+  </noscript>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/introjs.css" integrity="sha512-i+WzzATeaDcwcfi5CfLn63qBxrKqiQvDLC+IChU1zVlaPguPgJlddOR07nU28XOoIOno9WPmJ+3ccUInpmHxBg==" crossorigin="anonymous" /> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/introjs.min.css" integrity="sha512-631ugrjzlQYCOP9P8BOLEMFspr5ooQwY3rgt8SMUa+QqtVMbY/tniEUOcABHDGjK50VExB4CNc61g5oopGqCEw==" crossorigin="anonymous" /> -->
+
+  <!-- introo csss enddd -->
+
+
+
+  <script type="application/javascript" crossorigin="anonymous" src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/VxAXDZ21424666393729.js"> </script>
+  <!-- <link href="../../introjs.css" rel="stylesheet"> -->
+  <!-- add to homescreen for ios -->
+ 
+ 
+  <!-- <link rel="stylesheet" href="node_modules/intro.js/introjs.css"> -->
+
+  <style>
+    #snackbar {
+      visibility: hidden;
+      /* min-width: 250px; */
+      width:100%;
+      margin:0 auto;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      /* left: 50%; */
+      bottom: 30px;
+      cursor: pointer;
+    }
+  
+    #snackbar.show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s;
+      animation: fadein 0.5s;
+    }
+  
+    @-webkit-keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+  
+    @keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+
+  </style>
+ 
+
+</head>
+<style>
+/* .no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(./assets/Preloader_11.gif) center no-repeat #fff;
+} */
+#loading {width: 100%;height: 100%;top: 0px;left: 0px;position: fixed;display: block; z-index: 99}
+
+#loading-image {position: absolute;top: 40%;left: 45%;z-index: 100}
+
+</style>
+
+<script>
+  // $(window).load(function() {
+	// 	// Animate loader off screen
+	// 	$(".se-pre-con").fadeOut("slow");
+  // });
+  window.onload = function(){ document.getElementById("loading").style.display = "none" }
+
+</script>
+
+
+<body >
+  <!-- <div id="snackbar" >A new version of this app is available. Click here to <button  class="btn btn-primary" id="reload">UPDATE</button></div>
+  <div id="loading">
+    <img id="loading-image" src="assets/Preloader_11.gif" alt="Loading..." />
+    </div>  -->
+    <div>
+      <div id="snackbar">
+        <div id="first">A new version of this app is available. Click here to </div>
+        <button  class="btn btn-primary" id="reload">UPDATE</button>
+        <div id="second" style="display:none;">Please Wait.Your app is updating...</div>
+      </div>
+    </div>
+
+  <app-root></app-root>
+
+  <!-- <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.11.0/quickblox.min.js" as="script">
+
+<script>
+  var usedLaterScript = document.createElement('script');
+  usedLaterScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.11.0/quickblox.min.js';
+  document.body.appendChild(usedLaterScript);
+</script> -->
+
+<!-- <div id="otEmbedContainer" style="width:800px; height:640px"></div> 
+<script src="https://tokbox.com/embed/embed/ot-embed.js?embedId=31ced376-6b33-4faf-bff6-2a3bd232c2c7&room=DEFAULT_ROOM"></script> -->
+  <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.11.0/quickblox.min.js"  ></script>
+
+  <!-- <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"  defer></script> -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/> -->
+
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+
+  <script>
+
+    let newWorker;
+  
+    function showUpdateBar() {
+      let snackbar = document.getElementById('snackbar');
+      snackbar.className = 'show';
+    }
+  
+    // The click event on the pop up notification
+    document.getElementById('reload').addEventListener('click', function(){
+      if(document.getElementById('second').style.display=='none') { 
+            document.getElementById('second').style.display='block'; 
+            document.getElementById('reload').style.display='none'; 
+            document.getElementById('first').style.display='none'; 
+        }
+      newWorker.postMessage({ action: 'skipWaiting' });
+    });
+  
+    if ('serviceWorker' in navigator) {
+  
+      navigator.serviceWorker.register('/ngsw-worker.js').then(reg => {
+        reg.addEventListener('updatefound', () => {
+          // A wild service worker has appeared in reg.installing!
+          newWorker = reg.installing;
+  
+          newWorker.addEventListener('statechange', () => {
+            // Has network.state changed?
+            switch (newWorker.state) {
+              case 'installed':
+                if (navigator.serviceWorker.controller) {
+                  // new update available
+                  showUpdateBar();
+                }
+                // No update available
+                break;
+            }
+          });
+        });
+      });
+  
+      let refreshing;
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (refreshing) return;
+        window.location.reload();
+        refreshing = true;
+      });
+    }
+  
+  </script>
+
+  <!-- Google My Business -->
+
+<!-- <script src="gmbdemo.js"  ></script> -->
+<!-- <script src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"></script> -->
+<link rel="preload" href="https://apis.google.com/js/api.js" as="script">
+
+<script>
+  var usedLaterScript = document.createElement('script');
+  usedLaterScript.src = 'https://apis.google.com/js/api.js';
+  document.body.appendChild(usedLaterScript);
+</script>
+<!-- <script src="https://apis.google.com/js/api.js"></script> -->
+<!--
+          *** BEGIN USER SPECIFIED SETTINGS ***
+-->
+<script >
+  // Enter an API key from the Google API Console:
+  //   https://console.developers.google.com/apis/credentials
+  var apiKey = 'AIzaSyD4rpILmhUjAAOxFwN7D62xCbyK1RCGNg4';
+
+  // Enter a client ID for a web application from the Google API Console:
+  //   https://console.developers.google.com/apis/credentials?project=_
+  // In your API Console project, add a JavaScript origin that corresponds
+  // to the domain where you will be running the script.
+  var clientId = '156131389471-492fagorrn1biovqs6qnmiq9fnfvfd7t.apps.googleusercontent.com';
+  // Use the latest Google My Business API version
+  var gmb_api_version = 'https://mybusiness.googleapis.com/v4';
+
+  // One or more authorization scopes. Additional scopes may be desired if
+  // multiple APIs are used. Refer to the documentation for the API
+  // or https://developers.google.com/people/v1/how-tos/authorizing
+  // At a minimum, include the Google My Business authorization scope.
+  var scopes = 'https://www.googleapis.com/auth/business.manage';
+</script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.min.js"></script> -->
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4rpILmhUjAAOxFwN7D62xCbyK1RCGNg4&libraries=places&callback=initMap">
+</script>
+
+<link rel="preload" href="https://apis.google.com/js/platform.js?onload=init" as="script">
+
+<script>
+  var usedLaterScript = document.createElement('script');
+  usedLaterScript.src = 'https://apis.google.com/js/platform.js?onload=init';
+  document.body.appendChild(usedLaterScript);
+</script>
+<!-- <script src="https://apis.google.com/js/platform.js?onload=init"  ></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/intro.min.js" integrity="sha512-NC1GtvckWJQLUHrSQp5+4ydIv6gW8kfP4Ewrwv8Y1xU1h9GTTaXDTnWl+kjHcZNCaX8ySFNSpPmtt/B4SUaDsQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/3.3.1/intro.js" integrity="sha512-2NyWICMdaqyEyVqo7uLSJe96gxKSFd7t3nrTY+YqhOeBcmcOk4B65ILcU8T8P7OazOTN/2FCNk9vz+vAZ4VDsA==" crossorigin="anonymous"></script>
+</body>
+
+</html>

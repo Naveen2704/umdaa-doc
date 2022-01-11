@@ -1,0 +1,233 @@
+::ng-deep ion-app, ion-nav, ion-tab, ion-tabs, .app-root, .ion-page{
+  &.introjs-fixParent{
+      contain: layout size style;
+  }
+}
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  // min-height: 100vh;
+}
+.help{
+  bottom:24px;
+  position: fixed;
+  right: 20px;
+  z-index: 1;
+}
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5;
+  &:before {
+    content: '';
+    // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 .5em;
+    line-height: 1.5em;
+    // this is really the only tricky part, you need to specify the background color of the container element...
+    color: #818078;
+    background-color: #fcfcfa;
+  }
+}
+.new-background-color{
+  --background: #54d61c;
+}
+.text{
+  white-space: nowrap;
+    // width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-appoint{
+    text-align: center;
+    color:#ffffff;
+    font-size: 14px;
+   }
+   .card-appoint-head{
+       background-color:rgb(36, 4, 73);
+   }
+   ion-card {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  ion-list {
+    overflow: hidden;
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .card-content-md{
+    //padding-left: 0px; 
+     padding-right: 5px; 
+  }
+ion-card-content{
+  padding: 10px 5px 10px 5px;
+}
+.fs{
+  font-size:11px;
+  font-weight: 400;
+  line-height:normal;
+}
+ion-content {
+  --background:rgba(240, 251, 255, 0.986);
+}
+// ion-item{
+//   --background:rgba(240, 251, 255, 0.986);
+// }
+.sc-ion-card-md-s .noresult{
+  width: 250px !important;
+}
+////////////////table//////////////////////
+.table thead th{
+  font-size: 11px !important;
+}
+.table{
+  color: #21396d !important;
+  margin-left: 2px;
+}
+.pill{
+  color:black;
+  background-color: #f0fbff;
+  border-radius: 10px;
+}
+.table-hover tbody tr:hover {
+  color: #212529;
+  background-color:#f0fbff !important;
+}
+.appIcon{
+  width: 50px !important;
+  height: 50px !important;
+  box-shadow: 0px 0px 2px 2px #ddd !important;
+}
+
+tr th{
+  font-weight: bold !important;
+}
+
+// #appTable {
+//   // display: inline-block;
+//   // margin: 20px;
+//   // border: 1px solid black;
+//   // overflow: hidden;            /* clip the excess when child gets bigger than parent */
+// }
+.customBadge{
+  padding: 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  opacity: 0.8;
+}
+// #appTable{
+//   border: 1px solid #efefef;
+// }
+// .table td,.table th{
+//   // display: table-cell;
+//   vertical-align: middle !important;
+// }
+
+#appTable tbody tr {
+  // display: block;
+  // transition: transform .1s;   /* smoother zoom */
+  border: 1px solid lavender;
+  //  transition: transform 2s;
+}
+// #appTable tbody tr:hover {
+//   // transform: scale(1.1);
+//   // transform-origin: 25% 25%;
+//   // box-shadow: 0px 0px 12px 4px #eeeeee
+// }
+#appTable tbody tr:hover td,th {
+  background-color:#fff;
+}
+.table td, .table th{
+  width:10px !important;
+}
+
+.table-responsive{
+  display: table !important;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .appIcon{
+    width: 50px !important;
+    height: 50px !important;
+    box-shadow: 0px 0px 2px 2px #ddd !important;
+    max-width: none !important; 
+  }
+  .table-responsive{
+    display: block !important;
+  }
+}
+
+.my_card_d{
+  margin-top: 0px !important;
+}
+
+::ng-deep.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #4CAF50;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #4CAF50;
+}
+#blink {
+  -webkit-animation: 2s linear infinite condemned_blink_effect; /* for Safari 4.0 - 8.0 */
+  animation: 4s linear infinite condemned_blink_effect;
+  font-size: 19px;
+}
+
+/* for Safari 4.0 - 8.0 */
+@-webkit-keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+
+ion-nav,
+ion-tab,
+ion-tabs,
+ion-list {
+    contain: none !important;
+}

@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar >
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+    <ion-title class="font-weight-bold small">DOCTOR PROFILE</ion-title>
+    <ion-icon slot="end" padding style="font-size: 20px;" (click)="logout()" name="md-power"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="container">
+    <ion-card class="card">
+        <!-- <ion-card-header  class="my_card-header">
+            <div class="my_card-icon my_bg_v my_card-icon_xs_padding">
+               <ion-text text-left  >
+                   <h6 class="text-center">DOCTOR PROFILE</h6>
+                  
+               </ion-text>
+            </div>
+           </ion-card-header> -->
+      <ion-card-content>
+          <div>
+              <form [formGroup]="detailsForm" (ngSubmit)="submit(detailsForm.value)">
+              <ion-row>
+                  <ion-col size-md="4" size-xs="12">
+                    <ion-row>
+                       <div class="class">
+                        <!--<div *ngIf="imageUrl =='' ? response.image:myImgUrl" else loggedOut>
+                        <img class="img-width" [src]="imageUrl !='' ? response.image:myImgUrl"  alt="no"   onerror="this.onerror=null; this.src='assets/Default.jpg'" >
+
+                        </div>
+                        
+                        <ng-template #loggedOut>
+                          <img class="img-width" [src]="imageUrl !='' ? imageUrl:myImgUrl"  alt="no"   onerror="this.onerror=null; this.src='assets/Default.jpg'" >
+
+                        </ng-template> -->
+                        <!-- imageUrl !='' ? response.image:myImgUrl -->
+                      <img class="img-width" [src]="imageUrl =='' ? mainImage:imageUrl"  alt="no"   >
+                        <!-- <img  class="img-width " src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRXp-arsd8amrwUNzkRHXfn5g4vtHVPxIpR8SVIo1engK96T_ER" alt="image not found"/>  -->
+                        <div class="middle">
+                          <div class="text">
+                            
+                            <ion-icon name="camera" onclick="document.getElementById('files').click()"></ion-icon>
+                          <input type="file"  id="files" style="display: none" name="file_i" formControlName="file_i" (change)="onFileSelect($event.target.files)" />
+                        </div>
+                        </div>
+                      </div> 
+                    </ion-row>
+                    <ion-row class="mt-2">
+                      <ion-col>
+                        <ion-title class="text-center text-wrap" color="warning" >Dr. {{response.first_name | titlecase}} {{response.last_name | titlecase}}</ion-title>
+
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-title class="text-muted font-weight-bold small text-center">{{response.qualification | uppercase}}</ion-title>
+                    </ion-row>
+                      <div class="d-flex " >
+                        
+                      </div>
+                  </ion-col>
+                  <ion-col size-md="8" size-xs="12">  
+                      <ion-row>
+                          <ion-col>
+                            <ion-label floating="stacked" >First Name</ion-label>
+                            <ion-input class="form-control" [(ngModel)]="response.first_name" formControlName="first_name" ></ion-input>
+                          </ion-col>
+                          <ion-col>
+                            <ion-label floating="stacked">Last Name</ion-label>
+                            <ion-input  class="form-control" [(ngModel)]="response.last_name"  formControlName="last_name" ></ion-input>
+                          </ion-col>
+                        </ion-row>
+                      <ion-row>
+                        <ion-col>
+                          <ion-label floating="stacked" >Email</ion-label>
+                          <ion-input class="form-control" [(ngModel)]="response.email" formControlName="email" ></ion-input>
+                        </ion-col>
+                        <ion-col>
+                          <ion-label floating="stacked">Mobile</ion-label>
+                          <ion-input  class="form-control" [(ngModel)]="response.mobile"  formControlName="mobile" ></ion-input>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col>
+                          <ion-label floating="stacked" >Reg No</ion-label>
+                          <ion-input class="form-control"   [(ngModel)]="response.registration_code"  formControlName="registration"></ion-input>
+                       </ion-col>
+                       <ion-col >
+                        <ion-label floating="stacked" >Qualification</ion-label>
+                        <ion-input  class="form-control" [(ngModel)]="response.qualification" formControlName="qualification" ></ion-input>
+                    </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col size-md="6">
+                              <ion-label floating="stacked" >Primary Clinic Name</ion-label>
+                              <ion-input readonly  class="form-control" [(ngModel)]="response.clinic_name" formControlName="clinic_name" ></ion-input>
+                          </ion-col>
+                          <ion-col size-md="6">
+                              <ion-label floating="stacked" >Department Name</ion-label>
+                              <ion-input readonly  class="form-control" [(ngModel)]="response.department_name" formControlName="department_name" ></ion-input>
+                          </ion-col>
+                      </ion-row>
+                    
+                      <br>
+                      <ion-row >
+                        <ion-col  size-md="6" size-xs="6" size-lg="6" size-xl="6">
+                          <button mat-raised-button type="submit" class="my_bg_v">Save</button>
+                          <!-- <ion-button type="submit" class="my_bg_v" >Save</ion-button> -->
+                        </ion-col>
+                        <ion-col  size-md="6" size-xs="6" size-lg="6" size-xl="6">
+                          <button mat-raised-button  routerLink="/edit-docs-profile" class="my_bg_v">Change Password</button>
+                            <!-- <ion-button routerLink="/edit-docs-profile" class="my_bg_v">Change Password</ion-button> -->
+                          </ion-col>
+                      </ion-row>    
+                  </ion-col>
+                   
+                </ion-row>
+                  
+                    
+                    
+            </form> 
+            
+          </div>
+                           
+      </ion-card-content>  
+    </ion-card>  
+    </div>
+  </ion-content>

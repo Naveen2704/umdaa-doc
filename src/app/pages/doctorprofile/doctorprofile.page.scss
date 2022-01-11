@@ -1,0 +1,89 @@
+.card{
+    width:70%;
+    margin: 40px auto;
+}
+.form-control{
+  text-transform: capitalize;
+}
+.margin-top{
+    margin-top: 2%;
+}
+.width{
+    width:200px;
+    height:200px;
+    margin: 30px auto;
+
+}
+.class {
+    position: relative;
+    width: 100%;
+  }
+  
+  .image {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .class:hover .img-width{
+    opacity: 0.3;
+  }
+  
+  .class:hover .middle {
+    opacity: 0.8;
+    
+  }
+  
+  .text {
+    //background-color: #21396d;
+    color: #21396d;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+  }
+.img-width{
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.but-p{
+    float: right;
+
+}
+.fs{
+    color:rgb(31, 97, 151);
+    font-size: medium;
+    font-weight: 600;
+    text-align: center;
+}
+.qs{
+    color:rgb(31, 97, 151);
+    font-size: small;
+    font-weight: 600;
+    text-align: center;
+}
+@media (max-width:772px){
+    .card{
+        width:100%;
+    }
+    
+}
+ion-content {
+  --background:rgba(240, 251, 255, 0.986);
+}

@@ -1,0 +1,96 @@
+
+
+
+<div class="conatiner">  
+  <div class="form_header">
+      <div class="row">
+        <div class=" col-6">
+          <!-- <button mat-button   (click)="openHelp()"><mat-icon>help</mat-icon></button> -->
+        </div>
+        <div class="col-6 text-right">
+          <i class="material-icons fs" (click)="close()">close</i>
+  
+        </div>
+      </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-12 d-flex p-0">
+      <div class="left col-6 my-auto">
+        <span class="font">Patient Name : {{data.patientName}}</span>
+      </div>
+      <div class=" col-6 text-right">
+       <button mat-button class="my_bg_v" *ngIf="ptientObj.status == 'FI Written'" (click)="viewfi()">View Rx</button>
+        
+      </div>
+     </div>
+  </div> -->
+
+
+<mat-tab-group backgroundColor="primary">
+  <mat-tab label="Conversation"> 
+    <mat-dialog-content class="mat-typography">
+      <div class="mesgs">
+        <div class="msg_history">
+          <div class="incoming_msg"  *ngFor = "let received of mesagesList">
+           <div *ngIf="received.doctor_id != firstDoctor_id" >
+            <div class="incoming_msg_img" >   
+              <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+            </div>
+              <div class="received_msg">
+                <div class="received_withd_msg" >
+                  <p>{{received.message}}</p>
+                  <span class="time_date">{{received.sent_by}}</span>
+                </div>
+            </div>
+            </div>
+             <div class="outgoing_msg" *ngIf="received.doctor_id == firstDoctor_id">
+            <div class="sent_msg" >
+              <p>{{received.message}}</p>
+              <span class="time_date">{{received.sent_by}}</span>
+               </div>
+          </div>
+          </div>
+          <!-- <div class="outgoing_msg" *ngFor="let sent_msg of mesagesList">
+            <div class="sent_msg" *ngIf="sent_msg.doctor_id=='7'">
+              <p>{{sent_msg.message}}</p>
+              <span class="time_date">{{sent_msg.sent_by}}</span>
+               </div>
+          </div> -->
+        </div>
+    
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="w-100">
+      <mat-form-field class="full-width w-100" *ngIf="show && ptientObj.status == 'FI Written'">
+        <input matInput placeholder="Request again ..." name="text" #msg>
+        <!-- <button matSuffix mat-raised-button (click)="requestagain(msg)" class="send" >Request Again</button> -->
+        <mat-icon matSuffix (click)="requestagain()" class="send" >send</mat-icon>
+      </mat-form-field>
+    
+      <mat-chip-list *ngIf="ptientObj.status == 'FI Written' " class="example-chip" cdkDropList cdkDropListOrientation="horizontal" >
+      <!-- <mat-chip (click)="thanks()">Thank you</mat-chip> -->
+        <mat-chip (click)="requestagain()" *ngIf="ptientObj.closeStatus == 0 || ptientObj.childStatus == 1">Request Again</mat-chip>
+      </mat-chip-list>
+      <mat-form-field class="full-width w-100">
+        <input matInput placeholder="Start chatting..." name="text" #msg>
+        <mat-icon matSuffix (click)="sentMsg(msg)" class="send" >send</mat-icon>
+      </mat-form-field>
+    </mat-dialog-actions>
+  </mat-tab>
+  <mat-tab label="View Rx"> 
+    <mat-list role="list" *ngFor="let list of viewfilist;let index = i">
+      <mat-list-item role="listitem" >
+        <div mat-line>{{list.doctor_name}} 
+          
+        </div>
+        <div mat-line>{{list.date}} 
+          
+        </div>
+        <div class="div-table-col">
+          <button mat-button color="primary" (click)="viewfi(list.expert_opinion_id)">View Rx</button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
+</mat-tab-group>
+</div>

@@ -1,0 +1,195 @@
+<!-- <ion-header>
+<ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="patientinfo/{{patient_id}}"></ion-back-button>
+</ion-buttons>
+<ion-title class="text-muted font-weight-bold small" >PATIENT VITALS</ion-title> 
+</ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="container">
+      <ion-card class="card width">
+          <ion-card-header  class="my_card-header">
+              <div class="my_card-icon my_bg_v my_card-icon_xs_padding">
+                 <ion-text text-left color="favorite" >
+                     <h6>PATIENT VITALS</h6>
+                 </ion-text>
+              </div>
+             </ion-card-header>
+        <ion-card-content>
+            <form [formGroup]="Vitalsform" (ngSubmit)="onSubmit(Vitalsform.value)">
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                    <ion-label class="fw">Pulse Rate</ion-label>
+                </ion-col>
+                <ion-col size-md="3"size-xs="3">
+                    <ion-input class="form-control"  formControlName="Pulse" [color]="color" 
+                    [(ngModel)]="pulse" 
+                    (ionChange)="onRangeChangeHandler()" type="number"></ion-input>   
+                   <!-- // <p>{{new.value}}</p> -
+                </ion-col>
+                <ion-col>
+                    <p>PER MIN (60-100)</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">BP</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                    <ion-input class="form-control" formControlName="bp1" [color]="bp1color" [(ngModel)]="bp1" type="number" (ionChange)="Changebp1()" ></ion-input>   
+                </ion-col>
+                <ion-col size-md="3">
+                    <ion-input class="form-control" formControlName="bp2" [color]="bp2color" [(ngModel)]="bp2" type="number" (ionChange)="Changebp2()" ></ion-input>   
+                </ion-col>
+                <ion-col>
+                    <p>MMHG(bp1(120-140),bp2(80-99))</p> 
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">Respiratory Rate</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control" formControlName="Respiratory" [color]="RRcolor" [(ngModel)]="RR" type="number" (ionChange)="ChangeRR()" ></ion-input>   
+                </ion-col>
+                <ion-col>
+                  <p>PER MIN</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">Temperature</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control" formControlName="Temperature" [color]="Tempcolor" [(ngModel)]="TEMP" type="number" (ionChange)="ChangeTEMP()" ></ion-input>   
+                </ion-col>
+                <ion-col>
+                  <p>F</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">SaO2</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control" formControlName="sa" [color]="sao2color" [(ngModel)]="SaO2" type="number" (ionChange)="ChangeSao2()"></ion-input>   
+                </ion-col>
+                <ion-col>
+                  <p>%</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">Height</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control" formControlName="height" [color]="heightcolor" [(ngModel)]="height" type="number" (ionChange)="Changeheight()"></ion-input>   
+                </ion-col>
+                <ion-col>
+                  <p>CM</p>
+                  <span>{{FeetHeight}}Ft</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                 <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">Weight</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control" formControlName="weight" [color]="kgcolor" [(ngModel)]="kg" type="number" (ionChange)="Changeweight()"></ion-input>   
+                </ion-col>
+                <ion-col>
+                  <p>KG</p>
+                  <span>{{WeightPounds}}Pounds</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">BMI</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control"  formControlName="bmi"  value={{BMI}}></ion-input>   
+                </ion-col>
+                <ion-col>
+                  <p>KG/M SQ</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4"size-xs="6">
+                  <ion-label class="fw">BSA</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control" formControlName="bsa" type="tel" value="{{BSA}}"></ion-input>   
+                </ion-col>
+                <ion-col>
+                  <p>M SQ</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-md="4" size-xs="6">
+                  <ion-label class="fw">WH Ratio</ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                  <ion-input class="form-control" formControlName="whr" type="tel"></ion-input>   
+                </ion-col>
+              </ion-row>
+              <div>
+                 <ion-row>
+                  <ion-col size-md="3" offset-md="1" offset-xs="1" size-xs="5">
+                    <ion-input class="form-control" formControlName= "uop1" type="text" placeholder="Eg.UOP"></ion-input>  
+                  </ion-col>
+                  <ion-col size-md="4" size-xs="3">
+                    <ion-input class="form-control" formControlName= "uop2" type="text"></ion-input>   
+                  </ion-col>
+                  <ion-col class="ion-no-padding">
+                    <ion-fab-button size="small" color="theme" (click)="adduop()">
+                      <ion-icon name="add" ></ion-icon>
+                    </ion-fab-button>
+                  </ion-col> 
+                </ion-row>
+              </div>
+              <div *ngIf="hide" formArrayName="uop">
+                  
+                  <div *ngFor="let Eguop of getuops(); let i = index" formGroupName="{{i}}">
+            <ion-row>
+                      <ion-col size-md="3" offset-md="1" offset-xs="1" size-xs="5">
+                          <ion-input class="form-control" formControlName= "adduop1" type="text" placeholder="Eg.UOP"></ion-input>  
+                        </ion-col>
+                        <ion-col size-md="4" size-xs="3">
+                            <ion-input class="form-control" formControlName= "adduop2" type="text"></ion-input>   
+                          </ion-col>
+                          <ion-col class="ion-no-padding">
+                              <ion-fab-button size="small" color="theme">
+                                <ion-icon name="close" (click)="removeuop(i)"></ion-icon>
+                              </ion-fab-button>
+                            </ion-col>
+                      
+                  </ion-row>
+                  </div>
+              </div>
+              
+              <ion-row>
+                <ion-col size-md="4">
+                  <ion-label class="fw">ANY DRUG ALLERGY? <span>YES/NO</span></ion-label>
+                </ion-col>
+                <ion-col size-md="3">
+                       
+                        <ion-toggle  name="" (ionChange)="notify($event)"></ion-toggle>
+                
+                </ion-col>
+              </ion-row>
+              <ion-row *ngIf="addTextArea">
+                <ion-col size-md="6" offset-md="3" offset-xs="3" size-xs="8">
+                    <textarea class="form-control" rows="4" formControlName= "addElergy" placeholder="Enter Drug Elergy" ></textarea>
+                </ion-col>
+              </ion-row>
+              <ion-row >
+                <ion-col offset-md="5" offset-xs="4">
+                    <ion-button type="submit" color="theme">Submit</ion-button>
+                </ion-col>
+              </ion-row>
+            </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>   -->

@@ -1,0 +1,125 @@
+
+<div class="mat-body m-0">
+  <div class="row">
+    <div class="col-12 text-right">
+        <mat-icon (click)="close()" class="custom_css_btn">close</mat-icon>
+    </div>
+  </div>
+  <div class="section">
+    <form [formGroup]="Uploadform" (ngSubmit)="uploadhe(Uploadform.value)">
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="uptitle" autocomplete="off" required>
+            <mat-error  *ngIf="isSubmitted && Uploadform.get('uptitle').hasError('required')">Title is required</mat-error>
+    
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+            <mat-form-field class="example-full-width"  >
+                <mat-label>Description</mat-label>
+                <textarea matInput  maxlength="256" formControlName="updesc"  style="line-height: 20px !important" placeholder="Enter Max 256 Characters" required></textarea>
+                <mat-error  *ngIf="isSubmitted && Uploadform.get('updesc').hasError('required')">Description is required</mat-error>
+
+              </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Read Article Link</mat-label>
+            <input matInput formControlName="readmore" autocomplete="off" >
+            <!-- <mat-error  *ngIf="isSubmitted && Uploadform.get('uptitle').hasError('required')">Title is required</mat-error> -->
+    
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="example-full-width">
+            <mat-label>Article Author By</mat-label>
+            <input matInput formControlName="author" autocomplete="off" >
+            <!-- <mat-error  *ngIf="isSubmitted && Uploadform.get('uptitle').hasError('required')">Title is required</mat-error> -->
+    
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12">
+          <h6 style="font-weight:bold;">To</h6>
+      </div>
+        <div class="col-12">     
+          <div class="check_box">
+            <div class="row">
+              <div class="col-6">
+                <mat-checkbox color="primary" value="1" formControlName='patient_visibility' [(ngModel)]="citizenvalue" (change)="toggleSelectionC($event)">CITIZENS</mat-checkbox>
+                <div *ngIf="opensubmenuC == true">
+                  <mat-list role="list">
+                    <mat-list-item class="p-0"  role="listitem" *ngFor="let x of citizenList; let i = index">
+                      <mat-radio-button color="primary"   [value]="x.value" (change)="selectionC($event.value)">
+                        {{x.viewValue}}
+                      </mat-radio-button>
+                    </mat-list-item>
+                  </mat-list>
+              </div>
+              </div>
+                <div class="col-6">
+                  <mat-checkbox color="primary" value="1" formControlName='doctor_visibility' [(ngModel)]="Doctorvalue" (change)="toggleSelectionD($event)" >DOCTORS</mat-checkbox>
+                  <div *ngIf="opensubmenuD == true" >
+                    <mat-form-field class="w-100">
+                      <mat-select placeholder="Departments" formControlName="department" multiple  >
+                  
+                        <!-- <app-select-check-all [model]="Uploadform.get('department')" [values]="DepartmentList">
+                        </app-select-check-all> -->
+                  
+                        <!-- <mat-option #allSelected (click)="toggleAllSelection()" [value]="0" (click)="tosslePerOne(allSelected.viewValue)">Select All</mat-option> -->
+                        
+                        <mat-option *ngFor="let department of DepartmentList" [value]="department.department_id" >{{ department.department_name }}</mat-option>
+                        
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12">
+          <h6 style="font-weight:bold;">Upload Format</h6>
+      </div>
+        <div class="col-12">
+                <div class="file_section">
+                    <img src="././assets/icon/imgupload.png"  class="{{ (fileType== 'video/mp4')?'d-none':(fileType == 'image/png')?'d-block':(fileType == 'application/pdf')?'d-none':''}}" onclick="document.getElementById('files').click()" width="50px" height="50px">
+                    <img src="././assets/icon/vedioupload.png"  class="{{ (fileType== 'image/png')?'d-none':(fileType == 'video/mp4')?'d-block':(fileType == 'application/pdf')?'d-none':'' }}" onclick="document.getElementById('files').click()" width="50px" height="50px">
+                    <img src="././assets/icon/pdfupload.png"  class="{{ (fileType== 'image/png')?'d-none':(fileType == 'video/mp4')?'d-none':(fileType == 'application/pdf')?'d-block':'' }}"  onclick="document.getElementById('files').click()" width="50px" height="50px">
+                    <!-- <mat-icon   onclick="document.getElementById('files').click()" >attach_file</mat-icon> -->
+                    
+                    <input type="file"  id="files" style="display: none" name="file_i[]" formControlName="file_i" (change)="onSelectFile($event)" multiple required><br>
+      
+        </div>
+    
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12">
+            <div class="attached_reports_list "  >
+                <p *ngIf="urls.length != 0" class="mb-0">DOCUMENTS</p>
+              <div class="d-inline" *ngFor='let url of urls' >
+                <img  *ngIf="format==='image' && url" [src]="url"  alt="Attached" width="65px" height="65px">
+                <br/>
+                <video  [src]="url" *ngIf="format==='video' && url" height="180" width="280"  controls></video> 
+                <iframe width="100" height="100" *ngIf="format==='pdf' && url" [src]="url" type="application/pdf"></iframe>
+              </div>
+              <!-- <pdf-viewer *ngIf="format==='application' && url" [src]="url"  [render-text]="true" style="display: block;"></pdf-viewer> -->
+        
+              <!-- <img [src]="patientDetails.photo !=null ? patientDetails.photo:myImgUrl" alt="image not found" class="resp-img" onerror="this.onerror=null; this.src='Default.jpg'" (click)="openDialog()"> -->
+      
+                
+            </div>
+        </div>
+      </div>
+       <div class="button-row text-center mt-2 p-0">
+            <button mat-raised-button  type="submit"  class="my-3 m-0 p-0 my_bg_v" style="width : 15em;" >SUBMIT</button>
+        </div>  
+    </form>
+    <mat-progress-bar mode="indeterminate" *ngIf="active_loader"></mat-progress-bar>
+  </div>
+</div>

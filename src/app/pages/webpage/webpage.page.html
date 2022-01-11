@@ -1,0 +1,147 @@
+
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.11.0/quickblox.min.js"  ></script> -->
+<!-- <ion-header #header> -->
+  <ion-header >
+  <ion-toolbar color="primary">    
+    <ion-buttons slot="start">
+
+      <ion-button color="dark" (click)="backtohome($event)">
+        <ion-icon name="arrow-back" style="color:white"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+ 
+  <div class="d-flex">
+    <div class="image my-auto">
+      <img [src]="image_link !='' ? patientDetails.photo:myImgUrl" alt="no"   onerror="this.src='assets/icon/profile.png'" (click)="openDialog()">
+    </div>
+    <div class="Patient_info ml-2 my-auto">
+      <div class="class_1 d-flex text-wrap m-1">
+        <label  class="primary ml-2 m-0"> {{patientDetails?.title}} {{patientDetails?.first_name |titlecase}} </label>
+        <span (click)="openDialog()" class="ml-2"><ion-icon ios="ios-create" md="md-create"></ion-icon></span>
+      </div>
+      <div class="class_2 primary d-flex m-1">
+        <label *ngIf = "patientDetails.age != ''" class=" ml-2 m-0 line">{{patientDetails?.age}} </label>
+        <label *ngIf = "patientDetails.gender != ''"  class=" ml-2 m-0 line">{{patientDetails?.gender |titlecase}}</label>
+        <label *ngIf = "patientDetails.umr_no != ''"  class="ml-2" >{{patientDetails?.umr_no}}</label>
+      </div>
+    </div>
+  </div>
+  <mat-slide-toggle slot="end" (change)="toggle($event)">MODE</mat-slide-toggle>
+  <span *ngIf="slot_type == 'video call' && id1 == '4'" slot="end" class="mr-4">
+    <!-- <mat-icon>videocam</mat-icon> -->
+    <mat-icon (click)="voicecall(details)"> phone</mat-icon>
+    <!-- <ion-icon name="call-outline"></ion-icon> -->
+    <!-- <ion-icon name="videocam-outline"></ion-icon> -->
+    <!-- <ion-fab-button size="small" *ngIf="status != 'closed'" color="tertiary"  class="mr-2" (click)="back()"> -->
+      <!-- <ion-icon name="call-outline" *ngIf="status != 'closed'" class="icon mr-2" (click)="voicecall(details)"></ion-icon> -->
+    <!-- </ion-fab-button>  -->
+
+  </span>
+  <span *ngIf="slot_type == 'video call' && id1 == '4'" slot="end" class="mr-4">
+    <mat-icon (click)="videoLoading(v_number)">videocam</mat-icon>
+    <!-- <mat-icon> phone</mat-icon> -->
+    <!-- <ion-icon name="call-outline"></ion-icon> -->
+    <!-- <ion-icon name="videocam-outline"></ion-icon> -->
+    <!-- <ion-fab-button size="small" *ngIf="status != 'closed'" color="tertiary"  class="mr-2" (click)="back()"> -->
+      <!-- <ion-icon name="call-outline" *ngIf="status != 'closed'" class="icon mr-2" (click)="voicecall(details)"></ion-icon> -->
+    <!-- </ion-fab-button>  -->
+
+  </span>
+
+   
+    <span *ngIf="id1 == '4'" slot="end">
+      <!-- <ion-fab-button size="small" *ngIf="status != 'closed'" color="tertiary"  class="mr-2" (click)="back()"> -->
+        <ion-icon name="md-power" *ngIf="status != 'closed'" class="icon mr-2" (click)="back()"></ion-icon>
+      <!-- </ion-fab-button>  -->
+
+    </span>
+    <span *ngIf="id1 == '6'" slot="end">
+      <!-- <ion-fab-button size="small" *ngIf="status != 'closed'" color="tertiary" class="mr-2" (click)="nurseclose()"> -->
+        <ion-icon name="md-power"  *ngIf="status != 'closed'" class="icon mr-2" (click)="nurseclose()"></ion-icon>
+      <!-- </ion-fab-button>  -->
+
+    </span>
+    <!-- <span  slot="end" *ngIf="slot_type == 'video call' && id1 == '4'">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="voicecall(details)">
+          <mat-icon>phone</mat-icon>
+          <span>Audio Call</span>
+        </button>
+        <button mat-menu-item  (click)="videoLoading(v_number)" >
+          <mat-icon>video_call</mat-icon>
+          <span>Video Call</span>
+        </button>
+      </mat-menu>
+ 
+    </span> -->
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content>
+    <!-- <div [id]="localCallId" class="local"></div> -->
+  <iframe  height="100%" width="100%" [src]="urlSafe" name="iframe_a" frameBorder="0"  loading="lazy" (load)="onLoad()" ></iframe>
+</ion-content>
+<div  [class]="opened == false?'d-none':'d-block'">
+  <mat-card cdkDrag class="myCard p-0 pull-right" style="transform: translate3d(0px,0px,0px);"
+  [ngClass]="{'minimize_div': isCardExpanded === true, 'nCard': isCardExpanded === false}">
+    <div class="row">
+      <mat-icon class="minimize  d-block d-md-block d-lg-none d-xl-none" *ngIf="showOnly" (click)="expand()">open_in_full</mat-icon>
+      <div class="col-md-12 justify-content-center w-100" style="height: auto;">
+
+        <div [id]="localCallId" [class]="openedd == false?'locall':'local'"></div>
+
+        <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+
+
+         <div class="icons justify-content-center">
+          <div class="example-button-row">
+            <div class="example-flex-container">
+              <div class="example-button-container" *ngIf="volume">
+                <button mat-fab color="primary" (click)="mute()" aria-label="Example icon button with a delete icon">
+                  <mat-icon>mic</mat-icon>
+                </button>
+              </div>
+              <div class="example-button-container"  *ngIf="volumee">
+                <button mat-fab color="primary" (click)="unmute()" aria-label="Example icon button with a delete icon">
+                  <mat-icon>mic_off</mat-icon>
+                </button>
+              </div>
+              <div class="example-button-container">
+                <button mat-fab color="warn" (click)="stopCall()" aria-label="Example icon button with a delete icon">
+                  <mat-icon>call_end</mat-icon>
+                </button>
+              </div>
+              <div class="example-button-container" *ngIf="showcam">
+                <button mat-fab color="success" (click)="hideCam()" aria-label="Example icon button with a delete icon">
+                  <mat-icon>videocam</mat-icon>
+                </button>
+              </div>
+              <div class="example-button-container" *ngIf="showcame">
+                <button mat-fab color="success" (click)="hideCame()" aria-label="Example icon button with a delete icon">
+                  <mat-icon>videocam_off</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+    <!-- <div class="qb-video">
+      <video #remoteVideo width="200px"  id="remote_video_{{userId}}" class="qb-video_source" autoplay playsinline></video>
+  </div> -->
+
+  
+  </mat-card>
+
+<audio #audioOption>
+  <source src='/assets/ring/ring.mpeg' type="audio/mp3">
+</audio>
+
+
+
+
+

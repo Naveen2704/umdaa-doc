@@ -1,0 +1,42 @@
+<div class="mat-body">
+  <div class="sidenav_container my_bg_v" >
+                  <div class="menu-section">
+                          <ul  id="nav" class="nav nav-sidebar" >
+                                  <li *ngFor="let page of pages; let i = index " class=" {{ ((pages.length-1)===i)?'':'' }}"   >
+                                          <a   class="list-group-item active collapsed " attr.data-target="#sidemenu{{ i }}"  data-toggle="collapse"   [routerLink]="page.link" id="side_{{i}}" [routerLinkActive]="['activeNV_link']" >
+                                                  
+                                                        <!-- <mat-icon> {{page.icon}}</mat-icon>   -->
+                                                        <img src="{{page.Activeicon}}" width="28px" height="28px" alt="" id="active_img_{{i}}" class="mb-1 d-none m-auto" [routerLinkActive]="['d-block','activeNV_link']"> 
+                                                          <img src="{{page.icon}}" width="28px" height="28px" alt="" id="img_{{i}}" class="mb-1 color" [routerLinkActive]="['d-none','activeNV_link']"> 
+                                                          
+                                          <p class="m-0 " style="font-size:10px;">{{page.name}}</p>
+                                          <!-- <i class="fa fa-angle-down {{ (page.subpages.length>0)?'':'d-none' }}"></i> --> 
+                                         <p class="m-0"> <i class="material-icons {{ (page.subpages.length>0)?'':'d-none' }}">
+                                          arrow_drop_down
+                                          </i> </p> 
+                                         
+                                          </a>
+
+                                          <!-- <div *ngIf="page.subpages.length>0" class="collapse in"  aria-expanded="false" id="sidemenu{{ i }}" >
+                                                  <ul  class="nav nav-sidebar " >
+                                                          <li  *ngFor="let subPage of page.subpages; let j = index "  >
+                                                                  <a (click)="changeSubClass(i,j)"  class="list-group-item active  {{ (j==0)?'activeNV_link':'' }}"  routerLink="{{ (subPage.link!='')?subPage.link+app_id+'/'+roleIdd:''}}" id="side{{i}}_{{j}}" style="color:rgb(75, 191, 236);">
+                                                                          
+                                                                                <mat-icon > {{subPage.icon}}</mat-icon>   
+                                                                                <img src="{{subPage.icon}}" width="30px" height="30px" alt="" id="color_sub"  class="mb-1">
+                                                                                  
+                                                                  <p class="m-0 " style="font-size:9px;">{{subPage.name}}</p>
+                                                                 
+                                                                  </a>                                          
+                                                        
+                                                          </li>   
+                                                  </ul> 
+                                          </div>      -->
+                                                              
+                                
+                                  </li>   
+                          </ul>
+                  </div>
+
+  </div>
+</div>

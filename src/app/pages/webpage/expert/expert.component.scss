@@ -1,0 +1,28 @@
+.custom_css_btn{
+    cursor: pointer !important;
+    color:red;
+  }
+
+//   .mat-radio-button ~ .mat-radio-button {
+//     margin-left: 16px;
+//   }
+ 
+    .overflow{
+        overflow-x: hidden;
+    }
+
+    ::ng-deep .mat-tab-body-content{
+        overflow: hidden !important;
+    }
+
+    ::ng-deep .mat-toolbar-row, .mat-toolbar-single-row {
+        height: 50px !important;
+    }
+    ::ng-deep .mat-toolbar-row, .mat-toolbar-single-row > span{
+        font-size:14px !important;
+    }
+    ::ng-deep  .mat-toolbar{
+        background-color: #425f87!important;
+        color: #ffffff!important;
+    }
+   

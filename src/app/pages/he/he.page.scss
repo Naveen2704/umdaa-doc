@@ -1,0 +1,453 @@
+::ng-deep .mat-tab-header {
+  background-color: #0b1271!important;
+
+  }
+  .clickable{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+   .class{
+    font-size: 12px;
+       span{
+           color: #425f87;  
+           font-weight: 200;
+           font-size: 15px;
+       }
+       a{
+           color: white;
+           text-decoration: none;
+       }
+   }
+   .margin{
+       button{
+           margin:2px;
+       }
+   }
+   .mat-list-base .mat-list-item, .mat-list-base .mat-list-option{
+       height: 24px !important;
+   }
+
+   .more {
+   
+    line-height: 16px;
+    height: 60px;
+    overflow: hidden;
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+  .more p{
+    box-sizing: border-box;
+    font-size: medium;
+    text-align: justify;
+    
+    }
+  
+  .show {
+    overflow: visible;
+    height:auto;
+    position: relative;
+  }
+  .zindexbutton img{
+    width: 100%;
+  }
+  .zindexbutton .click-button{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+
+  }
+  video{
+    outline: 0px;
+}
+
+// ion-content {
+//     --background:rgba(240, 251, 255, 0.986);
+// }
+
+.side{
+  width:100%;
+  height: 175px;
+  video{
+    height: 175px;
+
+    width:100%;
+    max-width: 100%;
+        max-height: 100%;
+        display: block;
+  }
+  img{ 
+    height: 175px;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    width:100%;
+    object-fit: cover;
+  }
+}
+// .bottom{
+ 
+//   position: relative;
+// }
+// .changes{
+//   position: absolute;
+//     bottom: 0;
+   
+// }
+// .change{
+//   position: relative;
+//   bottom: unset;
+// }
+
+.over{
+  position: relative;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.over:hover .image {
+  opacity: 0.3;
+}
+
+.over:hover .middle {
+  opacity: 1;
+}
+
+::ng-deep  .mat-tab-label-active{
+  color: #ffffff !important
+  }
+  ::ng-deep .mat-tab-label, .mat-tab-link {
+  color: #3bd6ac !important
+  
+  }
+  
+  ::ng-deep .mat-tab-header-pagination-chevron {
+  border-color: rgb(255 255 255 / 87%) !important;
+  }
+  ::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+  border-color: rgb(245 242 242) !important;
+  } 
+  ion-content {
+    --background:rgba(240, 251, 255, 0.986);
+  }
+
+
+  ::ng-deep .mat-tab-label{
+    opacity: 1 !important;
+  }
+
+  // inshorts ..................................................
+  .m{
+    margin: 10px auto;
+  }
+  .news-card {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    padding: 8px 16px 8px 8px;
+    height: 284px;
+    width: 900px;
+    z-index: 1;
+}
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+.news-card-image {
+  position: absolute;
+  height: 268px;
+  width: 320px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-left: 1px;
+  background-size: cover;
+  background-position: 50%;
+}
+
+.news-card-title {
+  margin-top: 5px;
+  font-size: 22px;
+  line-height: 27px;
+}
+.news-card-content, .news-card-title {
+  position: absolute;
+  padding-right: 20px;
+  color: #44444d;
+  overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+.news-right-box {
+  width: 528px;
+  right: 24px;
+}
+.news-card a {
+  color: #44444d!important;
+  font-weight: 400;
+}
+.news-card-author-time {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 22px;
+  color: #808290;
+}
+.news-card-author-time {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 22px;
+  color: #808290;
+}
+.news-card-content {
+  top: 95px;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+}
+.news-card-author-time-in-content {
+  display: none;
+}
+.news-card-footer {
+  position: absolute;
+  height: 26px;
+  overflow: hidden;
+  bottom: 10px;
+  padding-top: 4px;
+}
+.news-card-footer .read-more {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 12px;
+  font-weight: 400;
+}
+@media only screen and (max-width: 600px){
+.news-card {
+    width: 96%;
+    height: 650px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.news-card-title {
+  width: 96%;
+  margin-left: 0;
+  padding-right: 0;
+  font-size: 18px;
+  line-height: 24px;
+  padding-left:10px ;
+}
+.news-card-author-time-in-title {
+  display: none;
+}
+.news-card-content {
+  padding-right: 0;
+  font-size: 14px;
+  top: 75px;
+  padding-left:10px ;
+}
+.news-right-box {
+  left: 10px;
+  right: 10px;
+  width: 95%;
+  margin-top: 305px;
+}
+.news-card-author-time-in-content {
+  display: block;
+  margin-top: 7px;
+}
+.news-right-box {
+  left: 10px;
+  right: 10px;
+  width: 95%;
+  margin-top: 305px;
+}
+}
+
+@media only screen and (max-width: 1024px){
+  .news-card {
+      width: 96%;
+      margin-left: 2%;
+      margin-right: 2%;
+  }
+  .news-card-title {
+    width: 96%;
+    margin-left: 0;
+    padding-right: 0;
+    font-size: 18px;
+    line-height: 24px;
+    padding-left:10px ;
+  }
+  .news-card-author-time-in-title {
+    display: none;
+  }
+  .news-card-content {
+    padding-right: 0;
+    font-size: 14px;
+    top: 75px;
+    padding-left:10px ;
+  }
+  .news-right-box {
+    left: 10px;
+    right: 10px;
+    width: 95%;
+
+  }
+  .news-card-author-time-in-content {
+    display: block;
+    margin-top: 7px;
+  }
+
+  }
+// dgfgfdg
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+
+// animation swipe
+
+
+.tbg{
+  /* prevents horizontal scroll bar appearing  */
+  overflow-x:hidden;  
+}
+ion-tab-bar{
+  --background: #0b1271;
+    --color: #33e5a6;
+}
+ion-tab-button{
+  max-width: inherit !important;
+}
+/************************
+Tinder Template by Miami
+************************/
+
+.fab_custom{
+  position: fixed;
+  bottom: 66px;
+  right: 20px;
+  z-index: 99999;
+}
+.tbg {
+    // height: 720px;
+    // width: 400px;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid #c0c0c0;
+}
+.tbgwrap { padding: 0px; }
+.theader { height: 65px; border-bottom: 1px solid #c0c0c0; }
+.theader i.fa-comments {
+    color: #c0c0c0;
+    font-size: 40px;
+    display: inline-block;
+   
+    padding: 10px 20px;
+    position: relative;
+}
+.theader i.fa-cog {
+    color: #c0c0c0;
+    font-size: 40px;
+    display: inline-block;
+   
+    padding: 10px 20px;
+    position: relative;
+}
+.tlogo { width: 100px; margin: 0 auto; padding: 10px; }
+.tlogo img { width: 100px; }
+
+.tno {
+    background-color: #fff;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    top: 50px;
+    left: 25px;
+    border: 10px solid #f0f0f0;
+}
+.tno i {
+    color: #ff695b;
+    font-size: 80px;
+    padding: 17px 28px;
+}
+.ti {
+    background-color: #fff;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    left: 12px;
+    top: 30px;
+    border: 10px solid #f0f0f0;
+}
+.ti .fa-info {
+    font-size: 23px;
+    padding: 15px 20px;
+    color: #398beb;
+}
+.tyes {
+    background-color: #fff;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    top: 48px;
+    left: 0px;
+    border: 10px solid #f0f0f0;
+}
+.tyes i {
+    color: #5de19c;
+    font-size: 60px;
+    padding: 35px 30px;
+}
+.credit {
+    width: 400px;
+    height: auto;
+    position: relative;
+    top: 60px;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 2px 0px;
+}
+.credit a {
+    font-size: 7px;
+    letter-spacing: 5px;
+    color: #c0c0c0;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Helvetica', sans-serif;
+    font-style: italic;
+}

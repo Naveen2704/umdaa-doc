@@ -1,0 +1,502 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .header_section{
+    margin: 10px;
+    text-align: right;
+}
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width:360px) { 
+  .mx-w{
+    max-width: 15%;
+  }
+   
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+  .mx-w{
+    max-width: 15%;
+  }
+
+}
+@media (min-width: 767.98px) and (max-width: 576px) { 
+ 
+   
+  .mx-w{
+    max-width: 15%;
+  }
+}
+ /* // Medium devices (tablets, 768px and up) */ 
+@media (min-width: 320px) and (max-width:568px) { 
+  .mx-w{
+    max-width: 15%;
+  }
+   
+} 
+ /* // Medium devices (tablets, 768px and up) */ 
+ @media (min-width: 768px) and (max-width:1024px) { 
+  .mx-w{
+    max-width: 15%;
+  }
+  } 
+/* // Medium devices (tablets, 768px and up) */ 
+@media (min-width: 768px) and (max-width:1024px) { 
+
+  .mx-w{
+    max-width: 8%;
+  }
+   
+ 
+} 
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+
+  .mx-w{
+    max-width: 5%;
+  }
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+
+
+  .mx-w{
+    max-width: 5%;
+  }
+}
+
+
+.custom_css_btn {
+  background: #10365a;
+  color: #f5f5f5;
+}
+.mat-option{
+  font-size: 14px !important;
+}
+.cd{
+  margin:0px;
+  padding:0px;
+}
+.no-records {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 100%;
+  margin: 0 auto;
+}
+.mat-table{
+  background:none !important;
+}
+.cd_del{ 
+  cursor: pointer !important;
+  color:rgb(231, 74, 74);
+}
+.inv_del{ 
+  cursor: pointer !important;
+  color:rgb(231, 74, 74);
+}
+  /* ink bar tabs*/
+  ::ng-deep .mat-tab-header {
+  background-color: #425f87!important;
+   position: fixed !important;
+   z-index: 999;
+   width:100vw;
+  }
+  ::ng-deep .mat-tab-body-wrapper {
+    position: relative !important;
+    margin-top:55px;
+}
+.wrap{
+  word-wrap: break-word;
+  width: 100px;
+  height: 24px;
+  line-height: 13px;
+}
+mat-icon > .sufix{
+  position: relative;
+top: 5px;
+
+}
+.mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon, .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon {
+  cursor: pointer !important;
+}
+/* .scroll-container {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+ 
+  }
+  .hide-scrollbar {
+    overflow: auto;
+  }
+    ::-webki-scrollbar {
+      display: none;
+    }
+
+  .show-scroll {
+    overflow: auto;
+  }
+
+  mat-chip-list {
+    white-space: nowrap;
+ 
+  }
+  mat-chip-list:hover {
+    cursor: pointer;
+    border-color: #ccc;
+  } */
+
+  .container_in {
+    font-size: 16px;
+    line-height: 16px;
+    height: 32px;
+    overflow: hidden;
+
+   
+  }
+  
+  .show {
+    overflow: visible;
+    height: auto;
+  }
+  .new{
+    cursor: pointer;
+  }
+
+
+//   fi section
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 0 8px 8px 0 !important;
+   
+    flex-grow: 1 !important;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 8px 0 0 8px !important;
+    
+  
+    flex-grow: 1 !important;
+  }
+  ::ng-deep .mat-autocomplete-panel{
+    border-radius: 12px !important;  
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    overflow: auto  !important;  
+  }
+  ::ng-deep .mat-form-field-infix{
+    border-top: 5px solid transparent !important;
+  }
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  .mat-card{
+    background-color:#ffffff !important;
+  }
+  .custom_css_btn {
+    background: #10365a;
+    color: #f5f5f5;
+  }
+  .fs{
+    font-size:13px !important;
+   
+  }
+  .qty{
+    color: orange !important;
+    font-weight: bold;
+    
+  }
+  .expdate{
+    color: green !important;
+  }
+  .row.vertical-divider [class*='or']:not(:last-child)::after {
+   
+    // width: 1px;
+    content: "Or";
+    display:block;
+    position: absolute;
+    top:35px;
+    bottom: 0;
+    right: 25px;
+    min-height: 70px;
+    font-size: 20px;
+  }
+  .row.vertical-divider_m [class*='or_m']:not(:last-child)::after {
+   
+    // width: 1px;
+    content: "(Or)";
+    display:block;
+    position: absolute;
+    top:90px;
+    bottom: 0;
+    right: 140px;
+    min-height: 70px;
+    font-size: 20px;
+  }
+  .fs_D{
+    cursor: pointer !important;
+    color:rgb(231, 74, 74);
+  }
+  ::ng-deep .mat-tab-body-wrapper {
+    position: relative !important;
+    margin-top:55px !important;
+}
+  
+  .fs_E{
+    cursor: pointer !important;
+    color:#425f87
+  }
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  th, td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+    text-align: left;
+    font-size: 13px;
+  }
+  .table td, .table th {
+    padding: 10px !important;
+  }
+  .mat-header-cell {
+    color: rgb(9, 9, 9) !important;
+}
+  /* table {
+    width: 100%;
+  }
+  .mat-column-position {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 30% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .mat-column-name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 25% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    text-align: center;
+    padding: 10px !important;
+  }
+  .mat-column-weight {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 13% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    text-align: center;
+    padding: 10px !important;
+  }
+  .mat-column-symbol {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 20% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .mat-column-qty {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 10% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .mat-column-Edit {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    width: 10% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    text-align: center;
+  
+  } */
+ 
+.mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+    top:0 !important;
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) { 
+    .row.vertical-divider [class*='or']:not(:last-child)::before {
+   
+      width: 1px;
+      content: "Or";
+      display:none;
+      position: relative;
+      top:100px;
+      bottom: 0;
+      right: 142px;
+      min-height: 70px;
+      font-size: 20px;
+    }
+} 
+
+.example-form {
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.overflow{
+  overflow: hidden;
+}
+
+
+.header_section{
+  margin: 10px;
+}
+/* .scroll-container {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+ 
+  }
+  .hide-scrollbar {
+    overflow: auto;
+  }
+    ::-webki-scrollbar {
+      display: none;
+    }
+
+  .show-scroll {
+    overflow: auto;
+  }
+
+  mat-chip-list {
+    white-space: nowrap;
+   
+  }
+  mat-chip-list:active {
+    cursor: pointer;
+    border-color: #ccc;
+  } */
+  /* .info-widget {
+    width:100%;
+    border: 1px solid black;
+ 
+  }
+  ::-webki-scrollbar {
+    display: none;
+  }
+  .middle {
+   
+    overflow: auto;
+    white-space: nowrap;
+
+  }
+  mat-chip-list {
+    white-space: nowrap;
+    display: inline-block;
+  } */
+
+  .container {
+    font-size: 16px;
+    line-height: 16px;
+    height: 32px;
+    overflow: hidden;
+
+   
+  }
+  
+  .show {
+    overflow: visible;
+    height: auto;
+  }
+  .new{
+    cursor: pointer;
+  }
+
+  @media only screen   
+  and (min-device-width : 768px)   
+  and (max-device-width : 1024px) {
+  
+    .h-custom-47{
+      height: 47px !important;
+    }
+    .h-custom-37{
+      height: 37px !important;
+    }
+  }
+  @media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+{ 
+  .h-custom-47{
+    height: 58px !important;
+  }
+  .h-custom-60{
+    height: 60px !important;
+  }
+  .h-custom-37{
+    height: 37px !important;
+  }
+
+  } 
+  @media (max-width: 767px)  {
+    .padding{
+        padding:10px;
+        overflow-x: hidden;
+    }
+}

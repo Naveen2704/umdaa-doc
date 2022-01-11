@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class=" font-weight-bold small" >EXPERT OPINION</ion-title>
+   
+      <button slot="end" mat-button [matMenuTriggerFor]="belowMenu"  ><mat-icon >account_balance_wallet</mat-icon> {{Amount}} INR</button>
+
+    
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+      <button mat-menu-item (click)="addmoney()">Add Money to Wallet</button>
+      <!-- <button mat-menu-item>Item 2</button> -->
+    </mat-menu>
+    
+    <ion-icon slot="end" padding style="font-size: 20px;"  (click)="logout()" name="md-power"></ion-icon>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="mat-body" >
+    
+    <mat-tab-group  mat-align-tabs="start"  >
+      
+      <mat-tab label="My Referral"> 
+        <div class="container-fluid">
+          <div class="row"  data-step="1" data-intro="Search patients and then refer to an expert; Add Wallet amount before referral (min Rs.800/-)" data-position="right">
+            <div class="col-md-4 col-lg-4 col-xl-4 col-12">
+              <div class="text-left ">
+                <div class="mt-2"> 
+                  <mat-form-field class="w-100">
+                    <input type="text" name="term" [(ngModel)]="terms" (ngModelChange)="drugsearch(terms)"
+                          placeholder="Referral Patients"
+                          aria-label="Number"
+                          matInput
+                          id="keyword"
+                          [matAutocomplete]="auto2" required>
+                          <mat-icon matSuffix>search</mat-icon>
+                    
+                    <mat-autocomplete #auto2="matAutocomplete" [panelWidth]="374"> 
+                      <ng-container *ngFor="let item of results ">
+                        <mat-option class="p-1" *ngIf="item != null"  (click)="druginfo(item)" >
+                          <img class="example-option-img" aria-hidden src="https://img2.pngio.com/index-of-areaedu-wp-content-uploads-2016-02-default-png-600_600.png" height="25">
+                          <span class="pl-2">{{item?.full_name}}</span> |
+                         <small>UMR: # {{item?.umr_no}}</small>
+                        </mat-option>
+                      </ng-container>                     
+                      
+                    </mat-autocomplete>
+      
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" data-step="2" data-intro="Click on View -> you can chat with Expert and view by prescription, Cancel-> cancel the request , Close -> before accepting expert you can close , R ->Repeated request rised from you " >
+            <div class=" col-12 col-md-4 col-lg-4 col-xl-4 mt-2" *ngFor="let list of myOpinionList ">
+              <mat-card  >
+                <div class="col-12 p-0">
+                  <mat-card-title>
+                   <span matBadge="R" matBadgeOverlap="false" *ngIf="list.opinion_type =='Repeated Request'"> {{list.patientName | titlecase}}</span>
+                   <span  *ngIf="list.opinion_type !='Repeated Request'"> {{list.patientName | titlecase}}</span>
+
+                  </mat-card-title>
+                  <mat-card-subtitle>#{{list.umr_no}}</mat-card-subtitle>
+               
+                  <p><span class="font-weight-bold"> {{list.doctor_name}}</span></p>
+           
+               
+                 <p><span class="font-weight-semibold ">{{list.appointment_time}}</span></p>
+                 <p>{{list.status}}</p>
+                 
+                 <button mat-button class="my_bg_v" *ngIf="list.status == 'Not Accepted'" (click)="cancel(list.expert_opinion_id)">CANCEL</button>
+                 <button mat-button class="my_bg_d" disabled *ngIf="list.status == 'Cancelled'">CANCEL</button>
+                 <button mat-button class="my_bg_d" disabled *ngIf="list.status == 'Rejected'">Rejected</button>
+                 <button mat-button class="my_bg_d" disabled *ngIf="list.status == 'Closed'">Closed</button>
+                <button mat-button class="my_bg_g ml-2" *ngIf="list.status != 'Not Accepted' && list.status != 'Cancelled' && list.status != 'Rejected' && list.status != 'Closed'" (click)="view(list)">VIEW</button>
+                <button mat-button class="my_bg_o ml-2" *ngIf="list.status != 'Not Accepted' && list.status != 'Cancelled' && list.status != 'Rejected' && list.status != 'Closed'" (click)="close(list.expert_opinion_id)">CLOSE</button>
+
+                 <!-- <p><span class="font-weight-bold ">TIME:</span> {{list.appointment_time}}</p>
+                 <p><span class="font-weight-bold">PATIENT NAME:</span> {{list.patientName | titlecase}}</p>
+                 <p><span class="font-weight-bold">UMR NO:</span> {{list.umr_no}}</p>
+                 <p><span class="font-weight-bold">DOCTOR NAME:</span> {{list.doctor_name}}</p>
+                 <p><span class="font-weight-bold">STATUS:</span> {{list.status}}</p> -->
+
+                </div>
+                <!-- <div class="col-12 pl-0">
+                  
+                  <div class="example-button-row">
+                    <button mat-button class="my_bg_v">CANCEL</button>
+                    <button mat-button class="my_bg_g ml-2">VIEW</button>
+                  </div>
+               
+                </div> -->
+              </mat-card>
+            </div>
+          </div>
+        </div>
+       
+      </mat-tab>
+      <mat-tab label="My Opinion"> 
+        <div class="container-fluid">
+
+        
+        <div class="row">
+            <div class=" col-12 col-md-4 col-lg-4 col-xl-4 mt-2" *ngFor="let list of ReferredList">
+              <mat-card>
+
+            
+                  
+                
+                <div class="col-12 p-0">
+                 <!-- <p><span class="font-weight-bold ">TIME:</span> {{list.appointment_time}}</p>
+                 <p><span class="font-weight-bold">PATIENT NAME:</span> {{list.patientName | titlecase}}</p>
+                 <p><span class="font-weight-bold">UMR NO:</span> {{list.umr_no}}</p>
+                 <p><span class="font-weight-bold">DOCTOR NAME:</span> {{list.doctor_name}}</p>
+                 <p><span class="font-weight-bold">STATUS:</span> {{list.status}}</p> -->
+                
+                 <mat-card-title>
+                  <span matBadge="R" matBadgeOverlap="false" *ngIf="list.opinion_type =='Repeated Request'"> {{list.patientName | titlecase}}</span>
+                  <span  *ngIf="list.opinion_type !='Repeated Request'"> {{list.patientName | titlecase}}</span>
+                  </mat-card-title>
+                  <mat-card-subtitle>#{{list.umr_no}}</mat-card-subtitle>
+               
+                  <p><span class="font-weight-bold"> {{list.doctor_name}}</span></p>
+           
+               
+                 <p><span class="font-weight-semibold ">{{list.appointment_time}}</span></p>
+                 <p>{{list.status}}</p>
+                 <button mat-button class="my_bg_v" *ngIf="list.status == 'Not Accepted'" (click)="accept(list.expert_opinion_id)">Accept</button>
+                 <button mat-button class="my_bg_o ml-2" *ngIf="list.status == 'Not Accepted'" (click)="reject(list.expert_opinion_id)">Reject</button>
+                 <button mat-button class="my_bg_d" disabled *ngIf="list.status == 'Cancelled'">CANCEL</button>
+                 <button mat-button class="my_bg_d" disabled *ngIf="list.status == 'Closed'">Closed</button>
+                 <button mat-button class="my_bg_g"  *ngIf="list.status != 'Not Accepted' && list.status != 'Cancelled' && list.status != 'Closed' " (click)="mychat(list)">VIEW</button>
+                  <!-- <button mat-button class="my_bg_v ml-2">Accent</button> -->
+
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="My Transactions"> 
+        <div class="container-fluid">
+          <!-- <div class="row">
+            <div class="col-12">
+              <div class="text-right mt-3">
+                <p class="mb-0 d-inline-flex"><span class="ml-2">Umdaa Wallet</span> <mat-icon>account_balance_wallet</mat-icon></p>
+                <p><span class="font-weight-bold">{{Amount}} INR</span></p>
+                <p><button mat-raised-button class="my_bg_g ml-2" (click)="addmoney()">ADD AMOUNT</button></p>
+              </div>
+            </div>
+          </div> -->
+          <div class="row mt-2   ">
+            <div class="col-12">
+              <span class="mat-subheading-1">TRANSACTION HISTORY</span>
+            
+              <mat-list role="list" *ngFor="let list of tranhistory">
+                <mat-list-item role="listitem" >
+                  <div mat-line>{{list.to_doc}} 
+                    
+                  </div>
+                  <div mat-line>{{list.created_date}}</div>
+                  <div class="div-table-col" [ngStyle]="(list.transaction_type == 'Debit') ? {'color':'red'}:{'color':'green'} " >{{list.transaction_type}} </div>
+                  <div class="div-table-col">{{list.amount}} &#x20B9;  <span *ngIf="list.payment_status == 'Pending'" [ngStyle]="(list.payment_status == 'Pending') ? {'color':'#264ea5'}:{'color':''} " >{{list.payment_status}}  <ion-icon name="alert" (click)="info()"></ion-icon></span></div>
+                </mat-list-item>
+              </mat-list>
+              <!-- <div class="div-table" *ngFor="let list of tranhistory">
+                <div class="div-table-row" [ngStyle]="(list.transaction_type == 'Debit') ? {'background':'red'}:'' ">
+                  <div  class="div-table-col">
+                    {{list.to_doc}}
+                  </div>
+                  <div  class="div-table-col">
+                    {{list.transaction_type}}
+                  </div>
+                  <div  class="div-table-col">
+                    {{list.amount}}
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+       </mat-tab>
+    </mat-tab-group>
+   </div>
+   <div class="help">
+    <button mat-mini-fab  matTooltip="Help"  class="my_bg_v" (click)="help()"><mat-icon>help_outline</mat-icon></button>
+  </div>
+</ion-content>

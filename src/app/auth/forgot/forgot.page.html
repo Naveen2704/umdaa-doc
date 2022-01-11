@@ -1,0 +1,103 @@
+
+<ion-content>
+  <ion-grid class="d-none d-md-block">
+    <ion-row>
+      <ion-card class=" card_1">
+          <ion-card-header text-center>
+              <ion-card-title>Forgot Password ?</ion-card-title>
+              <ion-card-subtitle>                         
+                Go back and continue with <a style="color:#10367a;"  routerLink="/login" routerDirection="root">Login</a>
+              </ion-card-subtitle>
+          </ion-card-header>
+        <ion-card-content>
+              <form [formGroup]="forgot_form" #myForgot="ngForm" (ngSubmit)="Doforgot(forgot_form.value,myForgot)">
+              <ion-item margin >
+                  
+                  <ion-icon name="contact" slot="start"></ion-icon>
+                  <ion-input type="text" maxlength="10" formControlName="mobile"  [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" placeholder="Enter Mobile Number" required></ion-input>
+                  <ion-button  type="submit" color="primary">Get Otp</ion-button>
+              </ion-item>  
+              <!-- <div *ngIf="submitted && f.mobile.errors" class="invalid">
+                  <div *ngIf="f.mobile.required">Mobile Number is required</div>
+              </div> -->
+           <div class="class" *ngIf = "timer">
+            <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)"  [config]="config"></ng-otp-input>
+
+           </div>
+              <div class="timelaps text-right" >
+                <span style="color: blue;" *ngIf = "timer">
+                  <ng-container [counter]="counter" [interval]="interval" (value)="value = $event">
+                    <h3 *ngIf ="value != 0">{{ value }}</h3>
+                    <ion-button  type="submit" color="primary" *ngIf ="value == 0" size="small">Resend</ion-button>
+                  </ng-container>
+                </span>
+              </div>
+            </form>
+            <!-- <form [formGroup]="forgot_form_otp" #myOtp="ngForm" (ngSubmit)="checkOtp(forgot_form_otp.value,myOtp)">
+              <ion-item margin >
+                  
+                    <ion-icon name="call" slot="start"></ion-icon>
+                    <ion-input type="text" maxlength="6" formControlName="otp" placeholder="Enter OTP hear...." ></ion-input>
+                    
+                </ion-item> 
+             
+                 <div text-center>
+                    <ion-button  type="submit" [disabled]="forgot_form_otp.invalid" color="primary">Submit</ion-button>
+                  <div>{{timeLeft}}</div> 
+                </div> 
+              </form> -->
+            
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+  <div class="mobile_view  d-block d-md-none">
+    <ion-row> 
+      <ion-col size-md="3" class="my_bg_v">
+          <div class="text-center">
+              <img  src="assets/logo/umdaa_logo_1.png" width="100px" height="100px" >
+             </div>
+      </ion-col>
+      <ion-col size-md="9" size-xs="12">
+        <ion-toolbar>
+          <ion-title class="text-muted font-weight-bold large light text-center">FORGOT PASSWORD</ion-title>
+      </ion-toolbar>
+          <div class="mt-5 pt-3">
+            <form class="m-3" [formGroup]="forgot_form" #myForgot="ngForm" (ngSubmit)="Doforgot(forgot_form.value,myForgot)">
+              <ion-item margin >
+                  
+                  <ion-icon name="contact" slot="start"></ion-icon>
+                  <ion-input type="text" maxlength="10" formControlName="mobile"  [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" placeholder="Enter Mobile Number" required></ion-input>
+                  <ion-button  type="submit" color="primary">Get Otp</ion-button>
+              </ion-item>  
+              <!-- <div *ngIf="submitted && f.mobile.errors" class="invalid">
+                  <div *ngIf="f.mobile.required">Mobile Number is required</div>
+              </div> -->
+              </form>
+            <form class="m-3" [formGroup]="forgot_form_otp" #myOtp="ngForm" (ngSubmit)="checkOtp(forgot_form_otp.value,myOtp)">
+                <ion-item margin >
+                  
+                    <ion-icon name="call" slot="start"></ion-icon>
+                    <ion-input type="text" maxlength="6" formControlName="otp" placeholder="Enter OTP hear...." ></ion-input>
+                    
+                </ion-item> 
+              
+
+                <div class="text-center mt-4">
+                    <ion-button  expand="block" type="submit" [disabled]="forgot_form_otp.invalid" color="primary">Submit</ion-button>
+                </div>
+                <div class="text-center mt-3">
+                  <span>Go back and continue with <a style="color:#10367a;"  routerLink="/login" routerDirection="root">Login</a>
+                  </span>
+                </div>
+              </form>
+          </div>
+     </ion-col>
+    </ion-row>
+  </div>         
+            
+</ion-content>
+
+
+
+

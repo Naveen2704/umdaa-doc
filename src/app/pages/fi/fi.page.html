@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary" >
+    <ion-button slot="start" (click)="back($event)">
+      <ion-icon name="arrow-back" style="color:white"></ion-icon>
+     
+    </ion-button>
+    <ion-title class=" font-weight-bold small" >EXPERT OPINION</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-sidenav-container class="example-container" autosize >
+    <mat-sidenav mode="side" opened >
+      <app-sidenav></app-sidenav>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container> 
+
+</ion-content>

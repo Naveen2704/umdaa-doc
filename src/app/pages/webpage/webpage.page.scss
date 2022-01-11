@@ -1,0 +1,1001 @@
+
+
+.minimize{
+  top: 0;
+  z-index: 999;
+  color: white;
+  right: 0;
+  position: absolute;
+  height: 150px;
+  width: 100px;
+  transform: none !important;
+  text-align: right;
+}
+
+
+
+
+
+  @media (max-width:360px) { 
+    /* .cdk-overlay-pane { width: 50%; height: 70%; } */
+   
+
+     
+  }
+  
+  /* // Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) and (max-width: 767.98px) { 
+    /* .cdk-overlay-pane { width: 50%; height: 70%; } */
+  
+  
+  
+  }
+  @media (min-width: 767.98px) and (max-width: 576px) { 
+   
+     
+ 
+    
+  }
+   /* // Medium devices (tablets, 768px and up) */ 
+  @media (min-width: 320px) and (max-width:568px) { 
+
+    /* .cdk-overlay-pane { width: 50%; height: 70%; } */
+    .local {
+      position: fixed;
+      // right: 1rem;
+      top:0px;
+      bottom: 1rem;
+      width: 20vw;
+      height: 20vh;
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .locall
+    {
+      width: 100%;
+      // height: 650px;
+      height:100vh;
+    }
+
+    .remote{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .nCard{
+      height: 100vh !important;
+      width: 100vw !important;
+      top: 1px !important;
+      position: fixed !important;
+      transform: none !important;
+    }
+    .myCard{
+      top: 0;
+      z-index: 99999;
+      position: fixed;
+      width: 360px;
+      height: 640px;
+      background: #000000;
+      right: 0;
+      
+    }
+    .icons{
+      text-align: -webkit-center;
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+      
+      // text-align: -webkit-center;
+      // /* width: 100%; */
+      // margin-top: 560px;
+      // /* position: fixed; */
+      // z-index: 999;
+      // top: 0px;
+      // position: inherit;
+    }
+    .caller{
+      position: fixed;
+      width: 150px;
+      z-index: 99;
+    }
+    .max_caller{
+      width: 100%;
+      left: 0px;
+      position: fixed;
+      z-index: 1;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 99;
+      .icons{
+        text-align: -webkit-center;
+        /* width: 100%; */
+        margin-top: -100px;
+        /* position: fixed; */
+        z-index: 999;
+        top: 0px;
+        position: inherit;
+      }
+      .minimize{
+        color: black;
+      }
+    }
+    .receiver{
+      width: 100%;
+      left: 0px;
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+     
+    }
+
+    .hide{
+      display: none !important;
+    }
+    .show{
+      display: block !important;
+    }
+    .minimize_div{
+      background-color: #00000080;
+      // z-index: 9999;
+      width: 43%;
+      height: 42%;
+      top: 0;
+      right: 0;
+      .remote{
+      
+        width: 100%;
+        height: 100%;
+        right: 0px;
+        // position: relative;
+        object-fit: cover;
+        z-index: -1;
+        bottom: 0px;
+        .minimize{
+          color: black;
+        }
+      }
+      .icons{
+        display: none;
+       }
+       .local{
+         // position: fixed;
+         // width: 100px;
+         // z-index: 99;
+         display: none;
+       }   
+    }
+    
+  } 
+
+  @media(min-width:411px)and (max-width:823px){
+    .icons{
+      text-align: -webkit-center;
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+      // text-align: -webkit-center;
+      // /* width: 100%; */
+      // margin-top: 640px;
+      // /* position: fixed; */
+      // z-index: 999;
+      // top: 0px;
+      // position: inherit;
+    }
+
+    .local {
+      position: fixed;
+      // right: 1rem;
+      top:0px;
+      bottom: 1rem;
+      width: 20vw;
+      height: 20vh;
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .locall
+    {
+      width: 100%;
+      height:100vh;
+      // height: 530px;
+    }
+
+    .remote{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .minimize_div{
+      background-color: #00000080;
+      // z-index: 9999;
+      width: 43%;
+      height: 42%;
+      top: 0;
+      right: 0;
+      .icons{
+       display: none;
+      }
+      .caller{
+        // position: fixed;
+        // width: 100px;
+        // z-index: 99;
+        display: none;
+      }
+      .receiver{
+        width: 100%;
+        height: 80%;
+        right: 0px;
+        // position: relative;
+        object-fit: cover;
+        z-index: -1;
+        bottom: 0px;
+        .minimize{
+          color: black;
+        }
+      }
+     
+    }
+  }
+ 
+  
+  /* // Medium devices (tablets, 768px and up) */ 
+  @media (min-width: 768px) and (max-width:1024px) { 
+    .local {
+      position: fixed;
+      // right: 1rem;
+      top:0px;
+      bottom: 1rem;
+      width: 20vw;
+      height: 20vh;
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .locall
+    {
+      width: 100%;
+      height:100vh;
+      // height: 530px;
+    }
+
+    .remote{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .nCard{
+      width: 100vw;
+      height: 100vh;
+      top: 1px !important;
+      position: fixed !important;
+     
+    }
+    .myCard{
+      top: 1px !important;
+      z-index: 99999;
+      position: fixed !important;
+      width: 768px;
+      height: 1024px;
+      background: #000000;
+      right: 0;
+    }
+    .icons{
+      // text-align: -webkit-center;
+      // margin-top: -100px;
+      /* position: fixed; */
+      // z-index: 999;
+      // top: 0px;
+      // position: inherit;
+
+      text-align: -webkit-center;
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+    }
+    .caller{
+      position: fixed;
+      width: 300px;
+      z-index: 99;
+    }
+
+    .max_caller{
+      width: 100%;
+      left: 0px;
+      position: fixed;
+      height:1024px;
+      object-fit: fill;
+      z-index: 99;
+     
+    }
+    .receiver{
+      width: 100%;
+      left: 0px;
+      position: relative;
+      z-index: 1;
+      height: 1024px;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .minimize_div{
+      background-color: black;
+      z-index: 9999;
+      width: 43%;
+      height: 37%;
+      top: 0;
+      right: 0;
+      .icons{
+       display: none;
+      }
+      .caller{
+        // position: fixed;
+        // width: 100px;
+        // z-index: 99;
+        display: none;
+      }
+      .receiver{
+        width: 100%;
+        height: 378px;
+        right: 0px;
+        position: relative;
+        object-fit: cover;
+        z-index: -1;
+        bottom: 0px;
+      }
+    }
+  }
+  @media
+  (min-device-width: 800px) 
+  and (max-device-width: 1280px) {
+
+
+
+
+    .nCard{
+      width: 100vw;
+      height: 100vh;
+      top: 1px !important;
+      position: fixed !important;
+     
+    }
+    .myCard{
+      top: 1px !important;
+      z-index: 99999;
+      position: fixed !important;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      right: 0;
+    }
+    .icons{
+      text-align: -webkit-center;
+       width: 100%;
+       margin-top: 80vh !important;
+      /* position: fixed; */
+      z-index: 999;
+      top: 0px !important;
+      position: fixed;
+    }
+    .caller{
+      position: fixed;
+      width: 150px;
+      z-index: 99;
+    }
+
+    .max_caller{
+      width: 100%;
+      left: 0px;
+      position: fixed;
+      height:100%;
+      object-fit: fill;
+      z-index: 99;
+     
+    }
+    .receiver{
+      width: 100%;
+      left: 0px;
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .minimize_div{
+      background-color: black;
+      z-index: 9999;
+      width: 43%;
+      height: 43%;
+      top: 0;
+      right: 0;
+      .icons{
+       display: none;
+      }
+      .caller{
+        // position: fixed;
+        // width: 100px;
+        // z-index: 99;
+        display: none;
+      }
+      .receiver{
+        width: 100%;
+        height: 553px;
+        right: 0px;
+        position: relative;
+        object-fit: cover;
+        z-index: -1;
+        bottom: 0px;
+      }
+    }
+  }
+  /* // Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) { 
+    .nCard{
+      width: 320px;
+      height: 530px;
+      top: 1px !important;
+      position: fixed !important;
+      
+    }
+    .myCard{
+      top: 10px;
+      z-index: 99999;
+      position: fixed;
+      width: 320px;
+      height: 530px;
+      background: #000000;
+      right: 0;
+    }
+    .icons{
+      text-align: -webkit-center;
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+      // text-align: -webkit-center;
+      // /* width: 100%; */
+      // margin-top: 365px;
+      // /* position: fixed; */
+      // z-index: 999;
+      // top: 0px;
+      // position: inherit;
+    }
+    .caller{
+      position: fixed;
+      width: 150px;
+      z-index: 99;
+    }
+    .receiver{
+      width: 100%;
+      left: 0px;
+      position: relative;
+      z-index: 1;
+      height: 530px;
+      object-fit: fill;
+      z-index: -1;
+    }
+    .local{
+      width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1;
+    }
+
+    .locall
+    {
+      width: 100%;
+      // height: 530px;
+      height:100vh;
+    }
+
+
+    .remote{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+   
+  }
+  @media (min-width: 1366px) { 
+    .nCard{
+      width: 320px;
+      height: 530px;
+      top: 1px !important;
+      position: fixed !important;
+     
+    }
+    .myCard{
+      top: 10px;
+      z-index: 99999;
+      position: fixed;
+      width: 320px;
+      height: 530px;
+      background: #000000;
+      right: 0;
+    }
+    .icons{
+      text-align: -webkit-center;
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+      // text-align: -webkit-center;
+      // /* width: 100%; */
+      // margin-top: 365px;
+      // /* position: fixed; */
+      // z-index: 999;
+      // top: 0px;
+      // position: inherit;
+    }
+    
+    .caller{
+      position: fixed;
+      width: 150px;
+      z-index: 99;
+    }
+    .receiver{
+      width: 100%;
+      left: 0px;
+      position: relative;
+      z-index: 1;
+      height: 530px;
+      object-fit: fill;
+      z-index: -1;
+    }
+    .max_caller{
+      width: 100%;
+      left: 0px;
+      position: absolute;
+      height: 530px;
+      object-fit: cover;
+      z-index: 99;
+     
+    }
+
+    .local{
+      width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1;
+    }
+
+    .locall
+    {
+      width: 100%;
+      height: 530px;
+    }
+
+    .remote{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+   
+  }
+
+
+  
+  .round {
+    --width: 60px;
+    --height: 40px;
+    font-size: 90%;
+    --vertical-align: middle;
+    --padding-start: 10px;
+    --padding-end: 10px;
+   
+  }
+
+  .count-names {
+    position:absolute;
+    top: 250px;
+    left:100px;
+    // right:0;
+    padding:3px;
+}
+
+.k-dialog-titlebar {
+  border-color: inherit;
+  color: #ffffff;
+  background-color: blue !important;
+}
+
+ /* .header {
+    /* padding: 10px 20px;
+    padding-left: 7px; 
+    background: #10365a;
+    color: #fff;
+    margin-bottom: 0px;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+  }
+  .header_inner {
+    padding: 5 px;
+  } */
+
+  .click{
+    cursor: pointer;
+  }
+ .header{
+   height: 64px;
+   box-sizing: border-box;
+   padding: 0 12px;
+   width: 100%;
+   flex-direction: row;
+   align-items: center;
+   white-space: nowrap;
+   background-color:#10365a ;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+   color: #f5f5f5;
+   display: grid;
+ }
+
+ //   img{
+//    border-radius:50%;
+//    width: 50px;
+//    height: 50px;
+//    border:1px solid #f5f5f5;
+//      border-radius:50%;
+//      -webkit-border-radius: 50%;
+//      -moz-border-radius: 50%;
+//      max-width: none !important;
+//  }
+
+
+//  @media only screen and (max-width: 1240px) and (min-width: 600px)  {
+//   img{
+//     border-radius:50%;
+//     width: 50px;
+//     height: 50px;
+//     border:1px solid #f5f5f5;
+//       border-radius:50%;
+//       -webkit-border-radius: 50%;
+//       -moz-border-radius: 50%;
+//       max-width: none !important;
+//   }
+//  }
+
+//  @media only screen and (max-width: 600px) and (min-width: 360px)  {
+  img{
+    border-radius:50%;
+    width: 50px;
+    height: 50px;
+    border:1px solid #f5f5f5;
+      border-radius:50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      max-width: none !important;
+  }
+//  }
+ /* Extra small devices (phones, 600px and down) */
+// @media only screen and (max-width: 600px) {
+//   img{
+//     border-radius:50%;
+//     width: 37px;
+//     height: 37px;
+//     border:1px solid #f5f5f5;
+//       border-radius:50%;
+//       -webkit-border-radius: 50%;
+//       -moz-border-radius: 50%;
+//       max-width: none !important;
+//   }
+// }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+// @media only screen and (min-width: 600px) {
+//   img{
+//     border-radius:50%;
+//     width: 37px;
+//     height: 37px;
+//     border:1px solid #f5f5f5;
+//       border-radius:50%;
+//       -webkit-border-radius: 50%;
+//       -moz-border-radius: 50%;
+//       max-width: none !important;
+//   }
+// }
+
+/* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {
+//   img{
+//     border-radius:50%;
+//     width: 37px;
+//     height: 37px;
+//     border:1px solid #f5f5f5;
+//       border-radius:50%;
+//       -webkit-border-radius: 50%;
+//       -moz-border-radius: 50%;
+//       max-width: none !important;
+//   }
+// }
+
+
+ .right{
+   right:0;
+ }
+ .mat-mini-fab{
+   width: 29px !important;
+   height: 29px !important;
+ }
+ .fs{
+   font-size:15px !important;
+   /* background-color:#f2f5f8 !important; */
+   border-radius:50%;
+   width: 20px;
+   height: 20px;
+   color:white !important;
+   text-align: center;
+   line-height:20px;
+   border:1px solid #eeeeee;
+ }
+ 
+ .line{
+  border-right: 1px solid rgb(255, 253, 253);
+  height: 18px;
+  left: 10px;
+ line-height:18px;
+ padding-right: 5px;
+ 
+ }
+ .Patient_info{
+   width:100px;
+   
+ }
+ .class_1{
+   width: 100%;
+ }
+ 
+ .mat-chip.mat-standard-chip {
+   background-color: white !important;
+   color: rgb(35, 36, 86) !important;
+ }
+  .primary{
+   white-space: nowrap;
+  
+  //  overflow: hidden;
+   text-overflow: ellipsis;
+   
+  }
+
+  @media only screen and (min-width: 421px) and (max-width: 767px) {
+    .primary{
+      white-space: nowrap;
+     
+      overflow: hidden;
+      text-overflow: ellipsis;
+      
+     }
+
+     .icon
+     {
+       font-size: 23px;
+     }
+    }
+    
+    /*  Smartphones in portrait mode  */
+    
+    @media only screen and (max-width: 420px) {
+      .primary{
+        white-space: nowrap;
+       
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+       }
+
+       .icon
+       {
+         font-size: 23px;
+       }
+    }
+
+    .icon
+    {
+      font-size: 26px;
+    }
+ .edit_img{
+   color:white !important;
+   width:20px;
+   height: 20px;
+ }
+
+//  .k-dialog-titlebar {
+//   border-color: inherit;
+//   color: #ffffff;
+//   background-color: blue;
+// }
+
+
+body {
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+// .over{
+//   position: absolute;
+//     left: 389px; 
+//     top: 0px; 
+//     // left: auto;
+//     // top: 50px;
+//     z-index: 1;
+//     margin-left: 15px;
+//   // position: absolute;
+//   // left: 0px;
+//   // top: 0px;
+//   // z-index: 1;
+// }
+.overflow{
+  overflow: hidden;
+  position:absolute;
+  top:67px;
+  right:15px;
+  z-index: 1;
+}
+
+div.main {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  border: 3px solid #73AD21;
+}
+
+div.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  width: 200px;
+  height: 100px;
+  border: 3px solid #73AD21;
+}
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+.youtube_video{
+  background-color: #000000f5;
+  z-index: 10;
+  min-width: 118px;
+  min-height: 134px;
+  margin-left: -21px;
+  margin-top: -6px;
+}
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+
+.dvInsideTL {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 150px;
+  height: 100px;
+  background-color: #ff751a;
+  opacity: 0.5;
+}
+
+.navi {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000000ab;
+  z-index: -1;
+}
+.infoi {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+}
+
+::ng-deep .k-window-titlebar + .k-window-content {
+  min-height: 350px;
+    min-width: 300px;
+}
+::ng-deep .k-window-titlebar{
+  padding:5px !important;
+}
+::ng-deep .k-window{
+  color: rgb(251 252 255);
+  background-color: #21396d;
+}
+.example-button-row {
+  display: table-cell;
+  z-index: -1;
+}
+
+
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  margin:10px;
+}
+
+
+::ng-deep .alert-message{
+  display:grid !important;
+}
+::ng-deep .alert-message img{
+  width: 70px;
+  margin:0 auto;
+}
+
+
+
+// .remote {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+// }

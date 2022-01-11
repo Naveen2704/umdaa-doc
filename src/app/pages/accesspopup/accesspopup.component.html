@@ -1,0 +1,113 @@
+
+
+
+<div mat-dialog-title class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Up Grade Now !</strong> You can't access this feature
+  <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button> -->
+</div>
+<mat-dialog-content class="mat-typography">
+  <section class="pricing-area" id="pricing">
+    <div class="container mt-2">
+      <!-- <div class="row">
+        <div class="col-xl-8 mx-auto text-center">
+          <div class="section-title">
+            <h2>our prices</h2>
+            <p>You can access to this feature Upgrade Now </p>
+          </div>
+        </div>
+      </div> -->
+      <div class="row">
+               <div class="col-xl-4">
+        <div class="single-price">
+          <div class="price-title">
+          <h4>FREEMIUM</h4>
+          </div>
+          <div class="price-tag">
+          <h2>Free <span>Always</span></h2>
+          </div>
+          <div class="price-item">
+          <ul>
+            <li>Doctor App</li>
+            <li>Citizen App</li>
+            <li><span style="text-decoration: line-through;">Nurse App</span></li>
+            <li>OPD</li>
+            <li><span style="text-decoration: line-through;">IPD</span></li>
+            <li>Video Consultation</li>
+            <li><span style="text-decoration: line-through;">Basic + Details Analytics</span></li>
+            <li><span style="text-decoration: line-through;">Health Education*</span></li>
+            <li>Expert Opinion</li>
+            <li><span style="text-decoration: line-through;">Pharmacy Module</span></li>
+            <li><span style="text-decoration: line-through;">Lab Module</span></li>
+            <li><span style="text-decoration: line-through;">Digital Marketing</span></li>
+            <li><span style="text-decoration: line-through;">Bulk SMS*</span></li>
+          </ul>
+          </div>
+          <!-- <a href="https://umdaa.co/pricing-plans" class="box-btn">upgrade now</a> -->
+         </div>
+         </div>
+               <div class="col-xl-4">
+        <div class="single-price">
+          <div class="price-title">
+          <h4>PREMIUM</h4>
+          </div>
+          <div class="price-tag center">
+          <h1>₹30,000/- <span>+GST / </span> <span>Annum</span></h1>
+          </div>
+          <div class="price-item">
+          <ul>
+            <li>Doctor App</li>
+            <li>Citizen App</li>
+            <li>Nurse App</li>
+            <li>OPD</li>
+            <li>IPD</li>
+            <li>Video Consultation</li>
+            <li>Basic + Details Analytics</li>
+            <li>Health Education*</li>
+            <li>Expert Opinion</li>
+            <li>Pharmacy Module</li>
+            <li>Lab Module</li>
+            <li>Digital Marketing</li>
+            <li>Bulk SMS*</li>
+          </ul>
+          </div>
+          <!-- <a href="https://umdaa.co/pricing-plans" class="box-btn">upgrade now</a> -->
+         </div>
+         </div>
+               <div class="col-xl-4">
+        <div class="single-price">
+          <div class="price-title">
+          <h4>ADVANCED</h4>
+          </div>
+          <div class="price-tag">
+            <h1>₹18,000/- <span>+GST / </span> <span>Annum</span></h1>
+          </div>
+          <div class="price-item">
+          <ul>
+            <li>Doctor App</li>
+            <li>Citizen App</li>
+            <li>Nurse App</li>
+            <li>OPD</li>
+            <li>IPD</li>
+            <li>Video Consultation</li>
+            <li>Basic + Details Analytics</li>
+            <li>Health Education*</li>
+            <li>Expert Opinion</li>
+            <li>Pharmacy Module</li>
+            <li>Lab Module</li>
+            <li><span style="text-decoration: line-through;">Digital Marketing</span></li>
+            <li><span style="text-decoration: line-through;">Bulk SMS*</span></li>
+          </ul>
+          </div>
+          <!-- <a href="https://umdaa.co/pricing-plans" class="box-btn">upgrade now</a> -->
+         </div>
+         </div>
+            </div>
+    </div>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="upgrade()">Upgrade</button>
+</mat-dialog-actions>

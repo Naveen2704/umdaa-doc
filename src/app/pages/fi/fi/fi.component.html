@@ -1,0 +1,618 @@
+<div class="mat-body">
+
+  <mat-tab-group backgroundColor="primary" >
+    <mat-tab label="CD"  >
+      <section class="mt-3">
+        <div class="row cd">
+          <div class="col-sm-12 col-md-12">
+             <div class="mat-subheading-1 d-flex">
+               <div>CLINICAL DIAGNOSIS</div>
+               <!-- <div class="ml-2">
+                <i class="fa fa-pencil fa-1x" aria-hidden="true"  (click)="openDialog()"></i> 
+              </div> -->
+             </div>
+             
+             <div>
+              <form [formGroup]='CdForm' #myformcd="ngForm" (ngSubmit)="cdsearch(CdForm.value,myformcd)">
+                <div class="row ">
+                    <div class="col-10 col-md-5 ">
+                            <mat-form-field  class="w-100">
+                              <input  type="text"  #term (ngModelChange)="search(term.value)"
+                                    placeholder="Search Diagnosis here.."
+                                    aria-label="Number"
+                                    matInput
+                                    id="keyword"
+                                    formControlName='queryField'
+                                    [matAutocomplete]="auto"  required>
+                                    <input type="hidden" formControlName ="cd_id" class="form-control" >
+                                    <input type="hidden" formControlName ="cd_code" class="form-control" >
+                                    <mat-hint>Please enter Minimum 3 letters</mat-hint>
+                                    <!-- <button mat-raised-button matSuffix type="submit"  class="sufix mt-1 custom_css_btn" ><mat-icon>add</mat-icon></button>  -->
+
+                                    <!-- <mat-icon class="sufix" (click)="cdsearch(CdForm.value,myformcd)" matSuffix>search</mat-icon> -->
+                              <mat-autocomplete #auto="matAutocomplete"  >
+                                <!-- <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option> -->
+                                  <mat-option *ngFor="let item of items | async " [value]="item.disease_name" (click)="getId(item.clinical_diagnosis_id,item.code);cdsearch(CdForm.value,myformcd)" >
+                                    <span  >{{item.disease_name}} ({{item.code}})</span>
+                                   </mat-option>
+                           
+               
+                              </mat-autocomplete>
+                              <mat-error *ngIf="isSubmitted && CdForm.get('queryField').hasError('required')">
+                                Please Select diagnosis name 
+                              </mat-error>
+                            </mat-form-field>
+                          
+                    </div>
+                    <div class="col-2  col-md-4 pl-0" >
+                      
+                      <button mat-mini-fab type="submit"    class=" mt-1 custom_css_btn" ><mat-icon>add</mat-icon></button> 
+                    </div>
+              
+                </div>
+               </form>
+             </div>
+          </div>
+          <!-- <div class=" d-none d-sm-block col-sm-12 col-md-12"> -->
+            <!-- <div class="col-12 col-md-12 col-xs-12">
+              <div class="scroll-container"
+              (mouseleave)="showScroll = false"
+              (mouseenter)="showScroll = true"
+              [ngClass]="{'show-scroll' : showScroll}">
+              <mat-chip-list  [selectable]="true" #chipList [multiple]="true"  >
+
+                <mat-chip [selectable]="true"  *ngFor="let cdsuggition of cdsuggitions"  (click)="selectedcd(cdsuggition.disease_name,cdsuggition.clinical_diagnosis_id,cdsuggition.code)" >
+                  <span class="d-none d-sm-block">{{cdsuggition.disease_name |titlecase}}</span>
+                  <span class=" d-block d-sm-none wrap" >{{cdsuggition.disease_name |titlecase}}</span>
+                </mat-chip>
+                
+              </mat-chip-list>
+            </div>
+          
+          </div> -->
+          <!-- <div class="d-flex col-12 col-lg-12 ">
+            <div class="container_in " [class.show]="show">
+            <div class="class">
+              <mat-chip-list  [selectable]="true" #chipList [multiple]="true"  >
+
+                <mat-chip [selectable]="true"  *ngFor="let cdsuggition of cdsuggitions"  (click)="selectedcd(cdsuggition.disease_name,cdsuggition.clinical_diagnosis_id,cdsuggition.code)" >
+                  <span class="d-none d-sm-block">{{cdsuggition.disease_name |titlecase}}</span>
+                  <span class=" d-block d-sm-none" >{{cdsuggition.disease_name |titlecase}}</span>
+                </mat-chip>
+                
+              </mat-chip-list>
+            </div>
+            
+            <!-- <button >{{ show ? 'less': 'More' }}</button> 
+          </div>
+          <div class="new my-auto" *ngIf="cdsuggitions?.length > 0">
+            <span class="material-icons" (click)="show = !show">
+              more_vert
+              </span>
+            
+          </div>
+          
+          </div> -->
+          <div class="col-sm-12 col-md-12 " style="overflow: hidden;">
+                <div class="row ">
+                 <div class="col-12">
+                  <table mat-table [dataSource]="getlatestCds"  style="width:100%">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <td mat-cell *matCellDef="let element ;let i= index"> {{i+1}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.disease_name}} </td>
+                    </ng-container>
+                  
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="weight">
+                      <th mat-header-cell *matHeaderCellDef> Action </th>
+                      <td mat-cell *matCellDef="let element" (click)="deletcd(element.patient_cd_line_item_id)"> <mat-icon class="cd_del">delete</mat-icon> </td>
+                    </ng-container>
+
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <div *ngIf="getlatestCds.length == 0" class="no-records">
+                    No records found
+                  </div>
+                 </div>
+                
+              </div>
+          </div>
+        </div>
+      </section> 
+    </mat-tab>
+    <mat-tab label="INV"> 
+      <section class="mt-3">
+        <div class="row cd">
+         <div class="col-6 ">
+          <div class="mat-subheading-1">
+            <div>INVESTIGATIONS</div>
+          </div>
+        
+         </div>
+         <!-- <div class="col-6 text-right" style="margin-top:-8px;">
+           
+                 
+          <button mat-stroked-button color="primary"   type="text" (click)="selectinvTemp()"><mat-icon>done</mat-icon> Template</button>
+
+
+        </div>     -->
+        </div>
+        <div class="row cd">
+          <div class="col-sm-12 col-md-12">
+           
+             
+              <form  [formGroup]='InForm'  #myforminv="ngForm" (ngSubmit)="insearchadd(InForm.value,myforminv)">
+                <div class="row">
+                  <div class="col-10  col-md-5 ">
+                          <mat-form-field class="w-100" >
+                            <input type="text"  #query (ngModelChange)="invsearch(query.value)"
+                                   placeholder="Select Investigations here.."
+                                   aria-label="Number"
+                                   matInput
+                                   formControlName='queryinvField'
+                                   [matAutocomplete]="auto1" required>
+                                   <mat-hint>Please enter Minimum 3 letters</mat-hint>
+                                   <input type="hidden" formControlName ="Inv_id" class="form-control" >
+
+                            <mat-autocomplete #auto1="matAutocomplete" >
+                              <!-- <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option> -->
+                              <mat-option *ngFor="let option of options | async" [value]="option.investigation" (click)="getinvid(option.investigation_id);insearchadd(InForm.value,myforminv)">
+                                {{option.investigation}}
+                              </mat-option>
+                            </mat-autocomplete>
+                            <!-- <mat-error *ngIf="isadded && InForm.get('queryinvField').hasError('required')">
+                              Please Select Investigations name 
+                            </mat-error> -->
+                          </mat-form-field>
+                      
+                  </div>
+                  <div class="col-2  col-md-2 pl-0 mx-w">
+                    <button  mat-mini-fab type="submit"  class="  mt-1 custom_css_btn" ><mat-icon>add</mat-icon></button> 
+          
+                  </div>
+                  <!-- <div class="col-3  col-md-2 my-auto border-left">
+                    <!-- <button  mat-mini-fab type="submit"  class="  mt-1 custom_css_btn" ><mat-icon>add</mat-icon></button>  
+                    <button mat-stroked-button color="primary" type="text" (click)="selectinvTemp()"><mat-icon>done</mat-icon> Template</button>
+
+                  </div> -->
+          
+               
+              </div>
+                </form>
+            
+          </div>
+        </div>
+         <div class="row cd">
+           <!-- <div class="col-6  col-md-4 col-lg-2 col-xl-2 my-auto border-right">
+                    <!-- <button  mat-mini-fab type="submit"  class="  mt-1 custom_css_btn" ><mat-icon>add</mat-icon></button>  
+                    <button mat-stroked-button color="primary"   type="text" (click)="selectinvTemp()"><mat-icon>done</mat-icon> Template</button>
+
+                  </div>  -->
+          <!-- <div class=" col-12  col-md-12 col-lg-12 col-xl-12   ">
+            <div class="scroll-container"
+              (mouseleave)="showScroll = false"
+              (mouseenter)="showScroll = true"
+              [ngClass]="{'show-scroll' : showScroll}">
+              <mat-chip-list  [selectable]="true" #chipList [multiple]="true"  >
+
+                <mat-chip [selectable]="true"  *ngFor="let Invsuggition of Invsuggitions"  (click)="selectedInv(Invsuggition.investigation_name,Invsuggition.investigation_id)" >{{Invsuggition.investigation_name |titlecase}}</mat-chip>
+                
+              </mat-chip-list>
+            </div>
+            
+          </div> -->
+          <!-- <div class="d-flex col-12 col-lg-12 ">
+            <div class="container_in " [class.show]="show">
+            <div class="class">
+              <mat-chip-list  [selectable]="true" #chipList [multiple]="true"  >
+
+                <mat-chip [selectable]="true"  *ngFor="let Invsuggition of Invsuggitions"  (click)="selectedInv(Invsuggition.investigation_name,Invsuggition.investigation_id)" >{{Invsuggition.investigation_name |titlecase}}</mat-chip>
+                
+              </mat-chip-list>
+            </div>
+            
+            <!-- <button >{{ show ? 'less': 'More' }}</button>
+          </div>
+          <div class="new my-auto" *ngIf="Invsuggitions?.length > 0">
+            <span class="material-icons" (click)="show = !show">
+              more_vert
+              </span>
+            
+          </div>
+          
+          </div> -->
+         </div>
+         <div class="row cd">
+          <div class="col-sm-12 col-md-12 " style="overflow: hidden;">
+                <div class="row ">
+                 <div class="col-12">
+                  <table mat-table [dataSource]="getlatestinv"  class="mat-elevation-z8" style="width:100%">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <td mat-cell *matCellDef="let element ;let i= index"> {{i+1}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.investigation_name |titlecase}} </td>
+                    </ng-container>
+                  
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="weight">
+                      <th mat-header-cell *matHeaderCellDef> Action </th>
+                      <td mat-cell *matCellDef="let element" (click)="deleteinv(element.patient_investigation_line_item_id)"> <mat-icon class="inv_del">delete</mat-icon> </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Edit">
+                      <th mat-header-cell *matHeaderCellDef > 
+                      
+                        <!-- <button mat-raised-button  (click)="AddTemp(dataSource)" > <mat-icon class="fs">add</mat-icon>TEMP</button>--></th>
+                      <td mat-cell *matCellDef="let element"></td>
+                      
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns_in"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns_in;"></tr>
+                  </table>
+                  <!-- <div *ngIf="getlatestinv.length == 0" class="no-records">
+                    No records found
+                  </div> -->
+                 </div>
+
+              </div>
+          </div>
+         
+        </div>
+      </section> 
+     </mat-tab>
+    <mat-tab label="Rx"> 
+      <div class="conatiner-fluid overflow ">
+        <section >
+            <div class="row ">
+              <div class="col-12 col-md-12 col-lg-6 ">
+                <mat-card class="example-card padding">
+                  <!-- <div class="col-12   d-sm-block d-md-none p-0">
+                    <div class="btn_done text-right">
+                      <button mat-stroked-button color="primary" type="text" (click)="selectTemp()"><mat-icon>done</mat-icon> Template</button>
+                    </div>
+                  </div> -->
+                <form [formGroup]='DrugForm' #myformDrug="ngForm" (ngSubmit)="Prescribe(DrugForm.value,myformDrug)">
+                  <div class="row ">
+                    <div class="col-2 col-md-2 col-lg-2  my-auto">
+                      <div class="mat-subheading-1">Rx</div>
+                    </div>
+                    <div class="col-12 col-md-10  col-lg-10  my-auto">
+                      <div class="search">
+                        <mat-form-field appearance="outline" style="width:80%">
+                          <input type="text" id="drug" #drugs (ngModelChange)="drugsearch(drugs.value)"
+                                placeholder="Type Medicine here.."
+                                aria-label="Number"
+                                matInput
+                                id="keyword"
+                                formControlName='drugField'
+                                [matAutocomplete]="auto2" required>
+                          
+                                <mat-hint>Enter Minimum 3 letters</mat-hint>
+                                <input type="hidden" formControlName = "Drug_id" class="form-control" [(ngModel)]="s_drugId">
+                          <mat-autocomplete #auto2="matAutocomplete" [panelWidth]="374">
+                            
+                            <mat-option class="p-1" *ngFor="let item of results " [value]="item.trade_name" (click)="druginfo(item)" >
+                            <div class="d-inline-flex w-100 fs" [ngStyle]="(item.available_quantity > '0')?{'background-color':'white','color':'black','font-weight':'bold'}:{'background-color':'white','color':'#6e8178','font-weight':'lighter'}">
+                              <div>{{item.trade_name}} </div>
+                            <div class="ml-2">
+                              <span class="qty" *ngIf="item.available_quantity !=''">Qty:{{item.available_quantity}}</span>
+                            </div>
+                  
+                            <label class="ml-2 expdate" *ngIf="item.available_quantity > '0'">{{item.expiry_date | date: 'dd-MM-yyyy'}}</label>
+                            </div>
+                            
+                            </mat-option>
+                          </mat-autocomplete>
+                          <mat-error *ngIf="isprescribed && DrugForm.get('drugField').hasError('required')">
+                            Please Enter Medicine name
+                          </mat-error>
+                        </mat-form-field>
+                      
+                      </div>
+                    </div>
+                   
+        
+                  </div>
+                  <div class="row ">
+                    <!-- <div class="d-flex col-12 col-lg-12 ">
+                      <div class="container p-0" [class.show]="show">
+                      <div class="class">
+                        <mat-chip-list  [selectable]="true" #chipList [multiple]="true"  >
+        
+                          <mat-chip [selectable]="true"  *ngFor="let drugsuggition of drugsuggitions;let i=index"  (click)="selectedDrug(drugsuggition.drug_name,drugsuggition.drug_id)" >{{drugsuggition.drug_name |titlecase}}</mat-chip>
+                          
+                        </mat-chip-list>
+                      </div>
+                      
+                    </div>
+                    <div class="new my-auto" *ngIf="drugsuggitions?.length > 0">
+                      <span class="material-icons" (click)="show = !show">
+                        more_vert
+                        </span>
+                      
+                    </div>
+                    
+                    </div> -->
+         
+                  </div>
+                  
+                
+                  <div class="row h-custom-47 mt-2 "  >
+                    <div class="col-4 col-md-2 col-lg-2 pr-0 my-auto">
+                      <div class="mat-subheading-1">Mode </div>
+                    </div>
+                    <div class="col-8 col-md-4  col-lg-4  pl-0 my-auto">
+                      <mat-form-field appearance="outline">
+                        <mat-select value="Oral" [(ngModel)]="modeselect" placeholder="Mode.." formControlName="Mode" required>
+                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="isprescribed && DrugForm.get('Mode').hasError('required')">
+                          Mode is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4 col-md-2  col-lg-2 pr-0 my-auto">
+                      <div class="mat-subheading-1">Type </div>
+                    </div>
+                    <div class="col-8 col-md-4  col-lg-4 pl-0 my-auto">
+                      <mat-form-field appearance="outline">
+                        <mat-select value="Tablet" [(ngModel)]="typeselect" placeholder="Type.." formControlName="type" required>
+                          <mat-option *ngFor="let Type of types" [value]="Type.value">
+                            {{Type.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="isprescribed && DrugForm.get('type').hasError('required')">
+                          Medicine type is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row  vertical-divider ">
+                    <div class="d-none d-sm-block col-4 col-md-2 col-lg-2 pr-0 ">
+                      <div class="mat-subheading-1">Timing</div>
+                    </div>
+                    <div class="col-6 col-md-5 col-lg-4 mt-1 or" >
+                      <div class="checkbox" >
+                        <mat-checkbox formControlName="M"  id="morning" value="M" [(ngModel)]="isChecked" (change)="check($event)" color="primary">Breakfast (M)</mat-checkbox>
+                      </div>
+                      <div class="checkbox">
+                        <mat-checkbox formControlName="A" id="after" value="A"  [(ngModel)]="isCheckedd" (change)="check($event)"color="primary" >Lunch (A)</mat-checkbox>
+                      </div>
+                      <div class="checkbox">
+                        <mat-checkbox formControlName="N" id="night" value="N"  [(ngModel)]="isCheckeddd" (change)="check($event)" color="primary">Dinner (N)</mat-checkbox>
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-5  col-lg-5  pl-0  text-center">
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-select placeholder="Time.." formControlName="time" (selectionChange)="selectionChange($event)">
+                            <mat-option *ngFor="let time of times;let i = index" [value]="time.value">
+                              {{time.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                         
+                        </mat-form-field>
+                      </div>
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-select  placeholder="Frequency.." formControlName="Frequency" (selectionChange)="selectionChanges($event)" >
+                            <mat-option *ngFor="let mode of modes" [value]="mode.value">
+                              {{mode.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row h-custom-37" >
+                    <div class="col-4 col-md-2 col-lg-2 pr-0 my-auto">
+                      <div class="mat-subheading-1">A/B</div>
+                    </div>
+                    <div class="col-8 col-md-10  col-lg-10  pl-0 my-auto">
+                      <div class="radio ">
+                        <mat-radio-group aria-label="Select an option" formControlName="radio">
+                          <mat-radio-button value="AF" color="primary">After</mat-radio-button>
+                          <mat-radio-button value="BF" color="primary">Before</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                  </div>
+                 
+                  <div class="row h-custom-60 " >
+                    <div class="col-4 col-md-2 col-lg-2 pr-0 my-auto">
+                      <div class="mat-subheading-1">QTY</div>
+                    </div>
+                    <div class="col-8 col-md-4  col-lg-4  pl-0 my-auto">
+                      <mat-form-field  appearance="outline">
+                        <input matInput type="number" min="0" onKeyPress="if(this.value.length==4) return false;" placeholder="Qty Each Time"  autocomplete="off" formControlName="Qty" required>
+                        <mat-error *ngIf="isprescribed && DrugForm.get('Qty').hasError('required')">
+                        Quantity is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+              
+                    <div class="col-4 col-xs-6 col-md-2 col-lg-2 pr-0 my-auto">
+                      <div class="mat-subheading-1">Duration</div>
+                    </div>
+                    <div class="col-8 col-xs-6 col-md-4  col-lg-4  pl-0 my-auto">
+                        <mat-form-field  appearance="outline">
+                            <input matInput type="number" onKeyPress="if(this.value.length==3) return false;" placeholder="Duration" min="0" autocomplete="off" formControlName="Duration" required>
+                            <span matSuffix class="text-muted">{{freqvaluee}}</span>
+                            <mat-error *ngIf="isprescribed && DrugForm.get('Duration').hasError('required')">
+                              Duration is required
+                              </mat-error>
+                          </mat-form-field>
+                    </div>
+                  </div>
+                 
+                  <div class="row ">
+                    <div class="col-4 col-md-2 col-lg-2 pr-0 my-auto">
+                      <div class="mat-subheading-1">Remarks</div>
+                    </div>
+                    <div class="col-8 col-md-8  col-lg-8 pl-0 my-auto">
+                      <mat-form-field appearance="outline" class="w-100">
+                        <textarea matInput placeholder="Add note...." autocomplete="off" formControlName="Note" ></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row ">
+                    <div class="col-auto m-auto">
+                      <div class="btn_done text-center">
+                        <!-- <button mat-flat-button class="custom_css_btn" (click)="AddTemp(dataSource)">
+                          <span>SAVE TEMPLATE</span>
+                       </button>  -->
+                        <button mat-flat-button type="submit" class="custom_css_btn m-2" >SUBMIT</button>
+                        <button mat-flat-button type="button" class="custom_css_btn m-2" *ngIf="PrescriptionLength.length > 0" (click)="forward()" ><mat-icon>share</mat-icon> Forward</button>
+
+                       
+                      </div>
+                    </div>
+                   </div>
+                </form>
+                </mat-card>
+              </div>
+              <div class="col-12 col-md-12 col-lg-6">
+                <!-- <div class="text-right mb-3">
+                  <button mat-raised-button  (click)="forward()">
+                    <mat-icon>share</mat-icon> Forward
+                  </button>
+                </div> -->
+                <div class="rxlist">
+                  <mat-card>
+                    <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource" class="table table-responsive w-100 d-block d-md-table" >
+          
+                      <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+                    
+                      <!-- Position Column -->
+                      <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef> MEDICINE </th>
+                        <td mat-cell *matCellDef="let element"> {{element.medicine_name}}{{element.day_dosage}} </td>
+                      </ng-container>
+                    
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> DOSE </th>
+                        <td mat-cell *matCellDef="let element"> 
+                          <div class="mb-1" *ngIf="element.day_schedule=='' || element.day_schedule == null">
+                            {{element.day_dosage == "1" ? element.day_dosage+"Time":element.day_dosage == "SOS"?element.day_dosage:element.day_dosage == "STAT"?element.day_dosage:element.day_dosage == "HS"?element.day_dosage:element.day_dosage+"Times" }} A {{element.dosage_frequency}}
+                          </div>
+                          <!-- <div class="mb-1" *ngIf=" element.day_dosage != 'SOS' 
+                          || element.day_dosage != 'STAT' || element.day_dosage != 'HS'   ">
+                            {{element.day_dosage}} A {{element.dosage_frequency}}
+                          </div> -->
+                          <div class="mb-1" *ngIf="element.day_schedule!='' || element.day_schedule!= null">
+                            {{element.day_schedule}}<br>
+                            {{element.day_schedule == "M,A,N" ? "(8:00 AM,1:00 PM,8:00 PM)" : element.day_schedule == "M,A" ? "(8:00 AM,1:00 PM)" : element.day_schedule == "M" ? "(8:00 AM)" : element.day_schedule == "A" ? "(1:00 PM)": element.day_schedule == "N" ? "(8:00 PM)": element.day_schedule == "A,N" ? "(1:00 PM,8:00 PM)":element.day_schedule == "M,N" ? "(8:00 AM,8:00 PM)":''}}
+                          </div>
+                          <div *ngIf="element.drug_dose!= null">{{element.drug_dose}} {{element.dosage_unit}} Each</div>
+                         </td>
+                      </ng-container>
+                    
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="Prescription">
+                        <th mat-header-cell *matHeaderCellDef> Prescription</th>
+                        <td mat-cell *matCellDef="let element">
+                         A/B - {{element.preffered_intake}} <br>
+                         COURSE - {{element.dose_course}} <br>
+                         QTY - {{element.quantity == '0' ? '--' : element.quantity}}
+                      
+                        </td>
+                      </ng-container>
+                    
+                      <!-- Symbol Column -->
+                      <!-- <ng-container matColumnDef="symbol">
+                        <th mat-header-cell *matHeaderCellDef> COURSE </th>
+                        <td mat-cell *matCellDef="let element" > {{element.dose_course}}</td>
+                      </ng-container>
+                      <ng-container matColumnDef="qty">
+                        <th mat-header-cell *matHeaderCellDef> QTY </th>
+                        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                      </ng-container> -->
+                     <ng-container matColumnDef="Actions">
+                        <th mat-header-cell *matHeaderCellDef > Actions
+                          <!-- <button mat-flat-button color="primary" (click)="AddTemp(dataSource)">
+                              <span style="font-size: 10px">TEMPLATE</span>
+                          </button> -->
+                          <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="AddTemp(dataSource)">
+                              <mat-icon>save</mat-icon>
+                              <span>SAVE TEMPLATE</span>
+                            </button>
+                            <button mat-menu-item (click)="selectTemp()">
+                              <mat-icon>done</mat-icon>
+                              <span>SELECT TEMPLATES</span>
+                            </button>
+                          </mat-menu> -->
+                          
+                          <!-- <button mat-raised-button  (click)="AddTemp(dataSource)" > <mat-icon class="fs">add</mat-icon>TEMP</button>--></th>
+                        <td mat-cell *matCellDef="let element" 
+                      > 
+                        
+                        <!-- <mat-icon   (click)="
+                        updatePre(
+                          element.drug_id,
+                          element.patient_prescription_drug_id,
+                          element.patient_prescription_id,
+                          element.medicine_name,
+                          element.dosage_unit,
+                          element.day_schedule,
+                          element.mode,
+                          element.drug_dose,
+                          element.dose_course,
+                          element.day_dosage,
+                          element.dosage_frequency,
+                          element.preffered_intake,
+                          element.remarks
+                        )" class="fs_E" >edit</mat-icon>  -->
+                       <mat-icon (click)="deletePre(element.patient_prescription_drug_id)" class="fs_D">delete</mat-icon></td>
+                      </ng-container> 
+                      <ng-container matColumnDef="Delete">
+                        
+                      </ng-container>
+                     
+                    
+                    
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns_pr"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns_pr;"></tr>
+                    </table>
+                    </div>
+                </mat-card>
+                 </div>
+              </div>
+            </div>
+          </section> 
+        </div>
+    </mat-tab>
+  
+  </mat-tab-group>
+</div>

@@ -1,0 +1,1006 @@
+
+<ion-content >
+    <ion-grid class="p-0 container mt-0 d-none d-md-block" >
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup" label="Doctor Details">
+        <ion-grid class="p-0 container mt-0 d-none d-md-block" >
+          <div>
+            <ion-card class="card card-1">
+            <ion-row>
+              <ion-col size-md="2"  class="my_bg_v">
+                  <div class="logo">
+                    <img class="image"  src="assets/logo/umdaa_logo_1.png">
+                  </div>
+                  <!-- <div class="support">
+                      <ion-text text-center >
+                        <h6>Support: info@umdaa.co</h6>
+                      </ion-text>
+                  </div> -->
+              </ion-col>
+              <ion-col size-md="10" size-xs="12">
+                    <!-- <ion-toolbar>
+                        <ion-title class="text-muted font-weight-bold large light">REGISTRATION</ion-title>
+                    </ion-toolbar> -->
+                  <form  [formGroup]="validations_form" (ngSubmit)="signUp(validations_form.value)">
+                       <ion-row>
+                              <ion-col >
+                                  <div margin >
+                                      <ion-item >
+                                          <ion-label position="floating">First Name <span>*</span></ion-label>
+                                          <ion-input type="text" formControlName="first_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" required></ion-input>
+                                        </ion-item>
+                                        <div class="validation-errors error-message">
+                                        <div *ngIf="submitted && f.first_name.errors">
+                                            <div *ngIf="f.first_name.errors.required">First Name is required</div>
+                                        </div>
+                                        </div>
+                                    </div>
+                              </ion-col>
+                                <ion-col>
+                                        <div margin>
+                                            <ion-item >
+                                                <ion-label position="floating">Last Name<span>*</span></ion-label>
+                                                <ion-input type="text" formControlName="last_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" required></ion-input>
+                                              </ion-item>
+                                              <div class="validation-errors error-message">
+                                                  <div *ngIf="submitted && f.last_name.errors " >
+                                                      <div *ngIf="f.last_name.errors.required">Last name is required</div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                </ion-col>
+                                  <ion-col>
+                                      <div margin >
+                                          <ion-item >
+                                              <ion-label position="floating">Qualification</ion-label>
+                                              <ion-input  formControlName="qualification" type="text"  maxlength="64"   (keypress)="inputValidator($event)"></ion-input>
+                                            </ion-item>
+                                            
+                                          </div>
+                                  </ion-col>
+                             
+                         </ion-row>
+                          <ion-row>
+                              <ion-col>
+                                  <div margin >
+                                      <ion-item >
+                                          <ion-label position="floating">Mobile Number<span>*</span></ion-label>
+                                          <ion-input type="text"  maxlength="10" formControlName="mobile" (keypress)="numberOnly($event)"  [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" required></ion-input>
+                                          
+                                      </ion-item>
+                                        <div class="validation-errors error-message">
+                                        <div *ngIf="submitted && f.mobile.errors" >
+                                            <div *ngIf="f.mobile.errors.required">Mobile Number Required</div>
+                                            <div *ngIf="f.mobile.errors.minlength">Mobile must be 10 Digits</div>
+                                            <!-- //<div *ngIf="f.mobile.errors.pattern">Mobile must be 10 Digits</div> -->
+                                        </div>
+                                        </div>
+                                    </div>
+                              </ion-col>
+                              <ion-col>
+                                  <div margin>
+                                      <ion-item >
+                                          <ion-label position="floating">Email<span>*</span></ion-label>
+                                          <ion-input type="text" formControlName="email" maxlength="64" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required></ion-input>
+                                        </ion-item>
+                                        <div class="validation-errors  error-message" >
+                                        <div *ngIf="submitted && f.email.errors">
+                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                            <div *ngIf="f.email.errors.pattern">Please Enter Valid Email</div>
+                                        </div>
+                                        </div>
+                                      </div>
+                              </ion-col>
+                              <ion-col>
+                                  <div margin>
+                                      <ion-item >
+                                          <ion-label position="floating">Register Number <span>*</span></ion-label>
+                                          <ion-input type="text" formControlName="registration_code" maxLength="32" [ngClass]="{ 'is-invalid': submitted && f.registration_code.errors }" required></ion-input>
+                                        </ion-item>
+                                        <div class="validation-errors error-message">
+                                            <div *ngIf="submitted && f.registration_code.errors " >
+                                                <div *ngIf="f.registration_code.errors.required">Register Number is required</div>
+                                            </div>
+                                        </div>
+                                      </div> 
+                              </ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col>
+                              <div margin>
+                                  <ion-item >
+                                      <ion-label position="floating">Password <span>*</span></ion-label>
+                                      <ion-input (ionChange)="checkPassword($event)" type="password" formControlName="password" maxLength="32" required></ion-input>
+                                    </ion-item>
+                                    <div *ngIf="closes">
+                                      <div>
+                                        <ng-container>
+                                          <div class="error-message">
+                                            <small>Should Contain Minimum 8 characters,One Captial Letter,One Number,One special Character</small>
+                                          </div>
+                                        </ng-container>
+                                      </div> 
+                                    </div>  
+                                    <div *ngIf="hidee">
+                                      <div>
+                                        <ng-container>
+                                          <div class="error-message">
+                                            <small>Password is Required</small>
+                                          </div>
+                                        </ng-container>
+                                      </div> 
+                                    </div> 
+                                    <!-- <div *ngIf="hide">
+                                      <div>
+                                        <ng-container>
+                                          <div class="error-message">
+                                            <small>One Captial Letter</small>
+                                          </div>
+                                        </ng-container>
+                                      </div> 
+                                    </div>  
+                                    <div *ngIf="hide">
+                                      <div>
+                                        <ng-container>
+                                          <div class="error-message">
+                                            <small>One Number</small>
+                                          </div>
+                                        </ng-container>
+                                      </div> 
+                                    </div>   -->
+                                  </div> 
+                          </ion-col>
+                          <ion-col>
+                            <div margin>
+                                <ion-item >
+                                    <ion-label position="floating">Confirm Password <span>*</span></ion-label>
+                                    <ion-input  (ionChange)="checkCPassword($event)"  type="password" formControlName="confirm_password" maxLength="32" required></ion-input>
+                                  </ion-item>
+                                  <div>
+                                    <div>
+                                      <ng-container *ngIf="hideee">
+                                        <div class="error-message">
+                                          <small> Confirm Password is Required</small>
+                                        </div>
+                                      </ng-container>
+                                    </div> 
+                                  </div>
+                                  <div>
+                                      <ng-container *ngIf="pConfirm">
+                                        <div class="error-message">
+                                          <small> Password Not Matched</small>
+                                        </div>
+                                      </ng-container>
+         
+                                  </div>
+                                </div> 
+                        </ion-col>
+                        <ion-col>
+                          <div margin>
+                              <ion-item >
+                                <ion-label position="floating">Clinic / Practice Place</ion-label>
+                                <ion-select  (ionChange)="checkClincValue($event)"  formControlName="clinic_id" placeholder="Please select clinic">
+                                  <ion-select-option value="0">
+                                    <ion-text color="danger">Add New Clinic</ion-text> 
+                                  </ion-select-option>
+                                   <ion-select-option *ngFor="let option of optionsList" value="{{option.clinic_id}}" text-wrap>{{option.clinic_name}}</ion-select-option>
+                                 
+                                </ion-select>                           
+                              </ion-item>
+                              
+                         </div>
+                       </ion-col>  
+                          </ion-row>
+                          <!-- <ion-row>
+                                 <ion-col > 
+                                    <div formGroupName="matching_passwords" >
+                                      <ion-item margin 
+                                      id="myDIV" 
+                                      (ionChange)="checkPassword($event)"> 
+                                         <ion-label position="floating">Password</ion-label>
+                                        
+                                        <ion-input  type="password" minlength="8" formControlName="password" [type]="passwordType" ></ion-input>
+                                        <ion-icon   slot="end" [name]="passwordIcon" class="passwordIcon mb-0 mt-4" (click)='hideShowPassword()'></ion-icon>
+                               
+                                      </ion-item>    
+                                     - <div *ngIf="hide">
+                                        <div class="validation-errors error-message">
+                                          <ng-container *ngFor="let validation of validation_messages.password">
+                                            <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('password').hasError(validation.type) && (validations_form.get('matching_passwords').get('password').dirty )">
+                                              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                                            </div>
+                                          </ng-container>
+                                        </div> 
+                                      </div>    
+                                                                              
+                                    </div>
+                                </ion-col>
+                                  <ion-col >
+                                      <div formGroupName="matching_passwords" >
+                                      <ion-item margin >
+                                          <ion-label position="floating">Confirm Password</ion-label>
+                                        <ion-input type="password"  formControlName="confirm_password" minlength="8"   ></ion-input>
+                                       
+                                      </ion-item>
+                                      <div class="validation-errors error-message">
+                                        <ng-container *ngFor="let validation of validation_messages.confirm_password">
+                                          <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('confirm_password').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty)">
+                                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                                          </div>
+                                        </ng-container>
+                                      </div>
+                  
+                                    <div class="validation-errors error-message">
+                                        <ng-container *ngFor="let validation of validation_messages.matching_passwords">
+                                          <div class="error-message" *ngIf="validations_form.get('matching_passwords').hasError(validation.type) && (validations_form.get('matching_passwords').get('confirm_password').dirty || validations_form.get('matching_passwords').get('confirm_password').touched)">
+                                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                                          </div>
+                                        </ng-container>
+                                      </div>
+                                      </div>
+                                   </ion-col> 
+                                   <ion-col>
+                                      <div margin>
+                                          <ion-item >
+                                            <ion-label position="floating">Clinic / Practice Place</ion-label>
+                                            <ion-select  (ionChange)="checkClincValue($event)"  formControlName="clinic_id" placeholder="Please select clinic">
+                                              <ion-select-option value="0">
+                                                <ion-text color="danger">Add New Clinic</ion-text> 
+                                              </ion-select-option>
+                                               <ion-select-option *ngFor="let option of optionsList" value="{{option.clinic_id}}" text-wrap>{{option.clinic_name}}</ion-select-option>
+                                             
+                                            </ion-select>                           
+                                          </ion-item>
+                                          
+                                     </div>
+                                   </ion-col>  
+                          </ion-row> -->
+                            <ion-row>
+                                <ion-col>
+                                  <div margin>
+                                    <ion-item *ngIf="addnew">
+                                        <ion-label position="floating">Clinic Name</ion-label>
+                                        <ion-input formControlName="clinic_name" maxlength="25" (keypress)="onKeyPress($event)" ></ion-input>
+                                        
+                                      </ion-item>
+                                </div>
+                            </ion-col>
+                            <ion-col>
+      
+                                <div margin>
+                                              
+                                  <ion-item *ngIf="addnew">
+                                      <ion-label position="floating" >Clinic Address</ion-label>
+                                    <ion-input formControlName="clinic_location" maxlength="200"  ></ion-input>
+                                  </ion-item>
+                                  </div>
+                            </ion-col>
+                            </ion-row>
+    
+                            <ion-row>
+                              <ion-col size="6">
+                                  <div margin>
+                                      <ion-item >
+                                          <ion-label position="floating">Department</ion-label>
+                                          <ion-select (ionChange)="checkDeprtValue($event)" formControlName="department_id" placeholder="Please select Department">
+                                            <ion-select-option value="0" style="font-weight: bold;" >Add New Department</ion-select-option>
+                                            <ion-select-option *ngFor="let option of optionsDepart" value="{{option.department_id}}">{{option.department_name}}</ion-select-option>
+                                          
+                                          </ion-select>
+                                        </ion-item>
+                          
+      
+                                </div>
+                              </ion-col>
+                              <!-- <ion-col >
+                                <div margin >
+                                    <ion-item >
+                                        <ion-label position="floating">First Name <span>*</span></ion-label>
+                                        <ion-input type="text" formControlName="first_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" required></ion-input>
+                                      </ion-item>
+                                      <div class="validation-errors error-message">
+                                      <div *ngIf="submitted && f.first_name.errors">
+                                          <div *ngIf="f.first_name.errors.required">First Name is required</div>
+                                      </div>
+                                      </div>
+                                  </div>
+                            </ion-col> -->
+                              <!-- <ion-col>
+                                      <div margin>
+                                          <ion-item >
+                                              <ion-label position="floating">Last Name<span>*</span></ion-label>
+                                              <ion-input type="text" formControlName="last_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" required></ion-input>
+                                            </ion-item>
+                                            <div class="validation-errors error-message">
+                                                <div *ngIf="submitted && f.last_name.errors " >
+                                                    <div *ngIf="f.last_name.errors.required">Last name is required</div>
+                                                </div>
+                                            </div>
+                                          </div>
+                              </ion-col> -->
+                                <ion-col size="6">
+                                    <div margin>
+                                        <ion-item *ngIf="addnewdeprtment">
+                                            <ion-label position="floating">Department Name</ion-label>
+                                          <ion-input formControlName="department_name" maxlength="25" ></ion-input>
+                                        </ion-item>
+                                        </div>
+                                
+                                </ion-col>
+                            </ion-row>
+    
+                            <!-- <ion-row>
+                              <ion-col >
+                                  <div margin >
+                                      <ion-item >
+                                          <ion-label position="floating">Walkin Consultation Fees <span>*</span></ion-label>
+                                          <ion-input type="text" formControlName="first_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" required></ion-input>
+                                        </ion-item>
+                                        <div class="validation-errors error-message">
+                                        <div *ngIf="submitted && f.first_name.errors">
+                                            <div *ngIf="f.first_name.errors.required">Walkin Consultation Fees is required</div>
+                                        </div>
+                                        </div>
+                                    </div>
+                              </ion-col>
+                                <ion-col>
+                                        <div margin>
+                                            <ion-item >
+                                                <ion-label position="floating">Tele Consultation Fees</ion-label>
+                                                <ion-input type="text" formControlName="last_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" required></ion-input>
+                                              </ion-item>
+                                            </div>
+                                </ion-col>
+                         </ion-row> -->
+    
+                         <!-- <ion-row>
+                          <ion-col >
+                              <div margin style="margin-left: 30px;" >
+                                <h5>Walkin Consultation Timings</h5>
+                                <div class="two">
+                                  <ion-row>
+                          
+                                    <ion-col>
+                                        <div  margin >
+                                          <ul>
+                                            <li>Morning</li>
+                                            <li>Afternoon</li>
+                                            <li>Evening</li>
+                                          </ul> 
+                                      </div>
+                                    </ion-col>
+                                      <ion-col>
+                                        <div  margin >
+                                      <ul>
+                                        <li>     <input type="time" value="{{selectedTime}}" (click)="open()"></li>
+                                        <li>     <input type="time" value="{{selectedTime}}" (click)="open()"></li>
+                                        <li>     <input type="time" value="{{selectedTime}}" (click)="open()"></li>
+                                      </ul> 
+                                      </div>
+                                      </ion-col>
+                                      <ion-col>
+                                        <div  margin >
+                                          <ul>
+                                            <li data-toggle="modal" data-target="#exampleModalCenter">  Select Days</li>
+                                            <li>   Select Days</li>
+                                            <li> Select Days</li>
+                                          </ul> 
+                                      </div>
+                                    </ion-col>
+                                 
+                                  
+                              </ion-row>
+                                </div>
+                              </div>
+                          </ion-col>
+                     </ion-row> -->
+    
+                     <!-- <ion-row>
+                      <ion-col >
+                          <div margin style="margin-left: 30px;" >
+                            <h5>Tele Consultation Timings</h5>
+                            <div class="two">
+                              <ion-row>
+                      
+                                <ion-col>
+                                    <div  margin >
+                                      <ul>
+                                        <li>Morning</li>
+                                        <li>Afternoon</li>
+                                        <li>Evening</li>
+                                      </ul> 
+                                  </div>
+                                </ion-col>
+                                  <ion-col>
+                                    <div  margin >
+                                  <ul>
+                                    <li>     <input type="time" value="{{selectedTime}}" (click)="open()"></li>
+                                    <li>     <input type="time" value="{{selectedTime}}" (click)="open()"></li>
+                                    <li>     <input type="time" value="{{selectedTime}}" (click)="open()"></li>
+                                  </ul> 
+                                  </div>
+                                   
+                                  </ion-col>
+                                  <ion-col>
+                                    <div  margin >
+                                      <ul>
+                                        <li>  Select Days</li>
+                                        <li>   Select Days</li>
+                                        <li> Select Days</li>
+                                      </ul> 
+                                      
+                                  </div>
+                                  
+                      
+                                </ion-col>
+                             
+                              
+                          </ion-row>
+                            </div>
+                          </div>
+                      </ion-col>
+                 </ion-row> -->
+    
+       
+                      <ion-row>
+                          
+                            <ion-col col-6 padding>
+                                <div  margin >
+                                    Already you have an account Please<a href="#" routerLink="/login" >Login</a> 
+                                   <!-- <a style="color:#10367a;"  routerLink="/login" routerDirection="root">Sign In</a> -->
+                                   <!-- <a style="color:#10367a;"  routerDirection="root">Next</a> -->
+                              </div>
+                            </ion-col>
+                              <ion-col col-6 padding>
+                                  <div class="ion-float-right"  >
+                                    <button mat-raised-button color="primary">Next</button>
+                                    <!-- <ion-button expand="block" type="submit" color="primary" matStepperNext>Next</button> -->
+                                      <!-- <ion-button expand="block" type="submit" color="primary" matStepperNext>Next</ion-button> -->
+                                  </div>
+                              </ion-col>
+                           
+                          
+                      </ion-row>
+                      
+                  
+                        
+                  </form>
+              </ion-col >
+            </ion-row>
+            </ion-card>
+            </div>
+          </ion-grid>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Fill Slot Timings">
+        <ion-grid class="p-0 container mt-0 d-none d-md-block" >
+          <div>
+            <ion-card class="card card-1">
+            <ion-row>
+              <ion-col size-md="2"  class="my_bg_v">
+                  <div class="logo">
+                    <img class="image"  src="assets/logo/umdaa_logo_1.png">
+                  </div>
+                  <!-- <div class="support">
+                      <ion-text text-center >
+                        <h6>Support: info@umdaa.co</h6>
+                      </ion-text>
+                  </div> -->
+              </ion-col>
+              <ion-col size-md="10" size-xs="12">
+                    <!-- <ion-toolbar>
+                        <ion-title class="text-muted font-weight-bold large light">REGISTRATION</ion-title>
+                    </ion-toolbar> -->
+                    <form  [formGroup]="validations_form" (ngSubmit)="signUp(validations_form.value)">
+                      <ion-row>
+                             <ion-col >
+                                 <div margin >
+                                     <ion-item >
+                                         <ion-label position="floating">Consultation Fees<span>*</span></ion-label>
+                                         <ion-input type="text" formControlName="first_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" required></ion-input>
+                                       </ion-item>
+                                       <!-- <div class="validation-errors error-message">
+                                       <div *ngIf="submitted && f.first_name.errors">
+                                           <div *ngIf="f.first_name.errors.required">Consultation Fees is required</div>
+                                       </div>
+                                       </div> -->
+                                   </div>
+                             </ion-col>
+                               <ion-col>
+                                       <div margin>
+                                           <ion-item >
+                                               <ion-label position="floating">Scheduling Window</ion-label>
+                                               <ion-input type="text" formControlName="last_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" required></ion-input>
+                                             </ion-item>
+                                             <!-- <div class="validation-errors error-message">
+                                                 <div *ngIf="submitted && f.last_name.errors " >
+                                                     <div *ngIf="f.last_name.errors.required">Scheduling Window is required</div>
+                                                 </div>
+                                             </div> -->
+                                           </div>
+                               </ion-col>
+                                 <ion-col>
+                                     <div margin >
+                                         <ion-item >
+                                             <ion-label position="floating">Consultation Per Scheduling Window</ion-label>
+                                             <ion-input  formControlName="qualification" type="text"  maxlength="64"   (keypress)="inputValidator($event)"></ion-input>
+                                           </ion-item>
+                                           
+                                         </div>
+                                 </ion-col>
+                            
+                        </ion-row>
+  
+                        <ion-row>
+                          <ion-col style="margin-top:-27px;">
+                            <div margin >
+                              <table class="table table-bordered">
+                                <thead>
+                                  <tr  style="text-align: center;">
+                                    <th scope="col">Days</th>
+                                    <th scope="col">Morning Session</th>
+                                    <th scope="col">Afternoon Session</th>
+                                    <th scope="col">Evening Session</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr style="text-align: center;">
+                                    <th scope="row">Monday</th>
+                                    <td>
+                                      <div *ngIf="iconHide">
+                                        <ion-icon name="add"  style="zoom:1.5;" (click)="add('Monday','Morning')"></ion-icon>
+                                      </div>
+                                      <div class="card" style="border-radius: 25px;" *ngIf="iconHideee">
+                                        <div>{{monMorFromTime}} - {{monMorToTime}}</div>
+                                      </div>
+                                    </td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                  </tr>
+                                  <tr style="text-align: center;">
+                                    <th scope="row">Tuesday</th>
+                                    <td><ion-icon name="add"  style="zoom:1.5;" (click)="add('Tuesday','Morning')"></ion-icon>  <div>
+                                      {{tueFromTime}} - {{tueMorToTime}}</div></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                  </tr>
+                                  <tr style="text-align: center;">
+                                    <th scope="row">Wednesday</th>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon>
+                                      {{wedMorFromTime}} - {{wedMorToTime}}</td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                  </tr>
+                                  <tr style="text-align: center;">
+                                    <th scope="row">Thrusday</th>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon>
+                                      {{thurMorFromTime}} - {{thurMorToTime}}</td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                  </tr>
+                                  <tr style="text-align: center;">
+                                    <th scope="row">Friday</th>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon> {{friMorFromTime}} - {{friMorToTime}}</td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                  </tr>
+                                  <tr style="text-align: center;">
+                                    <th scope="row">Saturday</th>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon> {{satMorFromTime}} - {{satMorToTime}}</td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                  </tr>
+                                  <tr style="text-align: center;">
+                                    <th scope="row">Sunday</th>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon>{{sunMorFromTime}} - {{sunMorToTime}}</td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                    <td><ion-icon name="add"  style="zoom:1.5;"></ion-icon></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>  
+                            <div class="ion-float-right">
+                              <button mat-raised-button color="primary" (click)="nextPopUp()">Next</button>
+                      
+                            </div>                  
+                          </ion-col>
+  
+  
+                        </ion-row>
+                        <!-- <ion-row>
+                            <ion-col>
+                                <div class="ion-float-right">
+                                  <button mat-raised-button color="primary">Next</button>
+                          
+                                </div>
+                            </ion-col>
+                         
+                        
+                    </ion-row> -->
+                        </form>
+              </ion-col >
+            </ion-row>
+            </ion-card>
+            </div>
+          </ion-grid>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Register">
+        <ion-grid class="p-0 container mt-0 d-none d-md-block" >
+          <div>
+            <ion-card class="card card-1">
+            <ion-row>
+              <ion-col size-md="2"  class="my_bg_v">
+                  <div class="logo">
+                    <img class="image"  src="assets/logo/umdaa_logo_1.png">
+                  </div>
+                  <!-- <div class="support">
+                      <ion-text text-center >
+                        <h6>Support: info@umdaa.co</h6>
+                      </ion-text>
+                  </div> -->
+              </ion-col>
+              <ion-col size-md="10" size-xs="12">
+                <!-- <ion-toolbar>
+                    <ion-title class="text-muted font-weight-bold large light">REGISTRATION</ion-title>
+                </ion-toolbar> -->
+              <form  [formGroup]="validations_form" (ngSubmit)="signUp(validations_form.value)">
+                   <ion-row>
+                          <ion-col >
+                              <div margin >
+                                  <ion-item >
+                                      <ion-label position="floating">Google Review Link </ion-label>
+                                      <ion-input type="text" formControlName="first_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" required></ion-input>
+                                    </ion-item>
+                                    <!-- <div class="validation-errors error-message">
+                                    <div *ngIf="submitted && f.first_name.errors">
+                                        <div *ngIf="f.first_name.errors.required">First Name is required</div>
+                                    </div>
+                                    </div> -->
+                                </div>
+                          </ion-col>
+                      
+                         
+                     </ion-row>
+                      <ion-row>
+                          <ion-col>
+                            <div margin >
+                                <div class="form-group">
+                                  <label for="exampleInputPassword1">Signature</label>
+                                  <textarea class="form-control"  rows="8"></textarea>
+                                  <button class="btn btn-primary">Clear</button>
+                                  <!-- <input type="textarea" class="form-control" id="exampleInputPassword1" placeholder="Signature"> -->
+                                </div>
+                             
+                            </div>
+                              <!-- <div margin >
+                                  <ion-item >
+                                      <ion-label position="floating">Signature</ion-label>
+                                    
+                                     
+                                  </ion-item>
+                                  <canvas id="drawCanvas"
+                                  [ngStyle]="{'background': 'url(' + backgroundUrl +') no-repeat 0 0 / cover'}"></canvas>
+                                 
+                                </div> -->
+                          </ion-col>
+                       
+                      </ion-row>
+                      <ion-row>
+                 
+                      </ion-row>
+    
+                        <ion-row>
+                            <!-- <ion-col>
+                              <div margin>
+                                <ion-item *ngIf="addnew">
+                                    <ion-label position="floating">Clinic Name</ion-label>
+                                    <ion-input formControlName="clinic_name" maxlength="25" (keypress)="onKeyPress($event)" ></ion-input>
+                                    
+                                  </ion-item>
+                            </div>
+                        </ion-col> -->
+                        <!-- <ion-col>
+  
+                            <div margin>
+                                          
+                              <ion-item *ngIf="addnew">
+                                  <ion-label position="floating" >Clinic Address</ion-label>
+                                <ion-input formControlName="clinic_location" maxlength="200"  ></ion-input>
+                              </ion-item>
+                              </div>
+                        </ion-col> -->
+                        </ion-row>
+  
+                        <ion-row>
+                          <!-- <ion-col size="6">
+                              <div margin>
+                                  <ion-item >
+                                      <ion-label position="floating">Department</ion-label>
+                                      <ion-select (ionChange)="checkDeprtValue($event)" formControlName="department_id" placeholder="Please select Department">
+                                        <ion-select-option value="0" style="font-weight: bold;" >Add New Department</ion-select-option>
+                                        <ion-select-option *ngFor="let option of optionsDepart" value="{{option.department_id}}">{{option.department_name}}</ion-select-option>
+                                      
+                                      </ion-select>
+                                    </ion-item>
+                      
+  
+                            </div>
+                          </ion-col>
+                            <ion-col size="6">
+                                <div margin>
+                                    <ion-item *ngIf="addnewdeprtment">
+                                        <ion-label position="floating">Department Name</ion-label>
+                                      <ion-input formControlName="department_name" maxlength="25" ></ion-input>
+                                    </ion-item>
+                                    </div>
+                            
+                            </ion-col> -->
+                        </ion-row>
+  
+  
+   
+                  <ion-row>
+                      
+                        <ion-col col-6 padding>
+                            <div  margin >
+                                Already you have an account Please <a href="#" routerLink="/login" >Login</a> 
+                               <!-- <a style="color:#10367a;"  routerLink="/login" routerDirection="root">Sign In</a> -->
+                               <!-- <a style="color:#10367a;"  routerDirection="root">Next</a> -->
+                          </div>
+                        </ion-col>
+                          <ion-col col-6 padding>
+                              <div class="ion-float-right"  >
+                                <button class="btn btn-primary">Submit</button>
+                                <!-- <ion-button expand="block" type="submit" color="primary" matStepperNext>Next</button> -->
+                                  <!-- <ion-button expand="block" type="submit" color="primary" matStepperNext>Next</ion-button> -->
+                              </div>
+                          </ion-col>
+                       
+                      
+                  </ion-row>
+                  
+              
+                    
+              </form>
+          </ion-col >
+            </ion-row>
+            </ion-card>
+            </div>
+          </ion-grid>
+      </mat-step>
+    </mat-horizontal-stepper>
+  
+     
+          <div class="mobile_view  d-block d-md-none">
+            
+              <ion-row>
+                <ion-col size-md="3"  class="my_bg_v">
+                    <div class="logo text-center">
+                      <img class="image"  src="assets/logo/umdaa_logo_1.png">
+                    </div>
+                </ion-col>
+                <ion-col size-md="10" size-xs="12">
+                      <ion-toolbar>
+                          <ion-title class="text-muted font-weight-bold large light text-center">REGISTRATION</ion-title>
+                      </ion-toolbar>
+                    <form  [formGroup]="validations_form" (ngSubmit)="signUp(validations_form.value)">
+                         <ion-row>
+                                <ion-col >
+                                    <div margin >
+                                        <ion-item >
+                                            <ion-label position="floating">First Name <span>*</span></ion-label>
+                                            <ion-input type="text" formControlName="first_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" required></ion-input>
+                                          </ion-item>
+                                          <div class="validation-errors error-message">
+                                          <div *ngIf="submitted && f.first_name.errors">
+                                              <div *ngIf="f.first_name.errors.required">First Name is required</div>
+                                          </div>
+                                          </div>
+                                      </div>
+                                </ion-col>
+                                  <ion-col>
+                                          <div margin>
+                                              <ion-item >
+                                                  <ion-label position="floating">Last Name<span>*</span></ion-label>
+                                                  <ion-input type="text" formControlName="last_name" maxlength="30"  clearInput=true  (keypress)="onKeyPress($event)" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" required></ion-input>
+                                                </ion-item>
+                                                <div class="validation-errors error-message">
+                                                    <div *ngIf="submitted && f.last_name.errors " >
+                                                        <div *ngIf="f.last_name.errors.required">Last name is required</div>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                  </ion-col>
+                                    
+                           </ion-row>
+                            <ion-row>
+                              <ion-col>
+                                <div margin >
+                                    <ion-item >
+                                        <ion-label position="floating">Qualification</ion-label>
+                                        <ion-input  formControlName="qualification" type="text"  maxlength="64"   (keypress)="inputValidator($event)"></ion-input>
+                                      </ion-item>
+                                      
+                                    </div>
+                              </ion-col>
+                                <ion-col>
+                                    <div margin >
+                                        <ion-item >
+                                            <ion-label position="floating">Mobile Number<span>*</span></ion-label>
+                                            <ion-input type="text"  maxlength="10" formControlName="mobile" (keypress)="numberOnly($event)"  [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" required></ion-input>
+                                            
+                                        </ion-item>
+                                          <div class="validation-errors error-message">
+                                          <div *ngIf="submitted && f.mobile.errors" >
+                                              <div *ngIf="f.mobile.errors.required">Mobile Number Required</div>
+                                              <div *ngIf="f.mobile.errors.minlength">Mobile must be 10 Digits</div>
+                                              <!-- //<div *ngIf="f.mobile.errors.pattern">Mobile must be 10 Digits</div> -->
+                                          </div>
+                                          </div>
+                                      </div>
+                                </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                <ion-col>
+                                    <div margin>
+                                        <ion-item >
+                                            <ion-label position="floating">Email<span>*</span></ion-label>
+                                            <ion-input type="text" formControlName="email" maxlength="64" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required></ion-input>
+                                          </ion-item>
+                                          <div class="validation-errors  error-message" >
+                                          <div *ngIf="submitted && f.email.errors">
+                                              <div *ngIf="f.email.errors.required">Email is required</div>
+                                              <div *ngIf="f.email.errors.pattern">Please Enter Valid Email</div>
+                                          </div>
+                                          </div>
+                                        </div>
+                                </ion-col>
+                                <ion-col>
+                                    <div margin>
+                                        <ion-item >
+                                            <ion-label position="floating">Register Number <span>*</span></ion-label>
+                                            <ion-input type="text" formControlName="registration_code" maxLength="32" [ngClass]="{ 'is-invalid': submitted && f.registration_code.errors }" required></ion-input>
+                                          </ion-item>
+                                          <div class="validation-errors error-message">
+                                              <div *ngIf="submitted && f.registration_code.errors " >
+                                                  <div *ngIf="f.registration_code.errors.required">Register Number is required</div>
+                                              </div>
+                                          </div>
+                                        </div> 
+                                </ion-col>
+                            </ion-row>
+  
+                            <ion-row>
+                              <ion-col>
+                                <div margin>
+                                  <ion-item >
+                                      <ion-label position="floating">Password <span>*</span></ion-label>
+                                      <ion-input (ionChange)="checkPassword($event)" type="password" formControlName="password" maxLength="32" required></ion-input>
+                                    </ion-item>
+                                    <div *ngIf="closes">
+                                      <div>
+                                        <ng-container>
+                                          <div class="error-message">
+                                            <small>Should Contain Minimum 8 characters,One Captial Letter,One Number,One special Character</small>
+                                          </div>
+                                        </ng-container>
+                                      </div> 
+                                    </div>  
+                                    <div *ngIf="hidee">
+                                      <div>
+                                        <ng-container>
+                                          <div class="error-message">
+                                            <small>Password is Required</small>
+                                          </div>
+                                        </ng-container>
+                                      </div> 
+                                    </div> 
+                                  </div> 
+                            </ion-col>
+                            <ion-col>
+                              <div margin>
+                                <ion-item >
+                                    <ion-label position="floating">Confirm Password <span>*</span></ion-label>
+                                    <ion-input  (ionChange)="checkCPassword($event)"  type="password" formControlName="confirm_password" maxLength="32" required></ion-input>
+                                  </ion-item>
+                                  <div>
+                                    <div>
+                                      <ng-container *ngIf="hideee">
+                                        <div class="error-message">
+                                          <small> Confirm Password is Required</small>
+                                        </div>
+                                      </ng-container>
+                                    </div> 
+                                  </div>
+                                  <div>
+                                      <ng-container *ngIf="pConfirm">
+                                        <div class="error-message">
+                                          <small> Password Not Matched</small>
+                                        </div>
+                                      </ng-container>
+         
+                                  </div>
+                                </div>  
+                            </ion-col>
+                            </ion-row>
+                           
+                              <ion-row>
+                                
+                                  <ion-col>
+                                    <div margin>
+                                      <ion-item *ngIf="addnew">
+                                          <ion-label position="floating">Clinic Name</ion-label>
+                                          <ion-input formControlName="clinic_name" maxlength="25" (keypress)="onKeyPress($event)" ></ion-input>
+                                          
+                                        </ion-item>
+                                  </div>
+                              </ion-col>
+                              <ion-col>
+        
+                                  <div margin>
+                                                
+                                    <ion-item *ngIf="addnew">
+                                        <ion-label position="floating" >Clinic Address</ion-label>
+                                      <ion-input formControlName="clinic_location" maxlength="200"  ></ion-input>
+                                    </ion-item>
+                                    </div>
+                              </ion-col>
+                              </ion-row>
+      
+                              <ion-row>
+                                <ion-col>
+                                    <div margin>
+                                        <ion-item >
+                                            <ion-label position="floating">Department</ion-label>
+                                            <ion-select (ionChange)="checkDeprtValue($event)" formControlName="department_id" placeholder="Please select Department">
+                                              <ion-select-option value="0" style="font-weight: bold;" >Add New Department</ion-select-option>
+                                              <ion-select-option *ngFor="let option of optionsDepart" value="{{option.department_id}}">{{option.department_name}}</ion-select-option>
+                                            
+                                            </ion-select>
+                                          </ion-item>
+                
+                                  </div>
+                                </ion-col>
+                               
+                                <ion-col>
+                                    <div margin>
+                                        <ion-item *ngIf="addnewdeprtment">
+                                            <ion-label position="floating">Department Name</ion-label>
+                                          <ion-input formControlName="department_name" maxlength="25" ></ion-input>
+                                        </ion-item>
+                                        </div>
+                                 
+                                </ion-col>
+                              </ion-row>
+                        <ion-row>
+                            
+                              <!-- <ion-col col-6 padding>
+                                  <div  margin >
+                                      <!-- Already you have an account Please<a href="#" routerLink="/login" >Login</a>  -
+                                     <a style="color:#10367a;"  routerLink="/login" routerDirection="root">Sign In</a>
+                    
+                                </div>
+                              </ion-col> -->
+                                <ion-col col-12 padding>
+                                    <div>
+                                        <ion-button expand="block" type="submit" color="primary" >SIGNUP</ion-button>
+                                    </div>
+                                    <div class="text-center mt-2">
+                                      <span> have an account ? </span> <a style="color:#10367a;"  routerLink="/login" routerDirection="root">Sign In</a>
+                                    </div>
+                                </ion-col>
+                             
+                            
+                        </ion-row>
+                        
+                    
+                          
+                    </form>
+                </ion-col >
+              </ion-row>
+             
+              
+          </div>
+  
+  
+  </ion-grid>
+  </ion-content>

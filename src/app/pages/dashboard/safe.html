@@ -1,0 +1,25 @@
+
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">PATIENT</th>
+        <th scope="col">APPOINTMENT</th>
+        <th scope="col">WAITED</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let appointment of appointmentsList ;let i = index">
+      <tr >
+        <th scope="row">{{i+1}}</th>
+        <td> {{ appointment.title | titlecase }}
+            {{ appointment.first_name | titlecase }}</td>
+        <td> {{appointment.appointment_time}}</td>
+        <td>{{ appointment.umr_no }}</td>
+        <td>{{appointment.status}}</td>
+      </tr>
+   
+    </tbody>
+  </table>

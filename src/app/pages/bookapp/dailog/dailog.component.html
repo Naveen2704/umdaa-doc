@@ -1,0 +1,65 @@
+
+
+<h4 mat-dialog-title class="ml-2" style="font-size:15px;">Enter Mobile Number</h4>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+          <div class="row">
+          <div class="col-8">
+          <mat-form-field class="form-element w-100" >
+            <input matInput  maxlength="10" formControlName="mobile">
+            <mat-error  *ngIf="formGroup.get('mobile').hasError('pattern')">Invalid Mobile Number</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4 my-3">
+       
+          <button mat-button class="my_bg_v ml-2" type="submit" >SUBMIT</button>
+             
+        </div>
+      </div>
+          <!-- <button mat-button class="my_bg_v ml-2" (click)="close()">CLOSE</button> -->
+        </form>
+      </div>
+    </div>
+  
+    <div class="row" *ngIf="patientList.length != 0">
+      <div class="col-12">
+        <div class="row"  *ngFor="let details of patientList;let i = index">
+          <div class="col-8">
+            <div class="details m-2">
+           <span class="mr-2"> {{i+1}}  </span>{{details.patient_name}} - {{details.umr_no}}
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="book m-2">
+              <button mat-button class="my_bg_v " (click)="doAction(details.patient_id)">BOOK</button>
+            </div>
+          </div>
+        </div>
+        <!-- <mat-card *ngFor="let details of patientList" class="m-2">
+          <div class="d-flex">
+           <div class="details">
+             {{details.patient_name}} - {{details.umr_no}}
+           </div>
+           <div class="book text-right">
+             <button mat-button class="my_bg_v ml-2" (click)="doAction(details.patient_id)">BOOK APPOINTMENT</button>
+           </div>
+          </div>
+         </mat-card> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" *ngIf="this.patientList.length != 0">
+        <div class="text-center mt-3">
+          <button mat-button class="my_bg_v ml-2" (click)="addNew()">ADD NEW</button>
+          <!-- <button mat-button class="my_bg_v ml-2" (click)="close()">Close</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions  align="end">
+  <button mat-raised-button (click)="close()">CANCEL</button>
+</mat-dialog-actions>

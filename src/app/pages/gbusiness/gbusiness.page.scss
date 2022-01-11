@@ -1,0 +1,226 @@
+.text{
+
+    text-align:left;
+    margin-bottom: 0px;
+    letter-spacing: 0;
+    line-height: 1.5;
+   
+    
+}
+.align-left{
+    margin-left: 6.37133%;
+    margin-right: 1.03799%;
+    // align-self: center;
+    margin-top: 80px;
+}
+.header-text{
+    margin-top: 0px;
+    margin-bottom:16px;
+    font-size: 44px;
+}
+.header-para{
+    margin-top:20px;
+    margin-bottom: 30px;
+}
+.vertical{
+    align-items: center;
+    height: 100vh;
+}
+
+// ::ng-deep .mat-raised-button{
+//     border-radius: 24px !important;
+// }
+.location_name{
+    background-color: #fff;
+    color: #202124;
+    fill: #5f6368;
+    padding: 24px;
+}
+.location{
+    font: 400 24px / 32px 'Google Sans', Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    padding-bottom: 12px;
+    font-size: 30px;
+    font-weight: 500;
+}
+.description{
+    text-align: justify;
+    padding-top: 10px;
+}
+.location_icon{
+    padding-right: 24px;
+    mat-icon{
+      color:blue;
+    }
+}
+.location_data{
+    line-height:initial;
+    font-size: 14px;
+    color:blue;
+    
+}
+.locate_service{
+    
+    font-weight: bold;
+    display: block;
+}
+.schedule_1{
+    overflow: hidden;
+    padding-right: 10px;
+}
+.schedule_2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.font_style{
+    font-size: 14px;
+    
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+  padding: 20px;
+}
+.right{
+  padding: 20px;
+}
+  .btn-grey{
+      background-color:#D8D8D8;
+      color:#FFF;
+  }
+  .rating-block{
+    background-color:#ffffff;
+      border:1px solid #EFEFEF;
+      padding:15px 15px 20px 15px;
+      border-radius:3px;
+  }
+  .rating-block .btn{
+      margin:5px;
+
+  }
+  .bold{
+      font-weight:700;
+  }
+  .padding-bottom-7{
+      padding-bottom:7px;
+  }
+  
+  .review-block{
+      background-color:#ffffff;
+      border:1px solid #EFEFEF;
+      padding:15px;
+      border-radius:3px;
+      margin-bottom:15px;
+      -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+         box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); 
+
+
+
+  }
+  .review-block-name{
+      font-size:12px;
+      margin:10px 0;
+  }
+  .review-block-date{
+      font-size:12px;
+  }
+  .review-block-rate{
+      font-size:13px;
+      margin-bottom:15px;
+  }
+  // .review-block-title{
+  //     font-size:15px;
+  //     font-weight:700;
+  //     margin-bottom:10px;
+  // }
+  .review-block-description{
+      font-size:13px;
+  }
+  .padding{
+      padding:2px;
+  }
+
+  .single-chart {
+	width: 33%;
+	justify-content: space-around ;
+  }
+  
+  .circular-chart {
+	display: block;
+	margin: 10px auto;
+	max-width: 80%;
+	max-height: 250px;
+  }
+  
+  .circle-bg {
+	fill: none;
+	stroke: #eee;
+	stroke-width: 3.8;
+  }
+  
+  .circle {
+	fill: none;
+	stroke-width: 2.8;
+	stroke-linecap: round;
+	animation: progress 1s ease-out forwards;
+  }
+  
+  @keyframes progress {
+	0% {
+	  stroke-dasharray: 0 100;
+	}
+  }
+  
+  .circular-chart.orange .circle {
+	stroke: #ff9f00;
+  }
+  
+  .circular-chart.green .circle {
+	stroke: #4CC790;
+  }
+  
+  .circular-chart.blue .circle {
+	stroke: #21396d;
+  }
+  
+  .percentage {
+	fill: #666;
+	font-family: sans-serif;
+	font-size: 0.5em;
+	text-anchor: middle;
+  }
+  .example-form-field {
+    margin: 0 8px 16px 0;
+  }
+.class{
+  font-size: 15px;
+    color: #21396d;
+    word-break: break-word;
+}
+
+::ng-deep .mat-tab-header {
+  background-color: #0b1271!important;
+
+  }
+  ::ng-deep .mat-tab-group.mat-background-primary .mat-tab-label, .mat-tab-group.mat-background-primary .mat-tab-link, .mat-tab-nav-bar.mat-background-primary .mat-tab-label, .mat-tab-nav-bar.mat-background-primary .mat-tab-link {
+    color: #fff !important;
+}
+::ng-deep .mat-tab-label, .mat-tab-link {
+  color: #3bd6ac !important;
+}
+::ng-deep .mat-tab-label{
+  opacity: 1 !important;
+}
+
+::ng-deep .my-menu {
+  width: 230px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .class_width {
+    width: 140px;
+    
+  }
+}
+

@@ -1,0 +1,52 @@
+::ng-deep .mat-tab-label{
+  opacity: 1 !important;
+}
+
+ion-card-header{
+  padding-left:0px !important;
+} 
+.item-native {
+  padding: inherit !important;
+}
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+    .table-responsive{
+      display: inline-table !important;
+    }
+    ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+      background-color: #ece8f3 !important;
+    }
+    .example-full-width{
+      width: 100% !important;
+    }
+    .example-full-width-main{
+      width: 100% !important;
+    }
+    ::ng-deep  .mat-tab-label-active{
+      color: #ffffff !important
+      }
+      ::ng-deep .mat-tab-label, .mat-tab-link {
+      color: #3bd6ac !important
+      
+      }
+      
+      ::ng-deep .mat-tab-header-pagination-chevron {
+      border-color: rgb(255 255 255 / 87%) !important;
+      }
+      ::ng-deep .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron {
+      border-color: rgb(245 242 242) !important;
+      } 
+
+      ion-content {
+        --background:rgba(240, 251, 255, 0.986);
+      }
+      ::ng-deep .mat-tab-header {
+        background-color: #0b1271!important;
+      
+        }
+        select{
+          -moz-appearance: none; 
+	        -webkit-appearance: none; 
+        }

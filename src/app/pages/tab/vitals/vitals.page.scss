@@ -1,0 +1,22 @@
+.width{
+    width: 70%;
+    margin: 30px auto;
+}
+.fw{
+    font-weight: 600;
+}
+.mz{
+    margin: 0 auto;
+}
+@media(min-width:320px) and (max-width:772px ){
+.width{
+    width:100%;
+}
+}
+
+.abnormal{
+    color: red;
+}
+.normal{
+    color: black;
+}

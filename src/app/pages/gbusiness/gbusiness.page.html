@@ -1,0 +1,361 @@
+ <ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class=" font-weight-bold small">GOOGLE MY BUSINESS</ion-title>
+    <button mat-raised-button [matMenuTriggerFor]="menu" slot="end"  >
+      <div class="d-flex" *ngIf="show">
+
+     
+      <div class="class mr-2">
+        {{username}}
+      </div>
+      <div class="image">
+        <img src="assets/icon/default.jpg" alt="" width="30px" height="30px">
+      </div>
+    </div>
+    </button>
+    <mat-menu #menu="matMenu" class="my-menu">
+      <button mat-menu-item (click)="handleSignoutClick()">Sign Out</button>
+     
+    </mat-menu>
+    
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content> 
+  <div class="container" *ngIf="hide">
+    <div class="row ">
+      <div class="col-12 d-flex">
+        <div class="col-12 col-xl-6 col-lg-6 align-left">
+          <div class="text">
+              <div class="inner-text">
+                <h1 class="header-text"> Engage with patients on Google through Umdaa </h1>
+                <p class="header-para">
+                  With a Google My Business Account, you get more than a business listing. Your Business Profile lets you easily connect with patients across Google Search and Maps.
+                </p>
+                <button mat-raised-button class="my_bg_v" style="width: 200px" (click)="handleAuthClick()" >{{gmbsignin}}</button>
+              </div>
+          </div>
+        </div>
+        <div class="col-6"> 
+            <img  src="assets/mybusinness.png"  height="80%">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  
+  
+    <mat-tab-group (selectedTabChange)="yourFn($event)" *ngIf="show">
+      <mat-tab label="Account Info" (click)="location()">
+        <div class="container-fluid">
+        <div class="row">
+          
+            <div class="col-12 col-lg-6 col-xl-6">
+              <ion-card>
+                <ion-card-header>
+                 <ion-item>
+                  <ion-card-subtitle>Location Information</ion-card-subtitle>
+                   </ion-item>
+                 </ion-card-header>
+                 
+                <ion-card-content>
+                  <div class="location_name">
+                    <div class="location" *ngFor="let location of locationData">
+                      {{location.locationName}}
+                      <div class="description">
+                        <p>{{location.profile.description}}</p>
+                      </div>
+                      <div class="location_name d-flex">
+                        <div class="location_icon my-auto">
+                            <mat-icon>location_on</mat-icon>
+                        </div>
+                        <div class="location_data">
+                          <span style="font-size:17px;">{{location.address.addressLines[0]}},{{location.address.administrativeArea}}{{location.address.postalCode}}</span>
+                        </div>
+                      </div>
+                      <div class="location_name d-flex">
+                        <div class="location_icon my-auto">
+                            <mat-icon>push_pin</mat-icon>
+                        </div>
+                        <div class="location_data">
+                          <span class="locate_service">Service areas</span>
+                          {{location?.serviceArea.places.placeInfos[0].name}}
+                        </div>
+                      </div>
+                    </div>
+                    
+                </div>
+                </ion-card-content>
+              </ion-card>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-6">
+              <ion-card>
+                <ion-card-header>
+                 <ion-item>
+                  <ion-card-subtitle>Service Information</ion-card-subtitle>
+                   </ion-item>
+                 </ion-card-header>
+                 
+                <ion-card-content>
+                  <div class="location_name d-flex">
+                    <div class="location_icon ">
+                        <mat-icon>schedule</mat-icon>
+                    </div>
+                    <div class="clas" *ngFor="let location of locationData">
+                      <div class="d-flex" *ngFor="let data of location.regularHours.periods">
+                        <span class="schedule_1 font_style" style="width:100px"> {{data.openDay |titlecase}}</span>
+                        <span  class="schedule_1 font_style">{{data.openTime}}- {{data.closeTime}}</span>
+                      </div>
+                    </div>
+                   
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </div>
+          
+        </div>
+      </div>
+      </mat-tab>
+      <mat-tab label="Reviews" (selectedTabChange)="reviews()">  
+        <div class="container">
+                  
+          <div class="row">
+              <div class="col-sm-3">
+                  <div class="rating-block">
+                      <h4>Average user rating</h4>
+                      <h2 class="bold padding-bottom-7">{{reviewsDataa.averageRating}} <small>/ 5</small></h2>
+                      <div>
+                          <star-rating value="{{reviewsDataa?.averageRating}}" totalstars="5" checkedcolor="gold"  size="24px" readonly="true" ></star-rating>
+                        </div>
+                      <!-- <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      </button>
+                      <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      </button>
+                      <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      </button>
+                      <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      </button>
+                      <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      </button> -->
+                  </div>
+              </div>
+   
+          </div>			
+          
+          <div class="row">
+              <div class="col-sm-12">
+                  <hr/>
+                  <div class="review-block" *ngFor="let data of reviewsDataa.reviews">
+                      <div class="row">
+                          <div class="col-sm-2">
+                              <img src="{{data.reviewer.profilePhotoUrl}}" class="img-rounded" style="text-align:center;width:50px;height:50px;">
+                              <div class="review-block-name"><a href="#">{{data.reviewer.displayName}}</a></div>
+                              <div class="review-block-date">{{data.updateTime | date: 'dd/MM/yyyy' }}</div>
+                          </div>
+                          <div class="col-sm-9">
+                              <div class="review-block-rate" *ngIf="data.starRating == 'FIVE'">
+                                  <star-rating value="5" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true" ></star-rating>
+                              </div>
+                              <div class="review-block-rate" *ngIf="data.starRating == 'FOUR'">
+                                  <star-rating value="4" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true" ></star-rating>
+                              </div>
+                              <div class="review-block-rate" *ngIf="data.starRating == 'THREE'">
+                                  <star-rating value="3" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true" ></star-rating>
+                              </div>
+                              <div class="review-block-rate" *ngIf="data.starRating == 'TWO'">
+                                  <star-rating value="2" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true" ></star-rating>
+                              </div>
+                              <div class="review-block-rate" *ngIf="data.starRating == 'ONE'">
+                                  <star-rating value="1" totalstars="5" checkedcolor="gold" uncheckedcolor="black" size="24px" readonly="true" ></star-rating>
+                              </div>
+                              <div class="review-block-title">
+                                <div *ngIf="data.hasOwnProperty('comment')">
+                                  {{data.comment}}
+                                </div>
+                                  <button mat-raised-button (click)="reply(data.reviewId)"> <mat-icon>reply</mat-icon>Reply</button>
+                                 
+                                  <div *ngIf="hidereplay && id == data.reviewId">
+                                      <div class="form-group">
+                                          <label for="exampleFormControlTextarea1">Comment Here</label>
+                                          <textarea class="form-control" (change)="replyComment($event.target.value)" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                    
+                                       <div class="mt-2">
+                                        <button mat-raised-button (click)="submitReply(data.reviewId)" class="my_bg_v ">Submit</button>
+                                       </div>
+
+                                      <!-- <button class="btn btn-primary" (click)="submitReply(data.reviewId)">Submit</button> -->
+                                  </div>
+                              
+                                  <p *ngIf="data.hasOwnProperty('reviewReply')" class="mt-1 ">
+                                     <span style="color:blue;"></span> Comments:<br>
+                                      {{data.reviewReply.comment}}<br>
+                                      <small>Posted On:{{data.reviewReply.updateTime | date: 'dd/MM/yyyy HH:mm:ss'}}</small>
+                                      
+                                  </p>
+                                  <div class="class" *ngIf="data.hasOwnProperty('reviewReply')">
+                                    <button class="btn btn-danger"  (click)="deleteReply(data.reviewId)">Delete</button>
+                                  </div>
+                                
+
+    
+                              </div>
+                              <!-- <div class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div> -->
+                          </div>
+                      </div>
+                
+                  </div>
+              </div>
+          </div>
+          
+      </div> 
+      </mat-tab>
+      <mat-tab label="Insights">
+        <!-- <label for="birthday">Start Date:</label>
+              <input type="date" id="birthday" name="birthday" (change)="selectDate($event)"><br> -->
+              <!-- <input type="submit"> -->
+              <!-- <label for="birthday">End Date:</label>
+              <input type="date" id="birthday" name="birthday" (change)="endDate($event)"> -->
+              <div class="container-fluid">
+               
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="text-left m-2">
+    
+                        <mat-form-field class="example-form-field class_width "  appearance="fill">
+                          <mat-label>Start Date</mat-label>
+                          <input matInput [matDatepicker]="picker"  (dateChange)="selectDate($event)" disabled>
+                          <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                          <mat-datepicker #picker disabled="false"></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field class="example-form-field class_width "    appearance="fill">
+                          <mat-label>End Date</mat-label>
+                          <input matInput [matDatepicker]="picker2"  (dateChange)="endDate($event)" disabled>
+                          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                        </mat-form-field>
+                        <!-- <button mat-raised-button class="mr-2" (click)="picker.open()"><mat-icon>date_range</mat-icon></button> -->
+                        <!-- <button mat-raised-button (click)="picker2.open()">End Date <mat-icon>date_range</mat-icon></button> -->
+                        <button mat-raised-button  (click)="insights()">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+               
+  
+                <!-- <input type="submit" (click)="insights()"> -->
+                <div class="row">
+                  <div class="col-12 col-lg-4 col-md-4 col-xl-4" *ngFor="let data of insightsData">
+                    <ion-card>
+                      <ion-card-header>
+                        <ion-item>
+                          <ion-card-subtitle class="text-center">{{data.metric}}</ion-card-subtitle>
+                        </ion-item>
+                      </ion-card-header>
+                    
+                      <ion-card-content>
+                        <div class="text-center">
+                          <svg viewBox="0 0 36 36" class="circular-chart blue">
+                            <path class="circle-bg"
+                              d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path   [ngStyle]="(data.metric === 'ACTIONS_PHONE' )?{'stroke':'green'}:{'stroke':'#21396d;'}"
+                             class="circle" stroke-dasharray="100, 100"
+                              d="M18 2.0845
+                                 a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <text x="18" y="20.35" class="percentage" [ngStyle]="(data.metric === 'ACTIONS_PHONE' )?{'fill':'green'}:{'fill':'#666;;'}">{{data.totalValue.value}}</text>
+                          </svg>
+                        </div>
+                      </ion-card-content>
+                      <ion-item>
+                        <div class="class" *ngIf="data.metric == 'QUERIES_DIRECT'">
+                         
+                          Patients Who Search For You
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'QUERIES_INDIRECT'">
+                         
+                          Patients Who Search For Doctors Like You
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'QUERIES_CHAIN'">
+                         
+                          Patients Who Search For Your Practice Place
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'VIEWS_MAPS'">
+                         
+                          Patients Who Find You By Google Maps
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'VIEWS_SEARCH'">
+                         
+                          Patients Who viewed you on Google Search
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'ACTIONS_WEBSITE'">
+                         
+                          Patients Who Click Your Website
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'ACTIONS_PHONE'">
+                         
+                          Patients Who Click Your Phone Call
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'ACTIONS_DRIVING_DIRECTIONS'">
+                         
+                          Patients Who Search For Direction of Driving 
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'PHOTOS_VIEWS_MERCHANT'">
+                         
+                          Photos Seen By Patients Posted By you
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'PHOTOS_COUNT_MERCHANT'">
+                         
+                          Total number of photos posted by you
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'PHOTOS_COUNT_CUSTOMERS'">
+                         Photos uploaded by patients and live now
+                          <!-- Patients Who Search For You -->
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'LOCAL_POST_VIEWS_SEARCH'">
+                         
+                          Number of times your posts viewed by Patients  Locally
+                        </div>
+                        <div class="class" *ngIf="data.metric == 'PHOTOS_VIEWS_CUSTOMERS'">
+                         Photos Uploaded by Patients
+                          <!-- Number of times your posts viewed by Patients -->
+                        </div>
+                      </ion-item>
+                    </ion-card>
+              
+                  </div>
+              </div>
+              </div>
+           
+        
+      </mat-tab>
+    </mat-tab-group>
+  
+</ion-content>
+
+
+  <!-- <button class="btn btn-primary" (click)="handleAuthClick()" >Sign In</button> -->
+
+
+  <div style='display:block; flex-direction:column; width:50%; float:right;display: none;'>
+    <div class="section"> API Request </div>
+    <pre id="request-area"></pre>
+    <div class="section"> API Response </div>
+    <pre id="response-area"></pre>
+  </div>
+
+
+  
